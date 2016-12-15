@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using bytePassion.Lib.Communication.State;
@@ -13,6 +16,15 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 	internal class PatientSelectorViewModel : ViewModel, 
                                               IPatientSelectorViewModel
     {
+		private class PatientSorter : IComparer<Patient>
+		{
+			public int Compare (Patient p1, Patient p2)
+			{
+				return string.Compare(p1.Name, p2.Name, StringComparison.Ordinal);
+			}
+		}
+		
+
 		private readonly IClientPatientRepository patientRepository;
 		private readonly ISharedState<Patient> selectedPatientSharedVariable;
 		private readonly Action<string> errorCallback;
@@ -22,6 +34,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
         private Patient selectedPatient;
         private bool showDeceasedPatients;
 
+	    private readonly ObservableCollection<Patient> observablePatientList;
+
         public PatientSelectorViewModel(IClientPatientRepository patientRepository, 
 									    ISharedState<Patient> selectedPatientSharedVariable,
 										Action<string> errorCallback)
@@ -30,19 +44,27 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 	        this.selectedPatientSharedVariable = selectedPatientSharedVariable;
 	        this.errorCallback = errorCallback;
 
-	        Patients = new CollectionViewSource();
-			Patients.Filter += Filter;
+			observablePatientList = new ObservableCollection<Patient>();
+
+	        Patients = new CollectionViewSource
+	        {
+		        Source = observablePatientList
+			};
+	        Patients.Filter += Filter;
 			SearchFilter = "";
 			
-			patientRepository.NewPatientAvailable += PatientRepositoryChanged;
-	        patientRepository.UpdatedPatientAvailable += PatientRepositoryChanged;
+			patientRepository.NewPatientAvailable     += OnNewPatientAvailable;
+	        patientRepository.UpdatedPatientAvailable += OnUpdatedPatientAvailable;
 
 			patientRepository.RequestAllPatientList(
 				patientList =>
 				{
 					Application.Current.Dispatcher.Invoke(() =>
 					{
-						Patients.Source = patientList;
+						var sortedList = patientList.OrderBy(p => p, new PatientSorter());
+						
+						observablePatientList.Clear();
+						sortedList.Do(observablePatientList.Add);						
 						UpdateForNewInput();
 					});					
 				},
@@ -50,19 +72,27 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 			);                       			            
         }
 
-		private void PatientRepositoryChanged(Patient patient)
-		{
-			patientRepository.RequestAllPatientList(
-				patientList =>
-				{
-					Application.Current.Dispatcher.Invoke(() =>
-					{
-						Patients.Source = patientList;
-						UpdateForNewInput();
-					});
-				},
-				errorCallback
-			);
+	    private void OnUpdatedPatientAvailable(Patient patient)
+	    {
+		    Application.Current.Dispatcher.Invoke(() =>
+		    {
+			    var patientToRemove = observablePatientList.FirstOrDefault(p => p.Id == patient.Id);
+
+				if (patientToRemove != null)
+					observablePatientList.Remove(patientToRemove);
+
+				observablePatientList.Add(patient);
+				observablePatientList.Sort(new PatientSorter());
+		    });
+	    }
+
+	    private void OnNewPatientAvailable(Patient patient)
+	    {
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				observablePatientList.Add(patient);
+				observablePatientList.Sort(new PatientSorter());
+			});
 		}
 
 		public bool ShowDeceasedPatients
@@ -116,10 +146,10 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
        
         private void CheckList()
         {
-            var count = ((ListCollectionView) Patients.View).Count;
+            var count = observablePatientList.Count;
 
-            if (count == 1)
-                SelectedPatient = (Patient) ((ListCollectionView) Patients.View).GetItemAt(0);
+	        if (count == 1)		        
+		        SelectedPatient = observablePatientList[0];
 
             ListIsEmpty = count == 0;
         }
@@ -150,8 +180,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
         {
             Patients.Filter -= Filter;
 
-			patientRepository.NewPatientAvailable     -= PatientRepositoryChanged;
-			patientRepository.UpdatedPatientAvailable -= PatientRepositoryChanged;
+			patientRepository.NewPatientAvailable     -= OnNewPatientAvailable;
+			patientRepository.UpdatedPatientAvailable -= OnUpdatedPatientAvailable;
 		}
         public override event PropertyChangedEventHandler PropertyChanged;
     }
