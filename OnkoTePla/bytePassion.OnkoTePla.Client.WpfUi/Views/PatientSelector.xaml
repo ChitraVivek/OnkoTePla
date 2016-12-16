@@ -57,11 +57,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="50" />
             <RowDefinition />
+			<RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <TextBox Grid.Row="0"
                  FontFamily="{StaticResource StandardFontFamily}"
-                 FontSize="12pt"
+                 FontSize="12pt"				 
                  Text="{Binding SearchFilter,
                                 UpdateSourceTrigger=PropertyChanged,
                                 Mode=OneWayToSource}" />
@@ -95,5 +96,12 @@
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged}"
                  SelectionMode="Single" />
+		<Button Grid.Row="4"
+				Margin="5">
+			<TextBlock>
+				<Run Text="Patienten '"/><Run Text="{Binding SearchFilter, Mode=OneWay}"/><Run Text="' hinzufügen?"/>
+			</TextBlock>
+			
+		</Button>
     </Grid>
 </UserControl>

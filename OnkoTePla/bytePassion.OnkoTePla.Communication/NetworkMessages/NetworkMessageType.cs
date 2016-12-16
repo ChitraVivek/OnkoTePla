@@ -32,6 +32,8 @@
 		GetPracticeVersionInfoResponse,
 		TryToAddNewEventsRequest,
 		TryToAddNewEventsResponse,
+		TryToAddNewPatientRequest,
+		TryToAddNewPatientResponse,
 		GetLockRequest,
 		GetLockResponse,
 		ReleaseLockRequest,

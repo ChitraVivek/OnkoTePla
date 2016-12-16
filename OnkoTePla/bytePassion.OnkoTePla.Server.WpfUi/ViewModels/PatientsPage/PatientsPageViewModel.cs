@@ -45,16 +45,16 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		
 		private void DoGeneratePatients()
 		{
-			for (int i = 0; i < 1000; i++)
+			for (int i = 0; i < 1; i++)
 			{
 				var newPatient = patientNameGenerator.NewPatient();
 				patientRepository.AddPatient(newPatient.Name, 
-												  newPatient.Birthday, 
-												  newPatient.Alive, 
-												  newPatient.ExternalId);
+											 newPatient.Birthday, 
+											 newPatient.Alive, 
+											 newPatient.ExternalId);
 			}
 
-			MessageBox.Show("1000 Patents were generated");
+			MessageBox.Show("1 Patent was generated");
 		}
 
 		private void OnSelectedPatientChanged(Patient patient)

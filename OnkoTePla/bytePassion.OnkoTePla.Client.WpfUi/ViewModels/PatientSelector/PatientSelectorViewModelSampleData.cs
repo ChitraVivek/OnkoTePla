@@ -1,15 +1,16 @@
-﻿using bytePassion.Lib.TimeLib;
-using bytePassion.OnkoTePla.Contracts.Patients;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Input;
+using bytePassion.Lib.TimeLib;
+using bytePassion.OnkoTePla.Contracts.Patients;
 
 #pragma warning disable 0067
 
 namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 {
-    internal class PatientSelectorViewModelSampleData : IPatientSelectorViewModel 
+	internal class PatientSelectorViewModelSampleData : IPatientSelectorViewModel 
 	{
 		public PatientSelectorViewModelSampleData()
 		{			
@@ -29,7 +30,10 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 			SelectedPatient = patientList[0];
 			ListIsEmpty = false;
 			ShowDeceasedPatients = true;
+			SearchFilter = "John Do";
 		}
+
+		public ICommand CreatePatient => null;
 
 		public string  SearchFilter         { get; set; }
 		public Patient SelectedPatient      { get; set; }

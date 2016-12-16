@@ -89,6 +89,7 @@
     <Compile Include="Converter\DateToDateTimeConverter.cs" />
     <Compile Include="Computations\PatientToCollapedVisibilityConverter.cs" />
     <Compile Include="Converter\OperatingModeToVisibilityConverter.cs" />
+    <Compile Include="DialogServices\AddPatientDialogService.cs" />
     <Compile Include="Enums\ConnectionStatus.cs" />
     <Compile Include="Enums\MainPage.cs" />
     <Compile Include="Factorys\AppointmentModification\AppointmentModificationsBuilder.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModels\AddAppointmentDialog\AddAppointmentDialogViewModelSampleData.cs" />
     <Compile Include="ViewModels\AddAppointmentDialog\Helper\AppointmentCreationState.cs" />
     <Compile Include="ViewModels\AddAppointmentDialog\IAddAppointmentDialogViewModel.cs" />
+    <Compile Include="ViewModels\AddPatientDialog\AddPatientDialogViewModel.cs" />
+    <Compile Include="ViewModels\AddPatientDialog\AddPatientDialogViewModelSampleData.cs" />
+    <Compile Include="ViewModels\AddPatientDialog\IAddPatientDialogViewModel.cs" />
     <Compile Include="ViewModels\AppointmentGrid\AppointmentGridViewModelSampleData.cs" />
     <Compile Include="ViewModelMessages\Dispose.cs" />
     <Compile Include="ViewModels\AppointmentGrid\ClosedDayGridViewModel.cs" />
@@ -237,6 +241,9 @@
     <Compile Include="Views\AddAppointmentDialog.xaml.cs">
       <DependentUpon>AddAppointmentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPatientDialog.xaml.cs">
+      <DependentUpon>AddPatientDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AppointmentGrid.xaml.cs">
       <DependentUpon>AppointmentGrid.xaml</DependentUpon>
     </Compile>
@@ -333,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddAppointmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPatientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

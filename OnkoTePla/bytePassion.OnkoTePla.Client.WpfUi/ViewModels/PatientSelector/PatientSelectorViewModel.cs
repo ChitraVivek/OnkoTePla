@@ -5,9 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using bytePassion.Lib.Communication.State;
 using bytePassion.Lib.FrameworkExtensions;
+using bytePassion.Lib.WpfLib.Commands;
+using bytePassion.Lib.WpfLib.Commands.Updater;
 using bytePassion.OnkoTePla.Client.DataAndService.Repositories.PatientRepository;
+using bytePassion.OnkoTePla.Client.WpfUi.DialogServices;
 using bytePassion.OnkoTePla.Contracts.Patients;
 
 
@@ -50,9 +54,9 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 	        {
 		        Source = observablePatientList
 			};
-	        Patients.Filter += Filter;
-			SearchFilter = "";
-			
+	        Patients.Filter += Filter;			
+			SearchFilter = "";						
+
 			patientRepository.NewPatientAvailable     += OnNewPatientAvailable;
 	        patientRepository.UpdatedPatientAvailable += OnUpdatedPatientAvailable;
 
@@ -69,8 +73,30 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 					});					
 				},
 				errorCallback	
-			);                       			            
+			);   
+			
+			CreatePatient = new Command(DoCreatePatient,
+										() => !string.IsNullOrWhiteSpace(SearchFilter),
+										new PropertyChangedCommandUpdater(this, nameof(SearchFilter)));                    			            
         }
+
+	    private void DoCreatePatient()
+	    {
+		    var newPatient = AddPatientDialogService.GetNewPatient(SearchFilter);
+
+		    if (newPatient != null)
+		    {
+			    OnNewPatientAvailable(newPatient);
+			    SearchFilter = newPatient.Name;
+
+			    if (SelectedPatient == null)
+			    {
+				    SelectedPatient = newPatient;
+			    }
+
+				patientRepository.AddPatient(newPatient, errorCallback);
+		    }
+	    }
 
 	    private void OnUpdatedPatientAvailable(Patient patient)
 	    {
@@ -83,15 +109,20 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 
 				observablePatientList.Add(patient);
 				observablePatientList.Sort(new PatientSorter());
-		    });
+				UpdateForNewInput();
+			});
 	    }
 
 	    private void OnNewPatientAvailable(Patient patient)
 	    {
+			if (observablePatientList.FirstOrDefault(p => p.Id == patient.Id) != null)
+				return;
+
 			Application.Current.Dispatcher.Invoke(() =>
-			{
+			{				
 				observablePatientList.Add(patient);
 				observablePatientList.Sort(new PatientSorter());
+				UpdateForNewInput();
 			});
 		}
 
@@ -107,12 +138,14 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 
         public CollectionViewSource Patients { get; }
 
-        public string SearchFilter
+	    public ICommand CreatePatient { get; }
+
+	    public string SearchFilter
         {
             get { return searchFilter; }
             set
             {
-                searchFilter = value;                
+                PropertyChanged.ChangeAndNotify(this, ref searchFilter, value);             
                 UpdateForNewInput();
             }
         }
@@ -182,6 +215,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 
 			patientRepository.NewPatientAvailable     -= OnNewPatientAvailable;
 			patientRepository.UpdatedPatientAvailable -= OnUpdatedPatientAvailable;
+
+			((Command)CreatePatient).Dispose();
 		}
         public override event PropertyChangedEventHandler PropertyChanged;
     }

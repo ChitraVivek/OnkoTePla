@@ -11,5 +11,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Repositories.PatientReposi
 					
 		void RequestPatient(Action<Patient> patientAvailableCallback, Guid patientId, Action<string> errorCallback);
 		void RequestAllPatientList(Action<IReadOnlyList<Patient>> patientListAvailableCallback, Action<string> errorCallback);
+
+		void AddPatient(Patient newPatient, Action<string> errorCallback);
 	}
 }

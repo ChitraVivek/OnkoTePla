@@ -197,7 +197,14 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 																 },														
 																 connectionInfoVariable,
 																 errorCallback));
-		}		
+		}
+
+		public void AddPatientRequest(Patient newPatient, Action<string> errorCallback)
+		{
+			requestWorkQueue.Put(new TryToAddNewPatientRequestHander(newPatient, 
+																	 connectionInfoVariable, 
+																	 errorCallback));
+		}
 
 		public void TryAddEvents(Action<bool> resultCallback, IReadOnlyList<DomainEvent> newEvents, Action<string> errorCallback)
 		{

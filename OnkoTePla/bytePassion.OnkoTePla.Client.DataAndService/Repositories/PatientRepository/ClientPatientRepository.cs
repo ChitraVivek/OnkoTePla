@@ -87,6 +87,11 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Repositories.PatientReposi
 			}
 		}
 
+		public void AddPatient(Patient newPatient, Action<string> errorCallback)
+		{
+			connectionService.AddPatientRequest(newPatient, errorCallback);
+		}
+
 		private Patient GetPatient (Guid id, Action<string> errorCallback)
 		{			
 			if (cachedPatients.ContainsKey(id))
