@@ -97,7 +97,8 @@
                                         UpdateSourceTrigger=PropertyChanged}"
                  SelectionMode="Single" />
 		<Button Grid.Row="4"
-				Margin="5">
+				Margin="5"
+				Command="{Binding CreatePatient}">
 			<TextBlock>
 				<Run Text="Patienten '"/><Run Text="{Binding SearchFilter, Mode=OneWay}"/><Run Text="' hinzufügen?"/>
 			</TextBlock>
