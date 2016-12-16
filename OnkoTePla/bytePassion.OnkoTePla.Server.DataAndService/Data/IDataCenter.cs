@@ -15,6 +15,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Data
 		IReadOnlyList<Address> GetAllAvailableAddresses();
 
 		IEnumerable<Patient> GetAllPatients();
+		bool AddPatient(Patient newPatient);
 			
 		IEnumerable<User> GetAllUsers();
 		void AddNewUser(User newUser);

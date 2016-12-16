@@ -46,6 +46,22 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 			connectionService.SendPatientAddedNotification(newPatient);
 		}
 
+		public bool AddPatient(Patient newPatient)
+		{
+			if (!patients.ContainsKey(newPatient.Id))
+			{
+				patients.Add(newPatient.Id, newPatient);
+
+				PatientAdded?.Invoke(newPatient);
+				connectionService.SendPatientAddedNotification(newPatient);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		private void ModifyPatientAndRaiseEvent(Guid patientId, Func<Patient, Patient> modification)
 		{
 			if (!patients.ContainsKey(patientId))

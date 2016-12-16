@@ -71,6 +71,7 @@
     <Compile Include="Connection\ResponseHandling\Handers\GetLabelListResponseHandler.cs" />
     <Compile Include="Connection\ResponseHandling\Handers\ReleaseLockResponseHandler.cs" />
     <Compile Include="Connection\ResponseHandling\Handers\TryToAddNewEventResponseHandler.cs" />
+    <Compile Include="Connection\ResponseHandling\Handers\TryToAddNewPatientResponseHandler.cs" />
     <Compile Include="Connection\ThreadCollections\IHeartbeatThreadCollection.cs" />
     <Compile Include="Connection\ThreadCollections\INotificationThreadCollection.cs" />
     <Compile Include="Connection\NotificationObjects\EventNotificationObject.cs" />

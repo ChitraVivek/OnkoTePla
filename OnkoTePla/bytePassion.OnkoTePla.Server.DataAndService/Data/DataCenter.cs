@@ -44,6 +44,11 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Data
 			return patientRepository.GetAllPatients();
 		}
 
+		public bool AddPatient(Patient newPatient)
+		{
+			return patientRepository.AddPatient(newPatient);
+		}
+
 		#endregion
 
 		#region users
