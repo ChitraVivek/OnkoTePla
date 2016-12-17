@@ -62,7 +62,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.OverviewPage
 			UndoRedoViewModel = undoRedoViewModel;
 
 			ChangeConfirmationVisible = false;
-			AddAppointmentPossible = true;			
+			AddAppointmentPossible = false;			
 
 			
             appointmentModificationsVariable.StateChanged  += OnCurrentModifiedAppointmentVariableChanged;
@@ -91,6 +91,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.OverviewPage
 				
 				viewModelCommunication.Send(new HideDisabledOverlay());
 			});
+
+			UpdateAddAppointmentPossible();
 		}
 
 		private void OnSelectedDayVariablChanged(Date date)
