@@ -179,13 +179,13 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
        
         private void CheckList()
         {
-            var count = observablePatientList.Count;
+			var count = ((ListCollectionView) Patients.View).Count;
 
-	        if (count == 1)		        
-		        SelectedPatient = observablePatientList[0];
+			if (count == 1)
+				SelectedPatient = (Patient)((ListCollectionView)Patients.View).GetItemAt(0);
 
-            ListIsEmpty = count == 0;
-        }
+			ListIsEmpty = count == 0;
+		}
 
         private void Filter(object sender, FilterEventArgs e)
         {
