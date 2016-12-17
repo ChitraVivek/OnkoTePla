@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using bytePassion.Lib.FrameworkExtensions;
+using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.Commands.Updater;
 
@@ -21,14 +22,13 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 			Cancel = new Command(DoCancel);
 
 			Name = initialName;
+			Birthday = string.Empty;
 		}
 
 		private bool IsPatientCreationPossible()
 		{
-			// TODO: Test name
-			// TODO: Test birthday
-
-			return true;
+			return !string.IsNullOrWhiteSpace(Name) && 
+				   Date.IsValidDateString(Birthday);
 		}
 
 		private void DoCancel()
