@@ -8,13 +8,12 @@
                       mc:Ignorable="d" 
 			          Title="AddPatientDialog"
                       Width="600"
-					  Height="150"
+					  Height="300"
                       ResizeMode="NoResize"
-                      ShowTitleBar="False"
-                      SizeToContent="Height"
+                      ShowTitleBar="False"                     
                       WindowStartupLocation="CenterOwner"
                       WindowStyle="ToolWindow"
-                      d:DesignHeight="300" 
+                      d:DesignHeight="500" 
 			          d:DesignWidth="300">
 	
 	<d:DesignData.DataContext>
@@ -32,62 +31,91 @@
 
 		</Style>
 	</controls:MetroWindow.Resources>
+
+	<Border BorderBrush="Black"
+			BorderThickness="1">
+
+		<Grid>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition Height="45"/>
+				<RowDefinition Height="45"/>
+				<RowDefinition Height="45"/>
+				<RowDefinition Height="45"/>
+			</Grid.RowDefinitions>
+
+			
+			<TextBlock Grid.Column="0"
+					   Grid.Row="0"
+					   Grid.ColumnSpan="3"
+					   Style="{StaticResource HeaderTextBlock}"
+					   Text="Neuen Patienten anlegen"
+					   HorizontalAlignment="Left"
+					   Margin="20,0,0,0"
+					   VerticalAlignment="Center"/>
+			
+			<TextBlock Grid.Column="0"
+					   Grid.Row="1"
+					   Style="{StaticResource HeaderTextBlock}"
+					   HorizontalAlignment="Right"
+					   Text="Name:"/>
+
+			<TextBox Grid.Column="1"
+				     Grid.Row="1"
+				     Grid.ColumnSpan="2"
+				     Margin="5"
+				     FontSize="20"                 
+				     Text="{Binding Name, 
+				     				Mode=TwoWay, 
+				     				UpdateSourceTrigger=PropertyChanged}"/>
+
+			<TextBlock Grid.Column="0"
+				       Grid.Row="2"
+				       Style="{StaticResource HeaderTextBlock}"
+				       HorizontalAlignment="Right"
+				       Text="Geburtstag:"/>
+
+			<TextBox Grid.Column="1"
+				     Grid.Row="2"
+				     Grid.ColumnSpan="2"
+				     Margin="5"
+				     FontSize="20"                 
+				     Text="{Binding Birthday, 
+				     				Mode=TwoWay, 
+				     				UpdateSourceTrigger=PropertyChanged}"/>
+
+			<TextBlock Grid.Column="1"
+					   Grid.Row="3"
+					   Grid.ColumnSpan="2"
+					   Style="{StaticResource HeaderTextBlock}"
+					   FontSize="20"
+					   Margin="5"
+					   Text="Format: dd.mm.yyyy"
+					   HorizontalAlignment="Left"					   
+					   VerticalAlignment="Center"/>
+
+			<Button Grid.Row="4"
+				    Grid.Column="0"
+				    Margin="5"
+				    Content="Patienten anlegen"
+				    Command="{Binding CreatePatient}"/>
+
+			<Button Grid.Row="4"
+				    Grid.Column="2"
+				    Margin="5"
+				    Content="Abbrechen"
+				    Command="{Binding Cancel}"/>
+
+		</Grid>
+
+	</Border>
 	
-    <Grid>
-       
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		
-		<TextBlock Grid.Column="0"
-				   Grid.Row="0"
-				   Style="{StaticResource HeaderTextBlock}"
-				   HorizontalAlignment="Right"
-				   Text="Name:"/>
-		
-		<TextBox Grid.Column="1"
-				 Grid.Row="0"
-				 Grid.ColumnSpan="2"
-				 Margin="5"
-				 FontSize="20"                 
-				 Text="{Binding Name, 
-								Mode=TwoWay, 
-								UpdateSourceTrigger=PropertyChanged}"/>
-
-		<TextBlock Grid.Column="0"
-				   Grid.Row="1"
-				   Style="{StaticResource HeaderTextBlock}"
-				   HorizontalAlignment="Right"
-				   Text="Geburtstag:"/>
-
-		<TextBox Grid.Column="1"
-				 Grid.Row="1"
-				 Grid.ColumnSpan="2"
-				 Margin="5"
-				 FontSize="20"                 
-				 Text="{Binding Birthday, 
-								Mode=TwoWay, 
-								UpdateSourceTrigger=PropertyChanged}"/>
-
-		<Button Grid.Row="2"
-				Grid.Column="0"
-				Margin="5"
-				Content="Patienten anlegen"
-				Command="{Binding CreatePatient}"/>
-
-		<Button Grid.Row="2"
-				Grid.Column="2"
-				Margin="5"
-				Content="Abbrechen"
-				Command="{Binding Cancel}"/>
-
-	</Grid>
+    
 </controls:MetroWindow>
