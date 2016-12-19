@@ -22,6 +22,7 @@ using bytePassion.OnkoTePla.Contracts.Config;
 using bytePassion.OnkoTePla.Contracts.Domain;
 using bytePassion.OnkoTePla.Contracts.Infrastructure;
 using bytePassion.OnkoTePla.Contracts.Patients;
+using bytePassion.OnkoTePla.Resources;
 using Duration = bytePassion.Lib.TimeLib.Duration;
 
 
@@ -95,6 +96,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddAppointmentDialog
 											 new PropertyChangedCommandUpdater(this, nameof(DurationHours), nameof(DurationMinutes)));
 
 			SelectedPatient = Patient.Dummy;
+			Description = string.Empty;
 
 			DurationMinutes = 0;
 			DurationHours = 2;
@@ -308,6 +310,13 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddAppointmentDialog
 			set
 			{
 				description = value;
+
+				if (!NameChecker.CheckName(description))
+				{
+					var descWithoutForbiddenChar = NameChecker.GetNameWithoutForbittenCharacters(description);
+					PropertyChanged.ChangeAndNotify(this, ref description, descWithoutForbiddenChar);
+				}
+
 				DetermineCreationState();
 			}
 			get { return description; }

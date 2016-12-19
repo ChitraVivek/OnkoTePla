@@ -184,7 +184,7 @@
                      FontSize="24"
                      Foreground="#FF494949"
                      Text="{Binding Description,
-                                    Mode=OneWayToSource,
+                                    Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto" />
