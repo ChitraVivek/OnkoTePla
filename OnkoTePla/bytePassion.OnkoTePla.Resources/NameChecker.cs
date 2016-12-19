@@ -11,6 +11,20 @@ namespace bytePassion.OnkoTePla.Resources
 			return GlobalConstants.ForbiddenCharacters.All(forbiddenCharacter => !name.Contains(forbiddenCharacter));
 		}
 
+		public static string GetNameWithoutForbittenCharacters(string s)
+		{
+			var forbittenCharacter = GlobalConstants.ForbiddenCharacters.Select(c => c.ToString());
+
+			var result = s;
+
+			foreach (var forbiddenChar in forbittenCharacter)
+			{
+				result = result.Replace(forbiddenChar, string.Empty);
+			}
+
+			return result;
+		}
+
 		public static async void ShowCharacterError (string name)
 		{
 			var dialog = new UserDialogBox("Error",
