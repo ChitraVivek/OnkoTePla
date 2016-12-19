@@ -31,7 +31,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 				foreach (var practiceId in user.ListOfAccessablePractices)
 				{
 					msgBuilder.Append(practiceId);
-					msgBuilder.Append(",");
+					msgBuilder.Append("#");
 				}
 
 				if (user.ListOfAccessablePractices.Count > 0)
@@ -61,7 +61,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 			{
 				var userName = userParts[0];
 				var userId = Guid.Parse(userParts[1]);
-				var practiceListParts = userParts[2].Split(',')
+				var practiceListParts = userParts[2].Split('#')
 													.Select(Guid.Parse)
 													.ToList();
 

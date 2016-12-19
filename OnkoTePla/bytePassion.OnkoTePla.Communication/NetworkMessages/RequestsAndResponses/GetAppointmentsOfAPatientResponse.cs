@@ -22,14 +22,14 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 
 			foreach (var appointmentTransferData in AppointmentList)
 			{
-				sb.Append(appointmentTransferData.PatientId);         sb.Append(",");
-				sb.Append(appointmentTransferData.Description);       sb.Append(",");
-				sb.Append(appointmentTransferData.Day);               sb.Append(",");
-				sb.Append(appointmentTransferData.StartTime);         sb.Append(",");
-				sb.Append(appointmentTransferData.EndTime);           sb.Append(",");
-				sb.Append(appointmentTransferData.TherapyPlaceId);    sb.Append(",");
-				sb.Append(appointmentTransferData.LabelId);			  sb.Append(",");
-				sb.Append(appointmentTransferData.Id);			      sb.Append(",");
+				sb.Append(appointmentTransferData.PatientId);         sb.Append("#");
+				sb.Append(appointmentTransferData.Description);       sb.Append("#");
+				sb.Append(appointmentTransferData.Day);               sb.Append("#");
+				sb.Append(appointmentTransferData.StartTime);         sb.Append("#");
+				sb.Append(appointmentTransferData.EndTime);           sb.Append("#");
+				sb.Append(appointmentTransferData.TherapyPlaceId);    sb.Append("#");
+				sb.Append(appointmentTransferData.LabelId);			  sb.Append("#");
+				sb.Append(appointmentTransferData.Id);			      sb.Append("#");
 				sb.Append(appointmentTransferData.MedicalPracticeId);
 
 				sb.Append(";");
@@ -51,7 +51,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 
 				foreach (var appointmentData in appointmentListParts)
 				{
-					var appointmentParts = appointmentData.Split(',');
+					var appointmentParts = appointmentData.Split('#');
 
 					var patientId      = Guid.Parse(appointmentParts[0]);
 					var description    =            appointmentParts[1];

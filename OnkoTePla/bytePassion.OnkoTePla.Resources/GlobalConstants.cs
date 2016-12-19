@@ -11,7 +11,7 @@ namespace bytePassion.OnkoTePla.Resources
 			public const uint Notification = 6658;			
 		}
 
-		public static readonly char[] ForbiddenCharacters = {'|',';',',',':','.','#',
+		public static readonly char[] ForbiddenCharacters = {'|',';','#',
 															 '(','[','{','}',']',')' };
 
 		public const uint StandardSendingTimeout			 =  2000;    // unit is milliseconds

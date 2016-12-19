@@ -25,8 +25,8 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.Notifications
 
 			sb.Append('|');
 
-			sb.Append(TherapyPlaceType.Name); sb.Append(',');
-			sb.Append(TherapyPlaceType.IconType); sb.Append(',');
+			sb.Append(TherapyPlaceType.Name);     sb.Append(';');
+			sb.Append(TherapyPlaceType.IconType); sb.Append(';');
 			sb.Append(TherapyPlaceType.Id);
 
 			return sb.ToString();
@@ -39,7 +39,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.Notifications
 			var sessionId = new ConnectionSessionId(Guid.Parse(s.Substring(0, index)));
 
 			var typeParts = s.Substring(index + 1, s.Length - index - 1)
-							 .Split(',');
+							 .Split(';');
 
 			var name     = typeParts[0];
 			var iconType = (TherapyPlaceTypeIcon) Enum.Parse(typeof (TherapyPlaceTypeIcon), typeParts[1]);

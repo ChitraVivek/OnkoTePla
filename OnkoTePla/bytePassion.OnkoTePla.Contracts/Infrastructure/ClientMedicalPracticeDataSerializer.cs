@@ -37,7 +37,7 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 
 				foreach(var therapyPlaceData in allTherapyPlaceParts)
 				{					
-					var therapyPlaceParts = therapyPlaceData.Split(',');
+					var therapyPlaceParts = therapyPlaceData.Split('(');
 
 					var therapyPlaceId = Guid.Parse(therapyPlaceParts[0]);
 					var therapyPlaceName = therapyPlaceParts[1];
@@ -77,13 +77,13 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 			var isOpenOnSunday    = bool.Parse(hoursOfOpeningParts[20]);
 
 			var closedDaydata = hoursOfOpeningParts[21];
-			var closedDays = closedDaydata.Split(',')
+			var closedDays = closedDaydata.Split('(')
 										  .Where(part => !string.IsNullOrWhiteSpace(part))
 										  .Select(Date.Parse)
 										  .ToList();
 			 
 			var openedDaydata = hoursOfOpeningParts[22];
-			var openedDays = openedDaydata.Split(',')
+			var openedDays = openedDaydata.Split('(')
 										  .Where(part => !string.IsNullOrWhiteSpace(part))
 										  .Select(Date.Parse)
 										  .ToList();
@@ -103,30 +103,21 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 		{
 			var sb = new StringBuilder();
 
-			sb.Append(practice.Id);
-			sb.Append("|");
-			sb.Append(practice.Name);
-			sb.Append("|");
-			sb.Append(practice.Version);
-			sb.Append("|");
+			sb.Append(practice.Id);      sb.Append("|");
+			sb.Append(practice.Name);    sb.Append("|");
+			sb.Append(practice.Version); sb.Append("|");
 			
 			foreach (var room in practice.Rooms)
 			{
-				sb.Append(room.Id);
-				sb.Append(";");
-				sb.Append(room.Name);
-				sb.Append(";");
-				sb.Append(room.DisplayedColor);
-				sb.Append(";");				
+				sb.Append(room.Id);             sb.Append(";");
+				sb.Append(room.Name);           sb.Append(";");
+				sb.Append(room.DisplayedColor); sb.Append(";");				
 
 				foreach (var therapyPlace in room.TherapyPlaces)
 				{
-					sb.Append(therapyPlace.Id);
-					sb.Append(",");
-					sb.Append(therapyPlace.Name);
-					sb.Append(",");
-					sb.Append(therapyPlace.TypeId);
-					sb.Append("#");
+					sb.Append(therapyPlace.Id);     sb.Append("(");
+					sb.Append(therapyPlace.Name);   sb.Append("(");
+					sb.Append(therapyPlace.TypeId); sb.Append("#");
 				}
 
 				if (room.TherapyPlaces.Any())
@@ -168,7 +159,7 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 			foreach (var day in practice.HoursOfOpening.AdditionalClosedDays)
 			{				
 				sb.Append(day);
-				sb.Append(",");
+				sb.Append("(");
 			}
 
 			if (practice.HoursOfOpening.AdditionalClosedDays.Count > 0)
@@ -179,7 +170,7 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 			foreach (var day in practice.HoursOfOpening.AdditionalOpenedDays)
 			{				
 				sb.Append(day);
-				sb.Append(",");
+				sb.Append("(");
 			}
 
 			if (practice.HoursOfOpening.AdditionalClosedDays.Count > 0)

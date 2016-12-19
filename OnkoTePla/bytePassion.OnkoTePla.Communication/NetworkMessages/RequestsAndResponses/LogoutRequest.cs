@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using bytePassion.OnkoTePla.Contracts.Types;
 
 namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndResponses
@@ -23,7 +22,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 
 		public static LogoutRequest Parse (string s)
 		{
-			var parts = s.Split(';').ToList();
+			var parts = s.Split(';');
 
 			var sessionId = new ConnectionSessionId(Guid.Parse(parts[0]));
 			var userId    = Guid.Parse(parts[1]);			

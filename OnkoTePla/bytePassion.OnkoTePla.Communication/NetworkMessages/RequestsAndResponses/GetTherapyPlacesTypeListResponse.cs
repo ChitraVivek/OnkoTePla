@@ -22,8 +22,8 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 
 			foreach (var therapyPlaceType in TherapyPlaceTypes)
 			{
-				sb.Append(therapyPlaceType.Name);		sb.Append(',');
-				sb.Append(therapyPlaceType.IconType);	sb.Append(',');
+				sb.Append(therapyPlaceType.Name);		sb.Append('#');
+				sb.Append(therapyPlaceType.IconType);	sb.Append('#');
 				sb.Append(therapyPlaceType.Id);
 				sb.Append('|');
 			}
@@ -39,7 +39,7 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 			var therapyPlaceTypeList = new List<TherapyPlaceType>();
 
 			var typeListParts = s.Split('|')
-						         .Select(listPart => listPart.Split(','));
+						         .Select(listPart => listPart.Split('#'));
 
 			foreach (var typeParts in typeListParts)
 			{
