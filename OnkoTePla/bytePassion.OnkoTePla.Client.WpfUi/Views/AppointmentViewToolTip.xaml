@@ -4,7 +4,7 @@
              xmlns:appointmentView="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AppointmentView"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="22"
+             d:DesignHeight="42"
              d:DesignWidth="300"
              mc:Ignorable="d">
 
@@ -16,13 +16,27 @@
             BorderBrush="DarkGray"
             BorderThickness="1">
 
-		<TextBlock FontFamily="Segoe UI Semibold"
-				   Margin="10,0"
-                   Foreground="#404148"
-                   Text="{Binding Description}"
-                   TextWrapping="Wrap" 
-				   HorizontalAlignment="Left"
-				   VerticalAlignment="Center"/>
+		<StackPanel>
+
+			<TextBlock FontFamily="Segoe UI Semibold"
+				       Margin="10,5,10,0"
+                       Foreground="#404148"
+                       Text="{Binding PatientDisplayName}"
+                       TextWrapping="Wrap" 
+				       HorizontalAlignment="Left"
+				       VerticalAlignment="Center"/>
+			
+			<TextBlock FontFamily="Segoe UI Semibold"
+				       Margin="10,5"
+                       Foreground="#404148"
+                       Text="{Binding Description}"
+                       TextWrapping="Wrap" 
+				       HorizontalAlignment="Left"
+				       VerticalAlignment="Center"/>
+
+		</StackPanel>
+		
+		
 
 	</Border>
 </UserControl>
