@@ -106,6 +106,16 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 															  patient.ExternalId));
 		}
 
+		public void UpdatePatient(Guid patientId, string newName, Date newBirthday, bool newLivingStatus)
+		{
+			ModifyPatientAndRaiseEvent(patientId,
+									   patient => new Patient(newName,
+															  newBirthday,
+															  newLivingStatus,
+															  patient.Id,
+															  patient.ExternalId));
+		}
+
 		public void PersistRepository()
 		{
 			persistenceService.Persist(patients.Values.ToList());

@@ -3,9 +3,11 @@ using System.Windows;
 using System.Windows.Input;
 using bytePassion.Lib.Communication.State;
 using bytePassion.Lib.FrameworkExtensions;
+using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.ViewModelBase;
 using bytePassion.OnkoTePla.Contracts.Patients;
+using bytePassion.OnkoTePla.Resources.UserNotificationService;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients;
 using bytePassion.OnkoTePla.Server.WpfUi.SampleDataGenerators;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector;
@@ -16,7 +18,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 	internal class PatientsPageViewModel : ViewModel, IPatientsPageViewModel
 	{
 		private readonly IPatientRepository patientRepository;
-		private readonly ISharedStateReadOnly<Patient> selectedPatientVariable;
+		private readonly ISharedState<Patient> selectedPatientVariable;
 		private readonly PatientNameGenerator patientNameGenerator;		
 
 		private bool isPatientSelected;
@@ -28,7 +30,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 
 		public PatientsPageViewModel(IPatientSelectorViewModel patientSelectorViewModel,
 									 IPatientRepository patientRepository,
-									 ISharedStateReadOnly<Patient> selectedPatientVariable,
+									 ISharedState<Patient> selectedPatientVariable,
 									 PatientNameGenerator patientNameGenerator)
 		{
 			this.patientRepository = patientRepository;
@@ -39,9 +41,46 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			selectedPatientVariable.StateChanged += OnSelectedPatientChanged;
 			OnSelectedPatientChanged(selectedPatientVariable.Value);
 
-			Generate100RandomPatients = new Command(DoGeneratePatients);			
+			Generate100RandomPatients = new Command(DoGeneratePatients);		
+			
+			SaveChanges = new Command(DoSaveChanges);
+			DiscardChanges = new Command(DoDiscardChanges);	
 		}
-		
+
+		private void DoDiscardChanges()
+		{
+			selectedPatientVariable.Value = null;
+		}
+
+		private async void DoSaveChanges()
+		{
+			if (!Date.IsValidDateString(PatientBirthday))
+			{
+				var dialog = new UserDialogBox("Error",
+											   $"{PatientBirthday} ist kein gültiges Datum.\nFormat: dd.mm.yyyy",
+											   MessageBoxButton.OK);
+
+				await dialog.ShowMahAppsDialog();
+				return;
+			}			
+
+			if (string.IsNullOrWhiteSpace(PatientName))
+			{
+				var dialog = new UserDialogBox("Error",
+											   "Der Patientenname darf nicht leer bleiben",
+											   MessageBoxButton.OK);
+
+				await dialog.ShowMahAppsDialog();
+				return;
+			}
+
+			patientRepository.UpdatePatient(selectedPatientVariable.Value.Id,
+												PatientName,
+												Date.Parse(PatientBirthday),
+												selectedPatientVariable.Value.Alive);
+			selectedPatientVariable.Value = null;
+		}
+
 		private void DoGeneratePatients()
 		{
 			for (int i = 0; i < 100; i++)
@@ -80,7 +119,10 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 
 		public IPatientSelectorViewModel PatientSelectorViewModel { get; }
 
-		public ICommand Generate100RandomPatients { get; }		
+		public ICommand Generate100RandomPatients { get; }
+
+		public ICommand SaveChanges { get; }
+		public ICommand DiscardChanges { get; }
 
 		public bool IsPatientSelected
 		{

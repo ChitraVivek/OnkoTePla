@@ -62,8 +62,8 @@
                        FontWeight="Bold"
                        Foreground="#FF444444"
                        Text="Developer" />
-				<TextBlock Text="Alexander Horn" />
 				<TextBlock Text="Matthias Drescher" />
+				<TextBlock Text="Alexander Horn" />
 			</StackPanel>
 			
 		</Grid>

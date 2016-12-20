@@ -26,6 +26,8 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector
 	        this.patientRepository = patientRepository;
 	        this.selectedPatientSharedVariable = selectedPatientSharedVariable;
 
+			selectedPatientSharedVariable.StateChanged += OnSelectedPatientSharedVariableChanged;
+
 			patientRepository.PatientAdded    += PatientRepositoryUpdated;
 	        patientRepository.PatientModified += PatientRepositoryUpdated;
 
@@ -36,7 +38,12 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector
 			SearchFilter = "";
 		}
 
-		private void PatientRepositoryUpdated(Patient patient)
+	    private void OnSelectedPatientSharedVariableChanged(Patient patient)
+	    {
+		    SelectedPatient = patient;
+	    }
+
+	    private void PatientRepositoryUpdated(Patient patient)
 		{
 			Application.Current.Dispatcher.Invoke(() =>
 			{
