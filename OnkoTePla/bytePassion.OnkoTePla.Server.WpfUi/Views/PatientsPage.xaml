@@ -40,8 +40,8 @@
 		<Button Grid.Row="1"
 				Grid.Column="0"
 				Margin="10"
-				Content="Add 1 Random Patient"
-				Command="{Binding Generate1000RandomPatients}"/>
+				Content="Add 100 Random Patient"
+				Command="{Binding Generate100RandomPatients}"/>
 
 		<TextBlock Grid.Row="0"
 				   Grid.Column="1"

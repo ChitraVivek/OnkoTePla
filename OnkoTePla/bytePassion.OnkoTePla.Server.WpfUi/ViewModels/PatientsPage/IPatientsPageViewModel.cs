@@ -9,7 +9,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 	{
 		IPatientSelectorViewModel PatientSelectorViewModel { get; }
 
-		ICommand Generate1000RandomPatients   { get; }		
+		ICommand Generate100RandomPatients   { get; }		
 
 		bool   IsPatientSelected { get; }		
 		bool   IsPatientAlive    { get; }

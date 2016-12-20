@@ -40,12 +40,12 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			selectedPatientVariable.StateChanged += OnSelectedPatientChanged;
 			OnSelectedPatientChanged(selectedPatientVariable.Value);
 
-			Generate1000RandomPatients = new Command(DoGeneratePatients);			
+			Generate100RandomPatients = new Command(DoGeneratePatients);			
 		}
 		
 		private void DoGeneratePatients()
 		{
-			for (int i = 0; i < 1; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				var newPatient = patientNameGenerator.NewPatient();
 				patientRepository.AddPatient(newPatient.Name, 
@@ -81,7 +81,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 
 		public IPatientSelectorViewModel PatientSelectorViewModel { get; }
 
-		public ICommand Generate1000RandomPatients { get; }		
+		public ICommand Generate100RandomPatients { get; }		
 
 		public bool IsPatientSelected
 		{

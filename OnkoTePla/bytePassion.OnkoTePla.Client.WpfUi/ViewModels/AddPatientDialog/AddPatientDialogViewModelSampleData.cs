@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 
+#pragma warning disable 0067
+
 namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 {
 	internal class AddPatientDialogViewModelSampleData : IAddPatientDialogViewModel
