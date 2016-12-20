@@ -48,7 +48,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.UserPage
 
 		private void OnSelectedPageChanged(MainPage mainPage)
 		{
-			if (mainPage != MainPage.User)
+			if (mainPage == MainPage.User)
 			{
 				Users.Clear();
 
