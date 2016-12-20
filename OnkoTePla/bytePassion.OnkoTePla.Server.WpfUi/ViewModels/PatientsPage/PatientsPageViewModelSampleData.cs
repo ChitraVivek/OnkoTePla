@@ -18,7 +18,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			IsPatientAlive = false;
 
 			PatientName = "John Doe";
-			PatientBirthday = new Date(1,1,2000);
+			PatientBirthday = new Date(1,1,2000).ToString();
 			PatientExternalId = "exampleExternal-ID";
 			PatientInternalId = "exampleInternal-ID";
 		}
@@ -29,10 +29,10 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 
 		public bool   IsPatientSelected { get; }
 		public bool   IsPatientAlive    { get; }
-		public string PatientName       { get; }		
+		public string PatientName       { get; set; }		
 		public string PatientInternalId { get; }
 		public string PatientExternalId { get; }
-		public Date   PatientBirthday   { get; }		
+		public string PatientBirthday   { get; set; }		
 
 		public void Dispose () { }
 		public event PropertyChangedEventHandler PropertyChanged;

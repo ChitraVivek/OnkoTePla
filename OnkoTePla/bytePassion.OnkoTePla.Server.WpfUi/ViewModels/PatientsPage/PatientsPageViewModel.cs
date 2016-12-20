@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Input;
 using bytePassion.Lib.Communication.State;
 using bytePassion.Lib.FrameworkExtensions;
-using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.ViewModelBase;
 using bytePassion.OnkoTePla.Contracts.Patients;
@@ -25,7 +24,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		private string patientName;
 		private string patientInternalId;
 		private string patientExternalId;
-		private Date patientBirthday;
+		private string patientBirthday;
 
 		public PatientsPageViewModel(IPatientSelectorViewModel patientSelectorViewModel,
 									 IPatientRepository patientRepository,
@@ -54,7 +53,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 											 newPatient.ExternalId);
 			}
 
-			MessageBox.Show("1 Patent was generated");
+			MessageBox.Show("100 Patent was generated");
 		}
 
 		private void OnSelectedPatientChanged(Patient patient)
@@ -62,9 +61,9 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			if (patient == null)
 			{
 				IsPatientSelected = false;
-				IsPatientAlive = false;
-				PatientBirthday = new Date(1,1,2000);
-				PatientName = "";
+				IsPatientAlive    = false;
+				PatientBirthday   = "";
+				PatientName       = "";
 				PatientExternalId = "";
 				PatientInternalId = "";
 			}
@@ -72,7 +71,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			{
 				IsPatientSelected = true;
 				IsPatientAlive    = patient.Alive;
-				PatientBirthday   = patient.Birthday;
+				PatientBirthday   = patient.Birthday.ToString();
 				PatientName       = patient.Name;
 				PatientExternalId = patient.ExternalId;
 				PatientInternalId = patient.Id.ToString();
@@ -96,7 +95,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		public string PatientName
 		{
 			get { return patientName; }
-			private set { PropertyChanged.ChangeAndNotify(this, ref patientName, value); }
+			set { PropertyChanged.ChangeAndNotify(this, ref patientName, value); }
 		}
 		public string PatientInternalId
 		{
@@ -108,10 +107,10 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			get { return patientExternalId; }
 			private set { PropertyChanged.ChangeAndNotify(this, ref patientExternalId, value); }
 		}
-		public Date PatientBirthday
+		public string PatientBirthday
 		{
 			get { return patientBirthday; }
-			private set { PropertyChanged.ChangeAndNotify(this, ref patientBirthday, value); }
+			set { PropertyChanged.ChangeAndNotify(this, ref patientBirthday, value); }
 		}
 
 		protected override void CleanUp()

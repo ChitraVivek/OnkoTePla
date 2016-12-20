@@ -70,10 +70,12 @@
 			</Grid.ColumnDefinitions>
 			
 			<Grid.RowDefinitions>
-				<RowDefinition Height="60"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="30"/>
 				<RowDefinition Height="30"/>
 				<RowDefinition Height="30"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
 
@@ -86,12 +88,14 @@
                    Visibility="{Binding IsPatientAlive,
                                         Converter={StaticResource InvertedBoolToCollapsedVisibilityConverter}}" />
 
-			<TextBlock Grid.Row="0"
+			<TextBox Grid.Row="0"
 					   Grid.Column="1"
-					   HorizontalAlignment="Left"
+					   HorizontalAlignment="Stretch"
 					   VerticalAlignment="Center"
 					   Margin="5"
-					   Text="{Binding PatientName}"
+					   Text="{Binding PatientName, 
+									  Mode=TwoWay, 
+									  UpdateSourceTrigger=PropertyChanged}"
 					   FontSize="35"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
@@ -122,15 +126,17 @@
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
-			<TextBlock Grid.Row="1"
-					   Grid.Column="1"
-					   HorizontalAlignment="Left"
-					   VerticalAlignment="Center"
-					   Margin="5"
-					   Text="{Binding PatientBirthday, 
-									  Converter={StaticResource BirthdayToStringConverter}}"
-					   FontSize="15"
-					   FontFamily="{StaticResource StandardFontFamily}"/>
+			<TextBox Grid.Row="1"
+					 Grid.Column="1"
+					 HorizontalAlignment="Left"
+					 VerticalAlignment="Center"
+					 Margin="5"
+					 Width="100"
+					 Text="{Binding PatientBirthday, 
+									Mode=TwoWay, 
+									UpdateSourceTrigger=PropertyChanged}"
+					 FontSize="15"
+					 FontFamily="{StaticResource StandardFontFamily}"/>
 
 			<TextBlock Grid.Row="2"
 					   Grid.Column="1"
@@ -149,6 +155,24 @@
 					   Text="{Binding PatientExternalId}"
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
+
+			<Button Grid.Row="5"
+					Grid.Column="0"
+					Grid.ColumnSpan="2"
+					Width="200"
+					HorizontalAlignment="Left"
+					Content="Änderungen speichern"
+					Margin="5"
+					Command="{Binding SaveChanges}"/>
+
+			<Button Grid.Row="5"
+					Grid.Column="0"
+					Grid.ColumnSpan="2"
+					Width="200"
+					HorizontalAlignment="Right"
+					Content="Änderungen verwerfen"
+					Margin="5"
+					Command="{Binding DiscardChanges}"/>
 
 		</Grid>
 
