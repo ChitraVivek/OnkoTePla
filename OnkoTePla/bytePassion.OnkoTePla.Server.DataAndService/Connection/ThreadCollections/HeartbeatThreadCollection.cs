@@ -14,12 +14,10 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.ThreadCollectio
 	{
 		public event Action<ConnectionSessionId> ClientVanished;
 
-		private readonly NetMQContext zmqContext;		
 		private readonly IDictionary<ConnectionSessionId, HeartbeatThread> heartbeatThreads;
 
-		public HeartbeatThreadCollection(NetMQContext zmqContext)
+		public HeartbeatThreadCollection()
 		{
-			this.zmqContext = zmqContext;			
 			heartbeatThreads = new ConcurrentDictionary<ConnectionSessionId, HeartbeatThread>();
 		}		
 
@@ -37,7 +35,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.ThreadCollectio
 		public void AddThread(AddressIdentifier clientAddressIdentifier, ConnectionSessionId id)
 		{
 			var clientAddress = new Address(new TcpIpProtocol(), clientAddressIdentifier);
-			var heartbeatThread = new HeartbeatThread(zmqContext, clientAddress, id);
+			var heartbeatThread = new HeartbeatThread(clientAddress, id);
 
 			heartbeatThreads.Add(id, heartbeatThread);
 			heartbeatThread.ClientVanished += HeartbeatOnClientVanished;

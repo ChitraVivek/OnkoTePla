@@ -7,7 +7,7 @@ using bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndResponses;
 using bytePassion.OnkoTePla.Communication.SendReceive;
 using bytePassion.OnkoTePla.Contracts.Types;
 using bytePassion.OnkoTePla.Resources;
-using NetMQ;
+using NetMQ.Sockets;
 
 namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 {
@@ -15,56 +15,66 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 	{
 		public event Action ServerVanished;
 
-		private readonly NetMQContext context;		
 		private readonly Address clientAddress;
 		private readonly ConnectionSessionId sessionId;
 
 		private volatile bool stopRunning;
 
-		public HeartbeatThead (NetMQContext context,
-							   Address clientAddress,
-							   ConnectionSessionId sessionId)
+		public HeartbeatThead(Address clientAddress,
+							  ConnectionSessionId sessionId)
 		{
-			this.context = context;
 			this.clientAddress = clientAddress;
 			this.sessionId = sessionId;
 
-			IsRunning = true;
 			stopRunning = false;
+			IsRunning = false;
 		}
 
-		public void Run ()
+		public void Run()
 		{
-			using (var socket = context.CreateResponseSocket())
+			IsRunning = true;
+
+			try
 			{
-				socket.Options.Linger = TimeSpan.Zero;
-				
-				socket.Bind(clientAddress.ZmqAddress + ":" + GlobalConstants.TcpIpPort.Heartbeat);
-
-				var timoutCounter = 0;
-
-				while (!stopRunning)
+				using (var socket = new ResponseSocket())
 				{
-					var request = socket.ReceiveNetworkMsg(TimeSpan.FromSeconds(1));
-					
-					if (request == null)
-					{
-						timoutCounter++;
+					socket.Options.Linger = TimeSpan.Zero;
 
-						if (timoutCounter == 10)
-						{							
-							Application.Current?.Dispatcher.Invoke(() => ServerVanished?.Invoke());
-							break;
+					socket.Bind(clientAddress.ZmqAddress + ":" + GlobalConstants.TcpIpPort.Heartbeat);
+
+					var timoutCounter = 0;
+
+					while (!stopRunning)
+					{
+						var request = socket.ReceiveNetworkMsg(TimeSpan.FromSeconds(1));
+
+						if (request == null)
+						{
+							timoutCounter++;
+
+							if (timoutCounter == 10)
+							{
+								Application.Current?.Dispatcher.Invoke(() => ServerVanished?.Invoke());
+								break;
+							}
+						}
+						else if (request.Type == NetworkMessageType.HeartbeatRequest)
+						{
+							timoutCounter = 0;
+							var heartbeatRequest = (HeartbeatRequest) request;
+							socket.SendNetworkMsg(new HeartbeatResponse(heartbeatRequest.SessionId));
 						}
 					}
-					else if (request.Type == NetworkMessageType.HeartbeatRequest)
-					{
-						timoutCounter = 0;
-						var heartbeatRequest = (HeartbeatRequest) request;												
-						socket.SendNetworkMsg(new HeartbeatResponse(heartbeatRequest.SessionId));
-					}
-				}			
+				}
 			}
+			catch 
+			{
+				// Ignored				
+			}			
+
+			Console.WriteLine("heartbeat stopped !!!");
+
+			IsRunning = false;
 		}
 
 		public void Stop ()
@@ -72,6 +82,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 			stopRunning = true;
 		}
 
-		public bool IsRunning { get; }
+		public bool IsRunning { get; private set; }
 	}
 }

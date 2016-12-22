@@ -5,24 +5,20 @@ using bytePassion.Lib.Utils;
 using bytePassion.OnkoTePla.Communication.SendReceive;
 using bytePassion.OnkoTePla.Resources;
 using bytePassion.OnkoTePla.Server.DataAndService.Connection.ResponseHandling;
-using NetMQ;
+using NetMQ.Sockets;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 {
 	internal class UniversalResponseThread : IThread
 	{		
-		private readonly NetMQContext context;
 		private readonly Address serverAddress;		
 		private readonly IResponseHandlerFactory responseHandlerFactory;
 
 		private volatile bool stopRunning;		
 		
-		public UniversalResponseThread (NetMQContext context, 
-										Address serverAddress,								       
+		public UniversalResponseThread (Address serverAddress,								       
 										IResponseHandlerFactory responseHandlerFactory)
-		{
-			
-			this.context = context;
+		{						
 			this.serverAddress = serverAddress;			
 			this.responseHandlerFactory = responseHandlerFactory;
 
@@ -34,7 +30,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 		{
 			IsRunning = true;
 
-			using (var socket = context.CreateResponseSocket())
+			using (var socket = new ResponseSocket())
 			{
 				socket.Options.Linger = TimeSpan.Zero;
 

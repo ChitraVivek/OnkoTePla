@@ -7,19 +7,16 @@ using bytePassion.Lib.Types.Communication;
 using bytePassion.OnkoTePla.Contracts.Types;
 using bytePassion.OnkoTePla.Server.DataAndService.Connection.NotificationObjects;
 using bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads;
-using NetMQ;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.ThreadCollections
 {
 	internal class NotificationThreadCollection : DisposingObject, INotificationThreadCollection
 	{
-		private readonly NetMQContext zmqContext;		
 		private readonly IDictionary<ConnectionSessionId, NotificationThread> notificationThreads;
 		private readonly IDictionary<ConnectionSessionId, TimeoutBlockingQueue<NotificationObject>> notificationQueues; 
 
-		public NotificationThreadCollection (NetMQContext zmqContext)
+		public NotificationThreadCollection ()
 		{
-			this.zmqContext = zmqContext;			
 			notificationThreads = new ConcurrentDictionary<ConnectionSessionId, NotificationThread>();
 			notificationQueues = new ConcurrentDictionary<ConnectionSessionId, TimeoutBlockingQueue<NotificationObject>>();
 		}
@@ -40,7 +37,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.ThreadCollectio
 		{
 			var clientAddress = new Address(new TcpIpProtocol(), clientAddressIdentifier);
 			var notificationQueue = new TimeoutBlockingQueue<NotificationObject>(1000);
-			var notificationThread = new NotificationThread(zmqContext, clientAddress, id, notificationQueue);
+			var notificationThread = new NotificationThread(clientAddress, id, notificationQueue);
 			
 			notificationThreads.Add(id, notificationThread);
 			notificationQueues.Add(id, notificationQueue);

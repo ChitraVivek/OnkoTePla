@@ -17,7 +17,6 @@ using bytePassion.OnkoTePla.Contracts.Domain.Events.Base;
 using bytePassion.OnkoTePla.Contracts.Infrastructure;
 using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Contracts.Types;
-using NetMQ;
 
 namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 {
@@ -34,15 +33,13 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		public event Action<Label> NewLabelAvailable;
 		public event Action<Label> UpdatedLabelAvailable;
 
-		private readonly NetMQContext zmqContext;
 		private readonly SharedState<ConnectionInfo> connectionInfoVariable;
 
+		private volatile bool forceDisconnect = false;
 
 		public ConnectionService()
 		{
 			connectionInfoVariable = new SharedState<ConnectionInfo>(new ConnectionInfo(null, null));
-			zmqContext = NetMQContext.Create();
-			
 		}
 		
 		private Address ServerAddress { get; set; }
@@ -60,7 +57,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 
 		private void RunHeartbeatThread(ConnectionSessionId connectionSessionId)
 		{
-			heartbeatThread = new HeartbeatThead(zmqContext, ClientAddress, connectionSessionId);
+			heartbeatThread = new HeartbeatThead(ClientAddress, connectionSessionId);
 			heartbeatThread.ServerVanished += OnServerVanished;
 			new Thread(heartbeatThread.Run).Start();
 		}
@@ -71,6 +68,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 			{
 				heartbeatThread.ServerVanished -= OnServerVanished;
 
+				Console.WriteLine("try to stop heartbeat");
 				heartbeatThread.Stop();
 				heartbeatThread = null;
 			}
@@ -78,7 +76,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		
 		private void RunNotificationThread(ConnectionSessionId connectionSessionId)
 		{
-			notificationThread = new NotificationThread(zmqContext, ClientAddress, connectionSessionId);
+			notificationThread = new NotificationThread(ClientAddress, connectionSessionId);
 
 			notificationThread.NewDomainEventAvailable          += OnNewDomainEventAvailable;
 			notificationThread.NewPatientAvailable              += OnNewPatientAvailable;
@@ -103,6 +101,8 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 				notificationThread.NewLabelAvailable                -= OnNewLabelAvailable;
 				notificationThread.UpdatedLabelAvailable            -= OnUpdatedLabelAvailable;
 
+				Console.WriteLine("try to stop notification");
+
 				notificationThread.Stop();
 				notificationThread = null;
 			}			
@@ -111,7 +111,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		private void RunUserveralRequestThread()
 		{
 			requestWorkQueue = new TimeoutBlockingQueue<IRequestHandler>(1000);
-			universalRequestThread = new UniversalRequestThread(zmqContext, ServerAddress, requestWorkQueue);
+			universalRequestThread = new UniversalRequestThread(ServerAddress, requestWorkQueue);
 			new Thread(universalRequestThread.Run).Start();
 		}
 
@@ -119,6 +119,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		{
 			if (universalRequestThread != null)
 			{
+				Console.WriteLine("try to stop request");
 				universalRequestThread.Stop();
 
 				universalRequestThread = null;
@@ -187,16 +188,25 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		}
 
 		public void TryDisconnect(Action dissconnectionSuccessful, Action<string> errorCallback)
-		{			
+		{
 			ConnectionEventInvoked?.Invoke(ConnectionEvent.StartedTryDisconnect);
 
-			requestWorkQueue.Put(new EndConnectionRequestHandler(() =>
-																 {
-																	ConnectionEndResponseReceived();
-																	dissconnectionSuccessful?.Invoke();
-																 },														
-																 connectionInfoVariable,
-																 errorCallback));
+			if (connectionInfoVariable.Value.SessionId != null)
+			{
+				requestWorkQueue.Put(new EndConnectionRequestHandler(() =>
+					{
+						ConnectionEndResponseReceived();
+						dissconnectionSuccessful?.Invoke();
+					},
+					connectionInfoVariable,
+					errorCallback));
+			}
+			else
+			{
+				forceDisconnect = true;
+				CleanUpAfterDisconnection();
+				dissconnectionSuccessful?.Invoke();
+			}		
 		}
 
 		public void AddPatientRequest(Patient newPatient, Action<string> errorCallback)
@@ -377,7 +387,9 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		#endregion
 
 		private void CleanUpAfterDisconnection()
-		{						
+		{			
+			Console.WriteLine("try to clean up .....");
+						
 			StopHeartbeatThread();
 			StopNotificationThread();
 			StopUniversalRequestThread();
@@ -386,7 +398,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		protected override void CleanUp()
 		{
 			CleanUpAfterDisconnection();
-			zmqContext.Dispose();
 		}
 	}
 }

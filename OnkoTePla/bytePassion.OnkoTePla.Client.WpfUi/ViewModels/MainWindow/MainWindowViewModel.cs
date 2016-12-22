@@ -64,26 +64,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.MainWindow
 		{
 			switch (session.CurrentApplicationState)
 			{
-				case ApplicationState.LoggedIn:
-				{
-					session.Logout(() =>
-						{
-							session.TryDisconnect(() =>
-								{
-									Application.Current.Dispatcher.Invoke(() =>
-									{
-										CheckWindowClosing = false;
-										KillWindow();
-									});
-								},
-								_ => KillWindow()
-							);
-						},
-						_ => KillWindow()
-					);
-					break;
-				}
-
+				case ApplicationState.LoggedIn:				
+				case ApplicationState.TryingToConnect:
 				case ApplicationState.ConnectedButNotLoggedIn:
 				{
 					session.TryDisconnect(() =>
@@ -97,7 +79,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.MainWindow
 						_ => KillWindow()
 					);
 					break;
-				}
+				}								
 
 				default:
 				{

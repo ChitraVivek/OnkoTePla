@@ -3,49 +3,58 @@ using bytePassion.Lib.ConcurrencyLib;
 using bytePassion.Lib.Types.Communication;
 using bytePassion.OnkoTePla.Client.DataAndService.Connection.RequestHandling;
 using bytePassion.OnkoTePla.Resources;
-using NetMQ;
+using NetMQ.Sockets;
 
 namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 {
 	internal class UniversalRequestThread : IThread
 	{
-		private readonly NetMQContext context;
 		private readonly Address serverAddress;
 		private readonly TimeoutBlockingQueue<IRequestHandler> workQueue;
-				
+
 
 		private volatile bool stopRunning;
-		 
-		public UniversalRequestThread (NetMQContext context, 
-								       Address serverAddress,			
-								       TimeoutBlockingQueue<IRequestHandler> workQueue)
-		{
-			this.context = context;
-			this.serverAddress = serverAddress;
-			this.workQueue = workQueue;			
 
-			IsRunning = true;
+		public UniversalRequestThread(Address serverAddress,
+									  TimeoutBlockingQueue<IRequestHandler> workQueue)
+		{			
+			this.serverAddress = serverAddress;
+			this.workQueue = workQueue;
+
+			IsRunning = false;
 			stopRunning = false;
 		}
 
 		public void Run()
 		{
-			using (var socket = context.CreateRequestSocket())
+			IsRunning = true;
+
+			try
 			{
-				socket.Options.Linger = TimeSpan.Zero;
-
-				socket.Connect(serverAddress.ZmqAddress + ":" + GlobalConstants.TcpIpPort.Request);
-
-				while (!stopRunning)
+				using (var socket = new RequestSocket())
 				{
-					var workItem = workQueue.TimeoutTake();					
+					socket.Options.Linger = TimeSpan.Zero;
 
-					if (workItem == null)	// Timeout-case
-						continue;
+					socket.Connect(serverAddress.ZmqAddress + ":" + GlobalConstants.TcpIpPort.Request);
 
-					workItem.HandleRequest(socket);
-				}									
-			}			
+					while (!stopRunning)
+					{
+						var workItem = workQueue.TimeoutTake();
+
+						if (workItem == null)   // Timeout-case
+							continue;
+
+						workItem.HandleRequest(socket);
+					}
+				}
+			}
+			catch 
+			{
+				// ignored				
+			}
+			
+			Console.WriteLine("Request stopped !!!");
+			IsRunning = false;
 		}
 
 		public void Stop()
@@ -53,6 +62,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 			stopRunning = true;
 		}
 
-		public bool IsRunning { get; }
+		public bool IsRunning { get; private set; }
 	}
 }

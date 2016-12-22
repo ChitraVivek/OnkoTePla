@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndResponses;
 using bytePassion.OnkoTePla.Communication.SendReceive;
 using bytePassion.OnkoTePla.Contracts.Types;
 using bytePassion.OnkoTePla.Resources;
-using NetMQ;
+using NetMQ.Sockets;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 {
@@ -14,18 +14,15 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 	{
 		public event Action<ConnectionSessionId> ClientVanished;
 
-		private readonly NetMQContext context;		
 		private readonly Address clientAddress;
 		private readonly ConnectionSessionId sessionId;
 
 		private volatile bool stopRunning;
 
 
-		public HeartbeatThread (NetMQContext context, 								
-								Address clientAddress, 
+		public HeartbeatThread (Address clientAddress, 
 								ConnectionSessionId sessionId)
 		{
-			this.context = context;			
 			this.clientAddress = clientAddress;
 			this.sessionId = sessionId;
 
@@ -37,7 +34,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 		{
 		 	IsRunning = true;
 
-			using (var socket = context.CreateRequestSocket())
+			using (var socket = new RequestSocket())
 			{
 				socket.Options.Linger = TimeSpan.Zero;
 

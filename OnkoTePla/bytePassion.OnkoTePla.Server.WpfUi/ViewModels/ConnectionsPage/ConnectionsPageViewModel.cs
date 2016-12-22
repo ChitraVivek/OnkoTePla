@@ -73,8 +73,8 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.ConnectionsPage
 
 			CheckIfActicationIsPossible();
 
-			if (ActivateConnection.CanExecute(null))
-				ActivateConnection.Execute(null);	 // TODO: just for testing
+//			if (ActivateConnection.CanExecute(null))
+//				ActivateConnection.Execute(null);	 // TODO: just for testing
 	    }
 
 		private void OnConnectionStatusChanged()

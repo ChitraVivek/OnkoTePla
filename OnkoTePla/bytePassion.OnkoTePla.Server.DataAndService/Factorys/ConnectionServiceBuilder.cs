@@ -1,6 +1,5 @@
 ﻿using bytePassion.OnkoTePla.Server.DataAndService.Connection;
 using bytePassion.OnkoTePla.Server.DataAndService.Data;
-using NetMQ;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Factorys
 {
@@ -12,20 +11,15 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Factorys
 		{
 			this.dataCenterContainer = dataCenterContainer;			
 		}
-
-		private NetMQContext zmqContext;
-
+		
 		public IConnectionService Build()
 		{			
-			zmqContext = NetMQContext.Create();
-			
-			return new ConnectionService(zmqContext, dataCenterContainer); 
+			return new ConnectionService(dataCenterContainer); 
 		}
 		
 		public void DisposeConnectionService(IConnectionService connectionService)
 		{
 			connectionService.Dispose();
-			zmqContext.Dispose();
 		}
 	}
 }

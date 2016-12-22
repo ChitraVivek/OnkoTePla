@@ -63,7 +63,6 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection
 			}
 		}
 
-		private readonly NetMQContext zmqContext;
 		private          IDataCenter dataCenter;		
 
 		private readonly ICurrentSessionsInfo          sessionRepository;		
@@ -74,13 +73,10 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection
 		private bool isConnectionActive;
 
 
-		internal ConnectionService (NetMQContext zmqContext, 
-									DataCenterContainer dataCenterContainer) 								   
+		internal ConnectionService (DataCenterContainer dataCenterContainer) 								   
 		{
 			sessionRepository = new CurrentSessionsInfo();
 
-			this.zmqContext = zmqContext;
-			
 			dataCenterContainer.DataCenterAvailable += OnDataCenterAvailable;
 			IsConnectionActive = false;
 		}
@@ -93,10 +89,10 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection
 
 		public void InitiateCommunication(Address serverAddress)
 		{			
-			heartbeatThreadCollection = new HeartbeatThreadCollection(zmqContext);
+			heartbeatThreadCollection = new HeartbeatThreadCollection();
 			heartbeatThreadCollection.ClientVanished += OnClientVanished;
 
-			notificationThreadCollection = new NotificationThreadCollection(zmqContext);
+			notificationThreadCollection = new NotificationThreadCollection();
 
 			var responseHandlerFactory = new ResponseHandlerFactory(dataCenter, 																	
 																	sessionRepository, 
@@ -104,7 +100,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection
 																	NewDebugConnectionEstablishedCallback,  
 																	ConnectionEnded);
 
-			universalResponseThread = new UniversalResponseThread(zmqContext, serverAddress, responseHandlerFactory);
+			universalResponseThread = new UniversalResponseThread(serverAddress, responseHandlerFactory);
 			new Thread(universalResponseThread.Run).Start();
 
 			IsConnectionActive = true;

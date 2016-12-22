@@ -7,25 +7,22 @@ using bytePassion.OnkoTePla.Communication.SendReceive;
 using bytePassion.OnkoTePla.Contracts.Types;
 using bytePassion.OnkoTePla.Resources;
 using bytePassion.OnkoTePla.Server.DataAndService.Connection.NotificationObjects;
-using NetMQ;
+using NetMQ.Sockets;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 {
 	internal class NotificationThread : IThread
-	{
-		private readonly NetMQContext context;
+	{		
 		private readonly Address clientAddress;
 		private readonly ConnectionSessionId sessionId;
 		private readonly TimeoutBlockingQueue<NotificationObject> notificationQueue;
 
 		private volatile bool stopRunning;
 
-		public NotificationThread(NetMQContext context, 
-								  Address clientAddress, 
+		public NotificationThread(Address clientAddress, 
 								  ConnectionSessionId sessionId, 
 								  TimeoutBlockingQueue<NotificationObject> notificationQueue)
 		{
-			this.context = context;
 			this.clientAddress = clientAddress;
 			this.sessionId = sessionId;
 			this.notificationQueue = notificationQueue;
@@ -37,7 +34,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 		public void Run()
 		{
 			IsRunning = true;			
-			using (var socket = context.CreatePushSocket())
+			using (var socket = new PushSocket())
 			{
 				socket.Options.Linger = TimeSpan.Zero;
 
