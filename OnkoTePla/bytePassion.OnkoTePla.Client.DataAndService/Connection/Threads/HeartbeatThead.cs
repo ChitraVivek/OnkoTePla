@@ -72,8 +72,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 				// Ignored				
 			}			
 
-			Console.WriteLine("heartbeat stopped !!!");
-
 			IsRunning = false;
 		}
 

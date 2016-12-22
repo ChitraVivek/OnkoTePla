@@ -67,8 +67,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 			if (heartbeatThread != null)
 			{
 				heartbeatThread.ServerVanished -= OnServerVanished;
-
-				Console.WriteLine("try to stop heartbeat");
+				
 				heartbeatThread.Stop();
 				heartbeatThread = null;
 			}
@@ -99,9 +98,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 				notificationThread.NewTherapyPlaceTypeAvailable     -= OnNewTherapyPlaceTypeAvailable;
 				notificationThread.UpdatedTherapyPlaceTypeAvailable -= OnUpdatedTherapyPlaceTypeAvailable;
 				notificationThread.NewLabelAvailable                -= OnNewLabelAvailable;
-				notificationThread.UpdatedLabelAvailable            -= OnUpdatedLabelAvailable;
-
-				Console.WriteLine("try to stop notification");
+				notificationThread.UpdatedLabelAvailable            -= OnUpdatedLabelAvailable;				
 
 				notificationThread.Stop();
 				notificationThread = null;
@@ -118,8 +115,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		private void StopUniversalRequestThread()
 		{
 			if (universalRequestThread != null)
-			{
-				Console.WriteLine("try to stop request");
+			{				
 				universalRequestThread.Stop();
 
 				universalRequestThread = null;
@@ -388,8 +384,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 
 		private void CleanUpAfterDisconnection()
 		{			
-			Console.WriteLine("try to clean up .....");
-						
 			StopHeartbeatThread();
 			StopNotificationThread();
 			StopUniversalRequestThread();

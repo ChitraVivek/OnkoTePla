@@ -53,7 +53,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 				// ignored				
 			}
 			
-			Console.WriteLine("Request stopped !!!");
 			IsRunning = false;
 		}
 

@@ -135,7 +135,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 				// Ignored				
 			}
 
-			Console.WriteLine("notification stopped !!!");
 			IsRunning = false;
 		}
 
