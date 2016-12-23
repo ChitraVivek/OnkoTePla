@@ -66,7 +66,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Connection.Threads
 						case NetworkMessageType.PatientUpdatedNotification:
 						{
 							var patientUpdatedNotificationObject = (PatientUpdatedNotificationObject) nextNotification;
-							outMsg = new PatientAddedNotification(patientUpdatedNotificationObject.Patient, sessionId);
+							outMsg = new PatientUpdatedNotification(patientUpdatedNotificationObject.Patient, sessionId);
 							break;
 						}
 						case NetworkMessageType.TherapyPlaceTypeAddedNotification:
