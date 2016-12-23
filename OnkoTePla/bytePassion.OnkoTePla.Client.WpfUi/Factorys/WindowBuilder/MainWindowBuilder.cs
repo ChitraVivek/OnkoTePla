@@ -32,8 +32,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 		private readonly ICommandService commandService;
 		private readonly IViewModelCommunication viewModelCommunication;
 		private readonly ISession session;			    	
-        private readonly string versionNumber;
-		private readonly Action<string> errorCallback;
+        private readonly Action<string> errorCallback;
 
 		public MainWindowBuilder(ILocalSettingsRepository localSettingsRepository,
 								 IClientPatientRepository patientRepository,
@@ -44,8 +43,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 								 ICommandService commandService,
                                  IViewModelCommunication viewModelCommunication,
 								 ISession session,								
-                                 string versionNumber,
-								 Action<string> errorCallback)
+                                Action<string> errorCallback)
 		{
 	        this.localSettingsRepository = localSettingsRepository;
 	        this.patientRepository = patientRepository;
@@ -56,9 +54,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 			this.commandService = commandService;
 	        this.viewModelCommunication = viewModelCommunication;
 	        this.session = session;	        
-            this.versionNumber = versionNumber;
-			this.errorCallback = errorCallback;
-		}
+            this.errorCallback = errorCallback;
+		} 
 
 		public MainWindow BuildWindow()
 		{
@@ -86,7 +83,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 
 		    var connectionStatusViewModel = new ConnectionStatusViewModel(session);
 
-		    var dialogBuilder = new AboutDialogWindowBuilder(versionNumber, errorCallback);
+		    var dialogBuilder = new AboutDialogWindowBuilder();
 
 		    var actionBarViewModel = new ActionBarViewModel(session,
 															connectionStatusViewModel,

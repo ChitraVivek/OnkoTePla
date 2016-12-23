@@ -96,8 +96,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi
 														  commandService,
                                                           viewModelCommunication,
 														  session,														   														 
-                                                          "0.1.0.0",								 // TODO: get real versionNumber       
-														  fatalErrorHandler.HandleFatalError);              
+                                                          fatalErrorHandler.HandleFatalError);              
 
 			var mainWindow = mainWindowBuilder.BuildWindow();
 

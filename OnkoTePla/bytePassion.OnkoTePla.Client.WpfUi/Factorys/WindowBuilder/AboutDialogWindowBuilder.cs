@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using bytePassion.Lib.Utils;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AboutDialog;
 using bytePassion.OnkoTePla.Client.WpfUi.Views;
@@ -9,18 +8,10 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 {
 	internal class AboutDialogWindowBuilder : IWindowBuilder<AboutDialog>
     {
-        private readonly string versionNumber;
-		private readonly Action<string> errorCallback;
-
-		public AboutDialogWindowBuilder(string versionNumber, Action<string> errorCallback)
-		{
-			this.versionNumber = versionNumber;
-			this.errorCallback = errorCallback;
-		}
-
+        
 		public AboutDialog BuildWindow()
         {
-            var aboutDialogViewModel = new AboutDialogViewModel(versionNumber);
+            var aboutDialogViewModel = new AboutDialogViewModel();
 
             return new AboutDialog
                    {
@@ -31,7 +22,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.Factorys.WindowBuilder
 
         public void DisposeWindow(AboutDialog buildedWindow)
         {
-			throw new NotImplementedException();
+			// Nothing to do
 		}
     }
 }

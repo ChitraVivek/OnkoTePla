@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using bytePassion.Lib.WpfLib.Commands;
+using bytePassion.OnkoTePla.Resources;
 
 #pragma warning disable 0067
 
@@ -11,9 +12,9 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AboutDialog
 {
 	internal class AboutDialogViewModel : ViewModel, IAboutDialogViewModel
     {
-        public AboutDialogViewModel(string versionNumber)
+        public AboutDialogViewModel()
         {
-            VersionNumber = versionNumber;
+            VersionNumber = ApplicationInfo.ClientVersion;
             CloseDialog = new Command(CloseWindow);
         }
 

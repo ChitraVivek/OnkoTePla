@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using bytePassion.Lib.WpfLib.ViewModelBase;
+using bytePassion.OnkoTePla.Resources;
 
 #pragma warning disable 0067
 
@@ -7,9 +8,9 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.AboutPage
 {
 	internal class AboutPageViewModel : ViewModel, IAboutPageViewModel
     {
-		public AboutPageViewModel(string versionNumber)
+		public AboutPageViewModel()
 		{
-			VersionNumber = versionNumber;
+			VersionNumber = ApplicationInfo.ServerVersion;
 		}
 
 		public string VersionNumber { get; }

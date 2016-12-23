@@ -120,7 +120,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi
 			var patientsPageViewModel          = new PatientsPageViewModel(patientSelectorViewModel, patientRepository, selectedPatientVariable, patientNameGenerator);
 			var backupPageViewModel			   = new BackupPageViewModel(backUpService, backupScheduler, localSettingsRepository);
 			var optionsPageViewModel           = new OptionsPageViewModel();
-            var aboutPageViewModel             = new AboutPageViewModel("0.1.0.0"); 
+            var aboutPageViewModel             = new AboutPageViewModel(); 
 	        
 	        var mainWindowViewModel = new MainWindowViewModel(overviewPageViewModel,
                                                               connectionsPageViewModel,
