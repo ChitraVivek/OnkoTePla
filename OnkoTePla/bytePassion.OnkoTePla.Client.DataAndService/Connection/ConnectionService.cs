@@ -33,9 +33,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 		public event Action<Label> NewLabelAvailable;
 		public event Action<Label> UpdatedLabelAvailable;
 
-		private readonly SharedState<ConnectionInfo> connectionInfoVariable;
-
-		private volatile bool forceDisconnect = false;
+		private readonly SharedState<ConnectionInfo> connectionInfoVariable;		
 
 		public ConnectionService()
 		{
@@ -199,7 +197,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection
 			}
 			else
 			{
-				forceDisconnect = true;
 				CleanUpAfterDisconnection();
 				dissconnectionSuccessful?.Invoke();
 			}		
