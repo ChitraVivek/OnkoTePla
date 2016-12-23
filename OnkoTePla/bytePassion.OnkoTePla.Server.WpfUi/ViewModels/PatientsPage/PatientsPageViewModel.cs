@@ -75,9 +75,10 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			}
 
 			patientRepository.UpdatePatient(selectedPatientVariable.Value.Id,
-												PatientName,
-												Date.Parse(PatientBirthday),
-												selectedPatientVariable.Value.Alive);
+											PatientName,
+											Date.Parse(PatientBirthday),
+											selectedPatientVariable.Value.Alive,
+											true); // TODO
 			selectedPatientVariable.Value = null;
 		}
 

@@ -19,7 +19,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddAppointmentDialog
 		{
 			PatientSelectorViewModel = new PatientSelectorViewModelSampleData();
 
-			SelectedPatient = new Patient("John Doh", new Date(12,4,1978), true, new Guid(), "externalID");
+			SelectedPatient = new Patient("John Doh", new Date(12,4,1978), true, new Guid(), "externalID", false);
 
 			DurationHours = 2;
 			DurationMinutes = 15;

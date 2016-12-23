@@ -33,7 +33,8 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.SampleDataGenerators
 							   			(ushort)rand.Next(1936, 1992)),
 							   GetRandomBoolValue(),
 							   Guid.NewGuid(),
-							   "noExternalID");						
+							   "noExternalID",
+							   false);						
 		}
 
 		private bool GetRandomBoolValue ()

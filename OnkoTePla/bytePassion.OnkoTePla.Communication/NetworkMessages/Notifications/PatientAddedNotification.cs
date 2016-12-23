@@ -30,7 +30,8 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.Notifications
 			sb.Append(Patient.Alive);      sb.Append(';');
 			sb.Append(Patient.Birthday);   sb.Append(';');
 			sb.Append(Patient.Id);         sb.Append(';');
-			sb.Append(Patient.ExternalId);
+			sb.Append(Patient.ExternalId); sb.Append(';');
+			sb.Append(Patient.IsHidden);
 
 			return sb.ToString();
 		}
@@ -49,8 +50,9 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.Notifications
 			var birthday   = Date.Parse(patientData[2]);
 			var id         = Guid.Parse(patientData[3]);
 			var externalId =            patientData[4];
+			var isHidden   = bool.Parse(patientData[5]);
 
-			return new PatientAddedNotification(new Patient(name, birthday, alive, id, externalId), sessionId);
+			return new PatientAddedNotification(new Patient(name, birthday, alive, id, externalId, isHidden), sessionId);
 		}
 	}
 }

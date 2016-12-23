@@ -39,7 +39,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 		public void AddPatient(string name, Date birthday, bool alive, string externalId)
 		{
 			var newPatientId = Guid.NewGuid();
-			var newPatient = new Patient(name, birthday, alive, newPatientId, externalId);
+			var newPatient = new Patient(name, birthday, alive, newPatientId, externalId, false);
 			patients.Add(newPatientId, newPatient);
 
 			PatientAdded?.Invoke(newPatient);
@@ -83,7 +83,8 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 															  patient.Birthday,
 															  patient.Alive, 
 															  patient.Id,
-															  patient.ExternalId));
+															  patient.ExternalId,
+															  patient.IsHidden));
 		}
 
 		public void SetNewBirthday(Guid patientId, Date newBirthday)
@@ -93,7 +94,8 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 															  newBirthday, 
 															  patient.Alive, 
 															  patient.Id,
-															  patient.ExternalId));
+															  patient.ExternalId,
+															  patient.IsHidden));
 		}
 
 		public void SetLivingStatus(Guid patientId, bool newLivingStatus)
@@ -103,17 +105,19 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 															  patient.Birthday, 
 															  newLivingStatus, 
 															  patient.Id,
-															  patient.ExternalId));
+															  patient.ExternalId,
+															  patient.IsHidden));
 		}
-
-		public void UpdatePatient(Guid patientId, string newName, Date newBirthday, bool newLivingStatus)
+		
+		public void UpdatePatient(Guid patientId, string newName, Date newBirthday, bool newLivingStatus, bool newIsHiddenStatus)
 		{
 			ModifyPatientAndRaiseEvent(patientId,
 									   patient => new Patient(newName,
 															  newBirthday,
 															  newLivingStatus,
 															  patient.Id,
-															  patient.ExternalId));
+															  patient.ExternalId,
+															  newIsHiddenStatus));
 		}
 
 		public void PersistRepository()

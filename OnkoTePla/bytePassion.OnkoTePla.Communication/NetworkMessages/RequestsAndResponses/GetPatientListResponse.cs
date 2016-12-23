@@ -27,7 +27,8 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 				sb.Append(patient.Alive);      sb.Append(';');
 				sb.Append(patient.Birthday);   sb.Append(';');
 				sb.Append(patient.Id);		   sb.Append(';');
-				sb.Append(patient.ExternalId);
+				sb.Append(patient.ExternalId); sb.Append(';');
+				sb.Append(patient.IsHidden);
 
 				sb.Append('|');
 			}
@@ -52,8 +53,9 @@ namespace bytePassion.OnkoTePla.Communication.NetworkMessages.RequestsAndRespons
 				let birthday   = Date.Parse(patientParts[2])
 				let id         = Guid.Parse(patientParts[3])
 				let externalId =            patientParts[4]
+				let isHiddden  = bool.Parse(patientParts[5])
 
-				select new Patient(name, birthday, alive, id, externalId)
+				select new Patient(name, birthday, alive, id, externalId, isHiddden)
 			).ToList();
 
 			return new GetPatientListResponse(patients);

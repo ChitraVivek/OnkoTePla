@@ -16,7 +16,8 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.JSonDataStore
 			Alive      = p.Alive;
 			Birthday   = new DateSerializationDouble(p.Birthday);
 			Id         = p.Id;
-			ExternalId = p.ExternalId;				
+			ExternalId = p.ExternalId;
+			IsHidden   = p.IsHidden;
 		}
 
 		public string                  Name       { get; set; }
@@ -24,6 +25,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.JSonDataStore
 		public DateSerializationDouble Birthday   { get; set; }
 		public Guid                    Id         { get; set; }
 		public string                  ExternalId { get; set; }
+		public bool                    IsHidden   { get; set; }
 
 		public Patient GetPatient()
 		{
@@ -31,7 +33,8 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.JSonDataStore
 							   Birthday.GetDate(), 
 							   Alive, 
 							   Id, 
-							   ExternalId);
+							   ExternalId,
+							   IsHidden);
 		}		
 	}
 

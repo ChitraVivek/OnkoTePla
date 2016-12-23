@@ -15,10 +15,10 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector
 		{			
 			var patientList = new List<Patient>
 			                  {
-				                  new Patient("John Do", new Date(1,2,1945), true , new Guid(), ""),
-								  new Patient("John Do", new Date(1,2,1945), false, new Guid(), ""),
-								  new Patient("John Do", new Date(1,2,1945), false, new Guid(), ""),
-								  new Patient("John Do", new Date(1,2,1945), true , new Guid(), "")								 
+				                  new Patient("John Do", new Date(1,2,1945), true , new Guid(), "", false),
+								  new Patient("John Do", new Date(1,2,1945), false, new Guid(), "", false),
+								  new Patient("John Do", new Date(1,2,1945), false, new Guid(), "", false),
+								  new Patient("John Do", new Date(1,2,1945), true , new Guid(), "", false)								 
 							  };
 
 			Patients = new CollectionViewSource

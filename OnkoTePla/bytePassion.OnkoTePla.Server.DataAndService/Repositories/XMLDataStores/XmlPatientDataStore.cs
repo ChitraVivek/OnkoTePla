@@ -41,6 +41,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.XmlDataStores
 		private const string LivingStatusAttribute = "livingStatus";
 		private const string IdAttribute           = "id";
 		private const string ExternalIdAttribute   = "externalId";
+		private const string IsHiddenAttribute     = "isHidden";
 		
 		public void Persist(IEnumerable<Patient> data)
 		{
@@ -66,11 +67,12 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.XmlDataStores
 		{
 			writer.WriteStartElement(Patient);
 
-			writer.WriteAttributeString(NameAttribute, patient.Name);
-			writer.WriteAttributeString(BirthdayAttribute, patient.Birthday.ToString());
+			writer.WriteAttributeString(NameAttribute,         patient.Name);
+			writer.WriteAttributeString(BirthdayAttribute,     patient.Birthday.ToString());
 			writer.WriteAttributeString(LivingStatusAttribute, patient.Alive.ToString());
-			writer.WriteAttributeString(IdAttribute, patient.Id.ToString());	
-			writer.WriteAttributeString(ExternalIdAttribute, patient.ExternalId);
+			writer.WriteAttributeString(IdAttribute,           patient.Id.ToString());	
+			writer.WriteAttributeString(ExternalIdAttribute,   patient.ExternalId);
+			writer.WriteAttributeString(IsHiddenAttribute,     patient.IsHidden.ToString());
 				
 			writer.WriteEndElement();		
 		}
@@ -93,25 +95,27 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.XmlDataStores
 					if (reader.NodeType != XmlNodeType.Element || reader.Name != Patient) continue;
 					if (!reader.HasAttributes) continue;
 
-					var name         = String.Empty;
+					var name         = string.Empty;
 					var birthday     = Date.Dummy;
 					var livingStatus = false;
 					var id           = new Guid();
-					var externalId   = String.Empty;
+					var externalId   = string.Empty;
+					var isHidden     = false;
 						
 					while (reader.MoveToNextAttribute())
 					{
 						switch (reader.Name)
 						{
-							case NameAttribute:         name         = reader.Value; break;
+							case NameAttribute:         name         =            reader.Value;  break;
 							case BirthdayAttribute:     birthday     = Date.Parse(reader.Value); break;
-							case LivingStatusAttribute: livingStatus = Boolean.Parse(reader.Value); break;
+							case LivingStatusAttribute: livingStatus = bool.Parse(reader.Value); break;
 							case IdAttribute:           id           = Guid.Parse(reader.Value); break;
-							case ExternalIdAttribute:   externalId   = reader.Value; break;
+							case ExternalIdAttribute:   externalId   =            reader.Value;  break;
+							case IsHiddenAttribute:     isHidden     = bool.Parse(reader.Value); break;
 						}
 					}
 
-					patients.Add(new Patient(name, birthday, livingStatus, id, externalId));
+					patients.Add(new Patient(name, birthday, livingStatus, id, externalId, isHidden));
 				}
 			}
 			reader.Close();
