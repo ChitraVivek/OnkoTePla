@@ -65,7 +65,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 				{
 					Application.Current.Dispatcher.Invoke(() =>
 					{
-						var sortedList = patientList.OrderBy(p => p, new PatientSorter());
+						var sortedList = patientList.Where(p => !p.IsHidden)
+													.OrderBy(p => p, new PatientSorter());
 						
 						observablePatientList.Clear();
 						sortedList.Do(observablePatientList.Add);						
@@ -107,8 +108,12 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 				if (patientToRemove != null)
 					observablePatientList.Remove(patientToRemove);
 
-				observablePatientList.Add(patient);
-				observablePatientList.Sort(new PatientSorter());
+			    if (!patient.IsHidden)
+			    {
+					observablePatientList.Add(patient);
+					observablePatientList.Sort(new PatientSorter());
+				}
+				
 				UpdateForNewInput();
 			});
 	    }
@@ -117,6 +122,9 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 	    {
 			if (observablePatientList.FirstOrDefault(p => p.Id == patient.Id) != null)
 				return;
+
+		    if (patient.IsHidden)
+			    return;
 
 			Application.Current.Dispatcher.Invoke(() =>
 			{				
