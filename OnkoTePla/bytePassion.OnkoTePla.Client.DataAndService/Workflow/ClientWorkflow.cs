@@ -25,6 +25,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Workflow
 			new Transition(State.ConnectedButNotLoggedIn, Event.LoggedIn,               State.LoggedIn),
 			new Transition(State.LoggedIn,                Event.LoggedOut,              State.ConnectedButNotLoggedIn),
 			new Transition(State.LoggedIn,                Event.ConnectionLost,         State.DisconnectedFromServer),
+			new Transition(State.LoggedIn,                Event.StartedTryDisconnect,   State.TryingToDisconnect)
 		};
         
         public ClientWorkflow()
