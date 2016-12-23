@@ -54,6 +54,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Converter\BrushRoundConverter.cs" />
     <Compile Include="GlobalConstants.cs" />
     <Compile Include="Languages\LanguageRes.de-DE.Designer.cs">
