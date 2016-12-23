@@ -80,7 +80,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.Threads
 							}
 							case NetworkMessageType.PatientUpdatedNotification:
 							{
-								var patientUpdatedNotification = (PatientAddedNotification) notification;
+								var patientUpdatedNotification = (PatientUpdatedNotification) notification;
 
 								if (patientUpdatedNotification.SessionId == sessionId)
 									UpdatedPatientAvailable(patientUpdatedNotification.Patient);
