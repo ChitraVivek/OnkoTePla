@@ -52,7 +52,7 @@
 				<TextBlock DockPanel.Dock="Left" Text="{Binding VersionNumber, Mode=OneTime}" />
 				<TextBlock VerticalAlignment="Center"
                        DockPanel.Dock="Right"
-                       Text="bytePassion &#169; 2016" />
+                       Text="this software is under Apache 2.0 Licence" />
 			</DockPanel>
 
 			<StackPanel Grid.Row="4" Grid.Column="1">
