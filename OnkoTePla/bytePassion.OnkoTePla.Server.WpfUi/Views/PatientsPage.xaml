@@ -75,6 +75,8 @@
 				<RowDefinition Height="30"/>
 				<RowDefinition Height="30"/>
 				<RowDefinition Height="30"/>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="30"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
@@ -126,6 +128,46 @@
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
+			<TextBlock Grid.Row="4"
+					   Grid.Column="0"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Center"
+					   Margin="5"
+					   Text="Am leben:"
+					   FontSize="15"
+					   FontFamily="{StaticResource StandardFontFamily}"/>
+
+			<CheckBox Grid.Row="4"
+					  Grid.Column="1"
+					  HorizontalAlignment="Left"
+					  VerticalAlignment="Center"
+					  Margin="5"					  
+					  FontSize="15"
+					  FontFamily="{StaticResource StandardFontFamily}"
+					  IsChecked="{Binding IsPatientAlive, 
+										  Mode=TwoWay, 
+										  UpdateSourceTrigger=PropertyChanged}"/>
+
+			<TextBlock Grid.Row="5"
+					   Grid.Column="0"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Center"
+					   Margin="5"
+					   Text="Für Klienten versteckt:"
+					   FontSize="15"
+					   FontFamily="{StaticResource StandardFontFamily}"/>
+
+			<CheckBox Grid.Row="5"
+					  Grid.Column="1"
+					  HorizontalAlignment="Left"
+					  VerticalAlignment="Center"
+					  Margin="5"					  
+					  FontSize="15"
+					  FontFamily="{StaticResource StandardFontFamily}"
+					  IsChecked="{Binding IsPatientHidden, 
+										  Mode=TwoWay, 
+										  UpdateSourceTrigger=PropertyChanged}"/>
+
 			<TextBox Grid.Row="1"
 					 Grid.Column="1"
 					 HorizontalAlignment="Left"
@@ -156,7 +198,7 @@
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
-			<Button Grid.Row="5"
+			<Button Grid.Row="7"
 					Grid.Column="0"
 					Grid.ColumnSpan="2"
 					Width="200"
@@ -165,7 +207,7 @@
 					Margin="5"
 					Command="{Binding SaveChanges}"/>
 
-			<Button Grid.Row="5"
+			<Button Grid.Row="7"
 					Grid.Column="0"
 					Grid.ColumnSpan="2"
 					Width="200"

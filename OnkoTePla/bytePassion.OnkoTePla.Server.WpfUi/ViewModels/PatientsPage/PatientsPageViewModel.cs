@@ -27,6 +27,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		private string patientInternalId;
 		private string patientExternalId;
 		private string patientBirthday;
+		private bool isPatientHidden;
 
 		public PatientsPageViewModel(IPatientSelectorViewModel patientSelectorViewModel,
 									 IPatientRepository patientRepository,
@@ -77,8 +78,8 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			patientRepository.UpdatePatient(selectedPatientVariable.Value.Id,
 											PatientName,
 											Date.Parse(PatientBirthday),
-											selectedPatientVariable.Value.Alive,
-											true); // TODO
+											IsPatientAlive,
+											IsPatientHidden);
 			selectedPatientVariable.Value = null;
 		}
 
@@ -106,6 +107,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 				PatientName       = "";
 				PatientExternalId = "";
 				PatientInternalId = "";
+				IsPatientHidden   = false;
 			}
 			else
 			{
@@ -115,6 +117,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 				PatientName       = patient.Name;
 				PatientExternalId = patient.ExternalId;
 				PatientInternalId = patient.Id.ToString();
+				IsPatientHidden   = patient.IsHidden;
 			}
 		}
 
@@ -133,7 +136,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		public bool IsPatientAlive
 		{
 			get { return isPatientAlive; }
-			private set { PropertyChanged.ChangeAndNotify(this, ref isPatientAlive, value); }
+			set { PropertyChanged.ChangeAndNotify(this, ref isPatientAlive, value); }
 		}
 		public string PatientName
 		{
@@ -150,6 +153,13 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 			get { return patientExternalId; }
 			private set { PropertyChanged.ChangeAndNotify(this, ref patientExternalId, value); }
 		}
+
+		public bool IsPatientHidden
+		{
+			get { return isPatientHidden; }
+			set { PropertyChanged.ChangeAndNotify(this, ref isPatientHidden, value); }
+		}
+
 		public string PatientBirthday
 		{
 			get { return patientBirthday; }

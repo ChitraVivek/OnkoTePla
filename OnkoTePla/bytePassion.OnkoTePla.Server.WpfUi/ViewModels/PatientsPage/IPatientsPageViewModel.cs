@@ -14,10 +14,11 @@ namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 		ICommand DiscardChanges { get; }
 
 		bool   IsPatientSelected { get; }		
-		bool   IsPatientAlive    { get; }
+		bool   IsPatientAlive    { get; set; }
 		string PatientName       { get; set; }
 		string PatientBirthday   { get; set; }
 		string PatientInternalId { get; }
-		string PatientExternalId { get; }		
+		string PatientExternalId { get; }	
+		bool   IsPatientHidden   { get; set; }	
 	}
 }
