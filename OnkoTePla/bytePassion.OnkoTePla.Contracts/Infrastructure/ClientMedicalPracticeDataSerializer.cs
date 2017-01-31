@@ -174,7 +174,9 @@ namespace bytePassion.OnkoTePla.Contracts.Infrastructure
 			}
 
 			if (practice.HoursOfOpening.AdditionalClosedDays.Count > 0)
-				sb.Remove(sb.Length - 1, 1);			
+				sb.Remove(sb.Length - 1, 1);
+
+			sb.Append(";");
 
 			return sb.ToString();
 		}
