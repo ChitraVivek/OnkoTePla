@@ -8,6 +8,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 		ICommand Cancel        { get; }
 
 		string Name     { get; set; }
+		string Id       { get; set; }
 		string Birthday { get; set; }
 
 		bool Result { get; }

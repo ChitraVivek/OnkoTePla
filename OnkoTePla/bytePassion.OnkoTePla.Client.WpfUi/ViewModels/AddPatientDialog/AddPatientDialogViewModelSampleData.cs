@@ -11,6 +11,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 		{
 			Name = "blubb blubb";
 			Birthday = "1.2.16";
+			Id = "external id 001234";
 			Result = false;
 		}
 
@@ -18,6 +19,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 		public ICommand Cancel        => null;
 
 		public string Name     { get; set; }
+		public string Id       { get; set; }
 		public string Birthday { get; set; }
 
 		public bool Result { get; }

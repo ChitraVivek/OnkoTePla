@@ -61,6 +61,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Repositories.MedicalPracti
 			);
 		}
 
+		
 		public void RequestMedicalPractice(Action<ClientMedicalPracticeData> practiceAvailableCallback, 
 										   Guid practiceId, Date day, Action<string> errorCallback)
 		{

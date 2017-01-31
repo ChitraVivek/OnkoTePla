@@ -13,6 +13,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 	{
 		private string name;
 		private string birthday;
+		private string id;
 
 		public AddPatientDialogViewModel(string initialName)
 		{
@@ -58,6 +59,12 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 		{
 			get { return name; }
 			set { PropertyChanged.ChangeAndNotify(this, ref name, value); }
+		}
+
+		public string Id
+		{
+			get { return id; }
+			set { PropertyChanged.ChangeAndNotify(this, ref id, value); }
 		}
 
 		public string Birthday
