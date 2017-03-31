@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5DED
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.CommonUiElements", "bytePassion.OnkoTePla.CommonUiElements\bytePassion.OnkoTePla.CommonUiElements.csproj", "{28226AFB-934B-4F76-9E61-A4AAAF00C29A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Utils", "bytePassion.OnkoTePla.Utils\bytePassion.OnkoTePla.Utils.csproj", "{8242518D-A925-4391-BB9B-99558809ADAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{28226AFB-934B-4F76-9E61-A4AAAF00C29A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28226AFB-934B-4F76-9E61-A4AAAF00C29A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28226AFB-934B-4F76-9E61-A4AAAF00C29A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8242518D-A925-4391-BB9B-99558809ADAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8242518D-A925-4391-BB9B-99558809ADAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8242518D-A925-4391-BB9B-99558809ADAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8242518D-A925-4391-BB9B-99558809ADAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{1712088C-01D9-4FA1-A03F-632F64A92504} = {C8E2CC59-9C4B-4827-8F34-39D90E57268E}
 		{64B9B70A-75C7-402F-A156-6C3B404533F5} = {C8E2CC59-9C4B-4827-8F34-39D90E57268E}
 		{28226AFB-934B-4F76-9E61-A4AAAF00C29A} = {714734C2-47E3-4AF9-AD5C-278EEA027C62}
+		{8242518D-A925-4391-BB9B-99558809ADAF} = {714734C2-47E3-4AF9-AD5C-278EEA027C62}
 	EndGlobalSection
 EndGlobal
