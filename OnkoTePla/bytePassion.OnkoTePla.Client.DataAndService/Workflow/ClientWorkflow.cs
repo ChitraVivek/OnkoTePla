@@ -13,19 +13,19 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Workflow
         private static readonly IReadOnlyList<StateTransition<State, Event>> Transitions 
 			= new List<StateTransition<State, Event>>
         {
-            new Transition(State.DisconnectedFromServer,  Event.StartedTryConnect,      State.TryingToConnect),
-			new Transition(State.TryingToConnect,         Event.ConAttemptUnsuccessful, State.DisconnectedFromServer),
-			new Transition(State.TryingToConnect,         Event.ConnectionEstablished,  State.ConnectedButNotLoggedIn),
-			new Transition(State.TryingToConnect,         Event.StartedTryDisconnect,   State.TryingToDisconnect),
-			new Transition(State.ConnectedButNotLoggedIn, Event.StartedTryDisconnect,   State.TryingToDisconnect),
 			new Transition(State.TryingToDisconnect,      Event.Disconnected,           State.DisconnectedFromServer),
-			new Transition(State.TryingToDisconnect,      Event.ConAttemptUnsuccessful, State.DisconnectedFromServer),			
+			new Transition(State.LoggedIn,                Event.ConnectionLost,         State.DisconnectedFromServer),
 			new Transition(State.TryingToConnect,         Event.ConnectionLost,         State.DisconnectedFromServer),
 			new Transition(State.ConnectedButNotLoggedIn, Event.ConnectionLost,         State.DisconnectedFromServer),
-			new Transition(State.ConnectedButNotLoggedIn, Event.LoggedIn,               State.LoggedIn),
+			new Transition(State.TryingToDisconnect,      Event.ConAttemptUnsuccessful, State.DisconnectedFromServer),
+			new Transition(State.TryingToConnect,         Event.ConAttemptUnsuccessful, State.DisconnectedFromServer),
+			new Transition(State.TryingToConnect,         Event.StartedTryDisconnect,   State.TryingToDisconnect),
+			new Transition(State.LoggedIn,                Event.StartedTryDisconnect,   State.TryingToDisconnect),
+			new Transition(State.ConnectedButNotLoggedIn, Event.StartedTryDisconnect,   State.TryingToDisconnect),
+			new Transition(State.DisconnectedFromServer,  Event.StartedTryConnect,      State.TryingToConnect),			
+			new Transition(State.TryingToConnect,         Event.ConnectionEstablished,  State.ConnectedButNotLoggedIn),
 			new Transition(State.LoggedIn,                Event.LoggedOut,              State.ConnectedButNotLoggedIn),
-			new Transition(State.LoggedIn,                Event.ConnectionLost,         State.DisconnectedFromServer),
-			new Transition(State.LoggedIn,                Event.StartedTryDisconnect,   State.TryingToDisconnect)
+			new Transition(State.ConnectedButNotLoggedIn, Event.LoggedIn,               State.LoggedIn)									
 		};
         
         public ClientWorkflow()
