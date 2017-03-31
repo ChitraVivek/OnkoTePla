@@ -48,8 +48,7 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.SessionInfo
 			{
 				if (currentApplicationState != value)
 				{
-					currentApplicationState = value;
-					//logger.Debug($"CurrentApplicationState changed to: {value}");
+					currentApplicationState = value;					
 					ApplicationStateChanged?.Invoke(CurrentApplicationState);
 				}
 			}		
