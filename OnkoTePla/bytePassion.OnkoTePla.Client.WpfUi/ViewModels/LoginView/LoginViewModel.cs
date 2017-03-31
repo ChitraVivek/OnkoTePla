@@ -142,8 +142,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 			Application.Current.Dispatcher.Invoke(() =>
 			{
 				((ParameterrizedCommand<PasswordBox>) Login).RaiseCanExecuteChanged();
-				((Command) Connect).RaiseCanExecuteChanged();
-				((Command) DebugConnect).RaiseCanExecuteChanged();
+				((Command) Connect).RaiseCanExecuteChanged();				
 				((Command) Disconnect).RaiseCanExecuteChanged();
 			});
 		}	
@@ -279,8 +278,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 		}
 
 		public ICommand Login        { get; }
-		public ICommand Connect      { get; }
-		public ICommand DebugConnect { get; }
+		public ICommand Connect      { get; }		
 		public ICommand Disconnect   { get; }
 
 		public ObservableCollection<ClientUserData> AvailableUsers    { get; }
@@ -302,8 +300,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 			set
 			{
 				PropertyChanged.ChangeAndNotify(this, ref serverAddress, value);
-				((Command)Connect).RaiseCanExecuteChanged();
-				((Command)DebugConnect).RaiseCanExecuteChanged();
+				((Command)Connect).RaiseCanExecuteChanged();				
 			}
 		}
 
