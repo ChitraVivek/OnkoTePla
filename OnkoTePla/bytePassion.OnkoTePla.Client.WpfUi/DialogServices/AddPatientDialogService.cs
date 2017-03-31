@@ -27,7 +27,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.DialogServices
 								   Date.Parse(addPatientDialogViewModel.Birthday.Trim()),
 								   true,
 								   Guid.NewGuid(),
-								   "no external id",
+								   addPatientDialogViewModel.Id,
 								   false);
 			}
 			else
