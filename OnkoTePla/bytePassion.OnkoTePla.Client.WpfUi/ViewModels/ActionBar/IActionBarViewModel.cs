@@ -6,6 +6,8 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.ActionBar
 {
 	internal interface IActionBarViewModel : IViewModel
     {
+		string Title { get; }
+
         ICommand ShowOverview { get; }
         ICommand ShowSearch   { get; }
         ICommand ShowOptions  { get; }

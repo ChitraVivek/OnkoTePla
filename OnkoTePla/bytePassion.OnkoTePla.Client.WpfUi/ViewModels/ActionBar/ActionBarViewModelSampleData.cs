@@ -12,10 +12,13 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.ActionBar
         {
             ConnectionStatusViewModel = new ConnectionStatusViewModelSampleData();
 
+	        Title = "OnkoTePla";
 	        NavigationAndLogoutButtonVisibility = true;
         }
 
-        public ICommand ShowOverview => null;
+	    public string Title { get; }
+
+	    public ICommand ShowOverview => null;
         public ICommand ShowSearch   => null;
         public ICommand ShowOptions  => null;
         public ICommand Logout       => null;

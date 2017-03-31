@@ -118,7 +118,7 @@
                     VerticalAlignment="Center"
                     FontSize="20"
                     Foreground="#FFD8D8D8"
-                    Text="OnkoTePla - Version 0.1" />
+                    Text="{Binding Title}" />
 
         <views:ConnectionStatusView Grid.Column="4"
                                     DataContext="{Binding ConnectionStatusViewModel}"/>

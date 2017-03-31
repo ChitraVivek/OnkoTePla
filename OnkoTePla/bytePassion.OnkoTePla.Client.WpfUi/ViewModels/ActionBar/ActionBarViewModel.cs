@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using bytePassion.Lib.Communication.ViewModel;
@@ -10,6 +11,7 @@ using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
 using bytePassion.OnkoTePla.Client.WpfUi.Enums;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModelMessages;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.ConnectionStatusView;
+using bytePassion.OnkoTePla.Resources;
 using bytePassion.OnkoTePla.Resources.UserNotificationService;
 
 
@@ -32,7 +34,21 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.ActionBar
             this.dialogBuilder = dialogBuilder;			
 			ConnectionStatusViewModel = connectionStatusViewModel;
 
-            ShowOverview = new Command(() => viewModelCommunication.Send(new ShowPage(MainPage.Overview)));
+	        var titleBuilder = new StringBuilder();
+
+#if DEBUG
+	        titleBuilder.Append(">>> DEBUG <<<    ");
+#endif
+	        titleBuilder.Append("OnkoTePla - Version ");
+	        titleBuilder.Append(ApplicationInfo.ClientVersion);
+
+#if DEBUG
+			titleBuilder.Append("    >>> DEBUG <<<");
+#endif
+
+	        Title = titleBuilder.ToString();
+
+			ShowOverview = new Command(() => viewModelCommunication.Send(new ShowPage(MainPage.Overview)));
             ShowSearch   = new Command(() => viewModelCommunication.Send(new ShowPage(MainPage.Search)));
             ShowOptions  = new Command(() => viewModelCommunication.Send(new ShowPage(MainPage.Options)));
 
@@ -76,7 +92,9 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.ActionBar
             viewModelCommunication.Send(new HideDisabledOverlay());
         }
 
-        public ICommand ShowOverview { get; }
+	    public string Title { get; }
+
+	    public ICommand ShowOverview { get; }
         public ICommand ShowSearch   { get; }
         public ICommand ShowOptions  { get; }
         public ICommand Logout       { get; }
