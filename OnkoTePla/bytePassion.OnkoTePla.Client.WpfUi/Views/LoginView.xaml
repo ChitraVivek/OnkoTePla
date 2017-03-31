@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:behaviors="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.Behaviors"
              xmlns:commandExecutingBehaviors="clr-namespace:bytePassion.Lib.WpfLib.CommandExecutingBehaviors;assembly=bytePassion.Lib"
-             d:DesignHeight="500"
+             d:DesignHeight="1500"
              d:DesignWidth="800"
              mc:Ignorable="d">
 
@@ -188,13 +188,6 @@
 										Margin="0,0,10,0"
 										Command="{Binding Connect}"
 										Content="Connect" />
-
-								<Button Width="100"
-										Height="25"
-										Margin="0,0,10,0"
-										IsEnabled="false"
-										Command="{Binding DebugConnect}"
-										Content="Debug Connect" />
 
 								<Button Width="100"
 										Height="25"

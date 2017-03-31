@@ -34,10 +34,9 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 		    IsUserListAvailable = true;
 	    }
 
-	    public ICommand Login        => null;
-	    public ICommand Connect      => null;
-		public ICommand DebugConnect => null;
-		public ICommand Disconnect   => null;
+	    public ICommand Login      => null;
+	    public ICommand Connect    => null;		
+		public ICommand Disconnect => null;
 
 	    public ObservableCollection<ClientUserData> AvailableUsers { get; }
 		public ObservableCollection<string>         ClientIpAddresses { get; }

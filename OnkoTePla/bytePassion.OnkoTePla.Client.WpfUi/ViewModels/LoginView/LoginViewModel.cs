@@ -48,9 +48,6 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 			Connect = new Command(DoConnect, IsConnectPossible);
 #endif
 
-			DebugConnect = new Command(DoDebugConnect,
-									   IsConnectPossible);
-
 			Disconnect = new Command(DoDisconnect,
 									 IsDisconnectPossible);
 
