@@ -41,7 +41,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.LoginView
 			Login = new ParameterrizedCommand<PasswordBox>(DoLogin,
 													       IsLoginPossible);
 
-			Connect = new Command(DoConnect,
+			Connect = new Command(DoDebugConnect, // TODO: just for testing
 								  IsConnectPossible);
 
 			DebugConnect = new Command(DoDebugConnect,
