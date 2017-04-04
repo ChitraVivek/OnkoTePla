@@ -35,6 +35,10 @@
       <HintPath>..\packages\AsyncIO.0.1.26.0\lib\net40\AsyncIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="bytePassion.Lib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\bytePassion.Library.1.0.0\lib\bytePassion.Lib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NetMQ, Version=4.0.0.0, Culture=neutral, PublicKeyToken=a6decef4ddc58b3a, processorArchitecture=MSIL">
       <HintPath>..\packages\NetMQ.4.0.0-rc5\lib\net40\NetMQ.dll</HintPath>
       <Private>True</Private>
@@ -43,6 +47,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\bytePassion.Library.1.0.0\lib\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,10 +110,6 @@
     <Compile Include="SendReceive\SendReceiveExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\bytePassion.Lib\bytePassion.Lib.csproj">
-      <Project>{825b03a5-fd0f-417a-adc5-d3a0aad2c36b}</Project>
-      <Name>bytePassion.Lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\bytePassion.OnkoTePla.Contracts\bytePassion.OnkoTePla.Contracts.csproj">
       <Project>{85958036-dfef-4c68-abf4-fd241eaab47f}</Project>
       <Name>bytePassion.OnkoTePla.Contracts</Name>
