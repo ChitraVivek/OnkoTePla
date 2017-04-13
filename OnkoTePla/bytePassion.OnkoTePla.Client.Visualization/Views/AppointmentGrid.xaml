@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.AppointmentGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
+             xmlns:appointmentGrid="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentGrid"
+             xmlns:global="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.Global"
+             xmlns:views="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" 
+			 d:DesignWidth="900">
+	
+	<d:UserControl.DataContext>
+		<appointmentGrid:AppointmentGridViewModelSampleData/>
+	</d:UserControl.DataContext>
+		
+	<UserControl.Resources>
+        <converter:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter"/>
+	</UserControl.Resources>
+
+	<Grid Background="White">
+		<Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static global:Constants+Layout.AppointmentGridTopRowSize}"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{x:Static global:Constants+Layout.AppointmentGridLeftColumsSize}"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+		
+		<views:TimeGrid Grid.Column="1"
+						Grid.Row="0"
+						Grid.RowSpan="2"
+						DataContext="{Binding TimeGridViewModel}"/>
+		
+        <ScrollViewer Grid.Row="1" 
+					  Grid.Column="0"
+					  Grid.ColumnSpan="2"
+					  Margin="0,15,0,0"
+					  HorizontalScrollBarVisibility="Disabled"
+					  VerticalScrollBarVisibility="Hidden">
+		
+			<ItemsControl ItemsSource="{Binding TherapyPlaceRowViewModels}">
+			
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<views:TherapyPlaceRowView Visibility="{Binding IsVisible, 
+																		Converter={StaticResource BoolToCollapsedVisibilityConverter}}"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			
+			</ItemsControl>
+		</ScrollViewer>
+
+        <TextBlock Grid.Column="0"
+				   Grid.Row="0"
+				   Grid.ColumnSpan="2"
+				   Grid.RowSpan="2"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   Text="Geschlossen"
+				   FontSize="80"
+				   FontFamily="{StaticResource StandardFontFamily}"
+				   Foreground="Red"
+				   RenderTransformOrigin="0.5, 0.5"
+				   Visibility="{Binding PracticeIsClosedAtThisDay, 
+										Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
+			
+			<TextBlock.RenderTransform>
+				<RotateTransform Angle="-30"></RotateTransform>
+			</TextBlock.RenderTransform>
+
+        </TextBlock>
+	</Grid>
+</UserControl>

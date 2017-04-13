@@ -1,0 +1,79 @@
+﻿<controls:MetroWindow x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.AboutDialog"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:aboutDialog="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.AboutDialog"
+                      Title="AddAppointmentDialog"
+                      Width="450"
+                      ResizeMode="NoResize"
+                      ShowTitleBar="False"
+                      SizeToContent="Height"
+                      WindowStartupLocation="CenterOwner"
+                      WindowStyle="ToolWindow"
+                      mc:Ignorable="d">
+
+    <d:DesignData.DataContext>
+        <aboutDialog:AboutDialogViewModelSampleData />
+    </d:DesignData.DataContext>
+
+
+    <Grid Background="{StaticResource WhiteColorBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="200" />
+            <RowDefinition />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.RowSpan="8"
+               Grid.ColumnSpan="3"
+               HorizontalAlignment="Left"
+               Opacity="0.1"
+               Source="{StaticResource Logo}"
+               Stretch="Uniform" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="1"
+                   HorizontalAlignment="Center"
+                   FontSize="32pt"
+                   Foreground="#FF444444"
+                   Text="OnkoTePla - Client" />
+        <DockPanel Grid.Row="2"
+                   Grid.Column="1"
+                   LastChildFill="False">
+            <TextBlock DockPanel.Dock="Left" Text="{Binding VersionNumber, Mode=OneWay}" />
+            <TextBlock VerticalAlignment="Center"
+                       DockPanel.Dock="Right"
+                       Text="this software is under Apache 2.0 Licence" />
+        </DockPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="12pt"
+                       FontWeight="Bold"
+                       Foreground="#FF444444"
+                       Text="Developer" />
+			<TextBlock Text="Matthias Drescher" />
+			<TextBlock Text="Alexander Horn" />
+        </StackPanel>
+
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Command="{Binding CloseDialog}"
+                Content="Close" />
+
+    </Grid>
+</controls:MetroWindow>

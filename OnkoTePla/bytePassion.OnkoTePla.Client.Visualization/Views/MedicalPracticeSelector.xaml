@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.MedicalPracticeSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:medicalPracticeSelector="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.MedicalPracticeSelector"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300">
+	
+	<d:UserControl.DataContext>
+		<medicalPracticeSelector:MedicalPracticeSelectorViewModelSampleData/>
+	</d:UserControl.DataContext>
+	
+    <ComboBox ItemsSource="{Binding AvailableMedicalPractices}"
+			  IsEnabled="{Binding PracticeIsSelectable}"
+			  SelectedItem="{Binding SelectedMedicalPractice, 
+									 Mode=TwoWay, 
+									 UpdateSourceTrigger=PropertyChanged}">
+        
+		<ComboBox.ItemTemplate>
+			<DataTemplate DataType="helper:MedicalPracticeDisplayData">
+				<TextBlock Text="{Binding PracticeName}"/>
+			</DataTemplate>
+		</ComboBox.ItemTemplate>
+		
+    </ComboBox>
+</UserControl>

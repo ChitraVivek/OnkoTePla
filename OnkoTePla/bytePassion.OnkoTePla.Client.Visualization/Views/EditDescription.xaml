@@ -1,0 +1,116 @@
+﻿<controls:MetroWindow x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.EditDescription"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:config="clr-namespace:bytePassion.OnkoTePla.Contracts.Config;assembly=bytePassion.OnkoTePla.Contracts"
+                      xmlns:converter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
+                      xmlns:editDescriptionViewModel="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.EditDescriptionViewModel"
+                      Title="Termin editieren"
+                      Width="500"
+                      Height="380"
+                      WindowStartupLocation="CenterOwner"
+                      mc:Ignorable="d">
+	
+	<d:DesignData.DataContext>
+		<editDescriptionViewModel:EditDescriptionViewModelSampleData/>
+	</d:DesignData.DataContext>
+	
+	<Window.Resources>
+
+		<converter:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter"/>
+		
+		<Style x:Key="HeaderTextBlock" TargetType="TextBlock">
+
+			<Setter Property="FontSize" Value="28" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="FontFamily" Value="Segoe UI" />
+			<Setter Property="Foreground" Value="#FF2C2C2C" />
+
+		</Style>
+
+		<Style x:Key="StandardTextBlock" TargetType="TextBlock">
+
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="FontFamily" Value="Segoe UI" />
+		</Style>
+
+	</Window.Resources>
+	
+    <Grid Margin="20">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="20" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0"
+                   Style="{StaticResource HeaderTextBlock}"
+                   Text="Label" 
+				   Height="50"/>
+
+		<ComboBox Grid.Row="1"
+				  Width="400"
+				  Height="40"
+				  HorizontalAlignment="Left"				  
+				  ItemsSource="{Binding AllAvailablesLabels}"
+				  SelectedItem="{Binding SelectedLabel, 
+										 Mode=TwoWay, 
+										 UpdateSourceTrigger=PropertyChanged}">
+
+			<ComboBox.ItemTemplate>
+				<DataTemplate DataType="{x:Type config:Label}">
+					<StackPanel Orientation="Horizontal">
+						<Rectangle Fill="{Binding Color, Converter={StaticResource ColorToSolidColorBrushConverter}}"
+									   Height="38"
+									   Width="60"/>
+						<TextBlock Text="{Binding Name}"
+									   Style="{StaticResource StandardTextBlock}"
+									   VerticalAlignment="Center"
+									   Margin="30,0,0,0"/>
+					</StackPanel>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+
+		</ComboBox>
+
+
+		<TextBlock Grid.Row="3"
+                   Style="{StaticResource HeaderTextBlock}"
+                   Text="Beschreibung" 
+				   Height="50"/>
+
+		<TextBox Grid.Row="4"
+				 Height="100"
+                 VerticalAlignment="Stretch"				 				 
+				 AcceptsReturn="True"
+                 FontSize="18"
+                 Foreground="#FF494949"                 
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"				 				 
+                 Text="{Binding Description, 
+								Mode=TwoWay, 
+								UpdateSourceTrigger=PropertyChanged}"/>
+		
+        <StackPanel Grid.Row="6"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+			
+            <Button Width="80"
+                    Margin="10,0"
+                    Command="{Binding Accept}"
+                    Content="ok" />
+			
+            <Button Width="80"
+                    Command="{Binding Cancel}"
+                    Content="cancel" />
+			
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>

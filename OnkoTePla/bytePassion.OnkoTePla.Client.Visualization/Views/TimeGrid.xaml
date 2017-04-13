@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.TimeGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:computations="clr-namespace:bytePassion.Lib.WpfLib.Computations;assembly=bytePassion.Lib"
+             xmlns:timeGrid="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.TimeGrid"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	
+	<d:DesignData.DataContext>
+        <timeGrid:TimeGridViewModelSampleData/>
+	</d:DesignData.DataContext>
+
+    <UserControl.Resources>
+        <computations:AddOffsetToDoubleConverter x:Key="AddOffsetToDouble"/>
+    </UserControl.Resources>
+
+    <Grid Background="White">
+
+        <ItemsControl ItemsSource="{Binding TimeSlotLabels}">
+			
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left" Value="{Binding XCoord, 
+																   Converter={StaticResource AddOffsetToDouble}, 
+																   ConverterParameter=-8}"/>
+                    <Setter Property="Canvas.Top"  Value="{Binding YCoord}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Caption}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+        </ItemsControl>
+
+        <ItemsControl ItemsSource="{Binding TimeSlotLines}">
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Line Stroke="#99A9A9A9"
+						  StrokeThickness="1"
+						  StrokeDashArray="3,1"
+						  X1="{Binding XCoord}"
+						  X2="{Binding XCoord}"
+						  Y1="{Binding YCoordTop}"
+						  Y2="{Binding YCoordBottom}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+    </Grid>
+</UserControl>

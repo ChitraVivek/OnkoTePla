@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.AppointmentViewDragAdorner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:appointmentViewDragAdorner="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentViewDragAdorner"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" 
+			 d:DesignWidth="300">
+	
+	<d:DesignData.DataContext>
+		<appointmentViewDragAdorner:AppointmentViewDragAdornerViewModelSampleData/>
+	</d:DesignData.DataContext>
+	
+	<UserControl.Resources>
+        <system:Boolean x:Key="True">  True  </system:Boolean>		
+		<system:Boolean x:Key="False"> False </system:Boolean>
+	</UserControl.Resources>
+	
+    <Border BorderThickness="1"
+			BorderBrush="Black">
+		
+		<TextBlock Text="{Binding Content}"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   FontFamily="Segoe UI Semibold"
+                   FontSize="18"/>
+		
+		<Border.Style>
+			<Style TargetType="Border">
+				
+				<Setter Property="Background" Value="White"/>
+				
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding DropPossible}" Value="{StaticResource True}">
+						<Setter Property="Background" Value="LawnGreen"/>
+					</DataTrigger>
+					<DataTrigger Binding="{Binding DropPossible}" Value="{StaticResource False}">
+						<Setter Property="Background" Value="Red"/>
+					</DataTrigger>
+				</Style.Triggers>
+				
+			</Style>
+		</Border.Style>
+		
+	</Border>
+</UserControl>

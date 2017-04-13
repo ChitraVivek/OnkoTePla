@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Resources", "bytePassion.OnkoTePla.Resources\bytePassion.OnkoTePla.Resources.csproj", "{1FF3C490-8680-46A5-AB65-6329863326DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Client.WpfUi", "bytePassion.OnkoTePla.Client.WpfUi\bytePassion.OnkoTePla.Client.WpfUi.csproj", "{7139072C-0298-4A71-B9B8-8CA1443DE591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Client.Visualization", "bytePassion.OnkoTePla.Client.Visualization\bytePassion.OnkoTePla.Client.Visualization.csproj", "{7139072C-0298-4A71-B9B8-8CA1443DE591}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Contracts", "bytePassion.OnkoTePla.Contracts\bytePassion.OnkoTePla.Contracts.csproj", "{85958036-DFEF-4C68-ABF4-FD241EAAB47F}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{77988D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{C8E2CC59-9C4B-4827-8F34-39D90E57268E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Server.WpfUi", "bytePassion.OnkoTePla.Server.WpfUi\bytePassion.OnkoTePla.Server.WpfUi.csproj", "{1712088C-01D9-4FA1-A03F-632F64A92504}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Server.Visualization", "bytePassion.OnkoTePla.Server.Visualization\bytePassion.OnkoTePla.Server.Visualization.csproj", "{1712088C-01D9-4FA1-A03F-632F64A92504}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Server.DataAndService", "bytePassion.OnkoTePla.Server.DataAndService\bytePassion.OnkoTePla.Server.DataAndService.csproj", "{64B9B70A-75C7-402F-A156-6C3B404533F5}"
 EndProject

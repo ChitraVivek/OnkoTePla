@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="bytePassion.OnkoTePla.Client.Visualization.Views.GridContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
+             xmlns:panels="clr-namespace:bytePassion.Lib.WpfLib.Panels;assembly=bytePassion.Lib"
+             xmlns:libBehaviors="clr-namespace:bytePassion.Lib.WpfLib.Behaviors;assembly=bytePassion.Lib"
+             xmlns:gridContainer="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.GridContainer"
+             xmlns:global="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.Global"
+             xmlns:views="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+	
+	<d:DesignData.DataContext>
+        <gridContainer:GridContainerViewModelSampleData/>
+	</d:DesignData.DataContext>
+	
+	<UserControl.Resources>
+		<converter:BoolToHiddenVisibilityConverter x:Key="BoolToHiddenVisibilityConverter"/>
+	</UserControl.Resources>
+
+    <Grid Background="White">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{x:Static global:Constants+Layout.AppointmentGridLeftColumsSize}"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" 
+				Grid.Column="1">
+            <i:Interaction.Behaviors>
+                <libBehaviors:SizeReportingBehavior ReportedSize="{Binding ReportedGridSize, 
+																		   Mode=OneWayToSource, 
+																		   UpdateSourceTrigger=PropertyChanged}" />				
+            </i:Interaction.Behaviors>
+        </Border>
+
+        <ItemsControl Grid.Column="0" 					 
+					  Grid.ColumnSpan="2" 
+					  ItemsSource="{Binding LoadedAppointmentGrids}"
+					  Background="White">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <panels:DeckPanel SelectedLayer="{Binding CurrentDisplayedAppointmentGridIndex}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+			
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Visibility" Value="{Binding IsActive, 
+																  Converter={StaticResource BoolToHiddenVisibilityConverter}}"/>					
+				</Style>
+            </ItemsControl.ItemContainerStyle> 
+			
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="gridContainer:IGridContainerViewModel">
+                    <views:AppointmentGrid DataContext="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+		
+	</Grid>
+</UserControl>
