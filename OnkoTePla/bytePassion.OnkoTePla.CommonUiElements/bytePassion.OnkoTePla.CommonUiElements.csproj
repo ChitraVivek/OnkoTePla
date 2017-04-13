@@ -60,6 +60,8 @@
       <DependentUpon>DebugOutputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DebugOutput\ViewModel\DebugOutputWindowViewModel.cs" />
+    <Compile Include="DebugOutput\ViewModel\DebugOutputWindowViewModelSampleData.cs" />
+    <Compile Include="DebugOutput\ViewModel\IDebugOutputWindowViewModel.cs" />
     <Compile Include="PatientSelector\Converter\BirthdayToStringConverter.cs" />
     <Compile Include="PatientSelector\Dialog\AddPatientDialog\AddPatientDialog.xaml.cs">
       <DependentUpon>AddPatientDialog.xaml</DependentUpon>

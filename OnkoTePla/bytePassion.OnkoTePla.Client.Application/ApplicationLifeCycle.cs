@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using bytePassion.Lib.Communication.MessageBus;
 using bytePassion.Lib.Communication.MessageBus.HandlerCollection;
@@ -20,7 +21,10 @@ using bytePassion.OnkoTePla.Client.DataAndService.Repositories.TherapyPlaceTypeR
 using bytePassion.OnkoTePla.Client.DataAndService.SessionInfo;
 using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
 using bytePassion.OnkoTePla.Client.Visualization.Factorys.WindowBuilder;
+using bytePassion.OnkoTePla.CommonUiElements.DebugOutput;
+using bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel;
 using bytePassion.OnkoTePla.Resources;
+using bytePassion.OnkoTePla.Utils;
 
 namespace bytePassion.OnkoTePla.Client.Application
 {
@@ -99,6 +103,23 @@ namespace bytePassion.OnkoTePla.Client.Application
 			var mainWindow = mainWindowBuilder.BuildWindow();
 
 			mainWindow.Show();
+
+#if DEBUG
+
+			var listener = new OnkoTePlaDebugListener();
+
+			Debug.Listeners.Add(listener);
+
+			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);
+
+			var debugWindow = new DebugOutputWindow
+			{
+				Owner = mainWindow,
+				DataContext = debugOutputWindowViewModel
+			};
+
+			debugWindow.Show();
+#endif
 		}
 
 		private static void AssureAppDataDirectoriesExist ()

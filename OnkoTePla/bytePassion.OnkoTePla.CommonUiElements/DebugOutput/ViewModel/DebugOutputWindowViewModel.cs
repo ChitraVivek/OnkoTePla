@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using bytePassion.Lib.WpfLib.ViewModelBase;
 using bytePassion.OnkoTePla.Utils;
 
 namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
@@ -60,37 +59,5 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 
 		public override event PropertyChangedEventHandler PropertyChanged;
 		
-	}
-
-	public interface IDebugOutputWindowViewModel : IViewModel
-	{
-		ICommand DumpOutput { get; }
-		ICommand ClearFilter { get; }
-
-		bool AlwaysOnTop { get; set; }
-		bool ScrollDown { get; set; }
-		string Filter { get; set; }
-
-		ICollectionView Output { get; }
-	}
-
-	internal class DebugOutputWindowViewModelSampleData : IDebugOutputWindowViewModel
-	{
-		public DebugOutputWindowViewModelSampleData()
-		{
-			AlwaysOnTop = true;
-			ScrollDown = false;
-		}
-
-		public ICommand DumpOutput  => null;
-		public ICommand ClearFilter => null;
-
-		public bool AlwaysOnTop { get; set; }
-		public bool ScrollDown { get; set; }
-		public string Filter { get; set; }
-		public ICollectionView Output { get; }
-
-		public void Dispose () { }
-		public event PropertyChangedEventHandler PropertyChanged;				
 	}
 }
