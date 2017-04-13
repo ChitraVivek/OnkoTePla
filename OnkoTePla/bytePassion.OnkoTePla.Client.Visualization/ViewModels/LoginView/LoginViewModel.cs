@@ -7,12 +7,12 @@ using System.Windows.Input;
 using bytePassion.Lib.FrameworkExtensions;
 using bytePassion.Lib.Types.Communication;
 using bytePassion.Lib.WpfLib.Commands;
-using bytePassion.Lib.ZmqUtils;
 using bytePassion.OnkoTePla.Client.DataAndService.Repositories.LocalSettings;
 using bytePassion.OnkoTePla.Client.DataAndService.SessionInfo;
 using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
 using bytePassion.OnkoTePla.Contracts.Config;
 using bytePassion.OnkoTePla.Resources.UserNotificationService;
+using bytePassion.OnkoTePla.Utils;
 
 namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.LoginView
 {

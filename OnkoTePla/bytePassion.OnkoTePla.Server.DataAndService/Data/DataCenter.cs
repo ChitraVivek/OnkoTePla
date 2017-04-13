@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using bytePassion.Lib.FrameworkExtensions;
 using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.Types.Communication;
-using bytePassion.Lib.ZmqUtils;
 using bytePassion.OnkoTePla.Contracts.Config;
 using bytePassion.OnkoTePla.Contracts.Domain;
 using bytePassion.OnkoTePla.Contracts.Domain.Events.Base;
@@ -12,6 +11,7 @@ using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.Config;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.EventStore;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients;
+using bytePassion.OnkoTePla.Utils;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Data
 {
