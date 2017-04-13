@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.Types.Repository;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 
 namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 {
-	public interface IPatientRepository : IPersistable
-	{
-		event Action<Patient> PatientAdded;
-		event Action<Patient> PatientModified;
-
+	public interface IPatientRepository : IPatientDataBaseInteraction, IPersistable
+	{		
 		Patient GetPatientById(Guid id);
 		IEnumerable<Patient> GetAllPatients();
-
 
 		void AddPatient (string name, Date birthday, bool alive, string externalId);
 		bool AddPatient (Patient newPatient);

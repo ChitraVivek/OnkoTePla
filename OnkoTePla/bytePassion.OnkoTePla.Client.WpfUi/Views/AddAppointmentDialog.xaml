@@ -10,6 +10,8 @@
                       xmlns:libConverter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"                      
                       xmlns:views="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.Views"
                       xmlns:config="clr-namespace:bytePassion.OnkoTePla.Contracts.Config;assembly=bytePassion.OnkoTePla.Contracts"
+                      xmlns:views1="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.Views;assembly=bytePassion.OnkoTePla.CommonUiElements"
+                      xmlns:patientSelector="clr-namespace:bytePassion.OnkoTePla.CommonUiElements.PatientSelector;assembly=bytePassion.OnkoTePla.CommonUiElements"
                       Title="AddAppointmentDialog"
                       Width="1000"
                       Height="720"
@@ -152,7 +154,7 @@
 
         </ContentControl>
 
-        <views:PatientSelector Grid.Row="2"
+        <patientSelector:PatientSelector Grid.Row="2"
                                Grid.RowSpan="2"
                                Grid.Column="0"
                                Margin="20,20,20,0"

@@ -35,6 +35,9 @@
       <HintPath>..\packages\bytePassion.Library.1.0.0\lib\bytePassion.Lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.2.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -57,6 +60,21 @@
       <DependentUpon>DebugOutputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DebugOutput\ViewModel\DebugOutputWindowViewModel.cs" />
+    <Compile Include="PatientSelector\Converter\BirthdayToStringConverter.cs" />
+    <Compile Include="PatientSelector\Dialog\AddPatientDialog\AddPatientDialog.xaml.cs">
+      <DependentUpon>AddPatientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSelector\Dialog\AddPatientDialog\AddPatientDialogService.cs" />
+    <Compile Include="PatientSelector\Dialog\AddPatientDialog\ViewModel\AddPatientDialogViewModel.cs" />
+    <Compile Include="PatientSelector\Dialog\AddPatientDialog\ViewModel\AddPatientDialogViewModelSampleData.cs" />
+    <Compile Include="PatientSelector\Dialog\AddPatientDialog\ViewModel\IAddPatientDialogViewModel.cs" />
+    <Compile Include="PatientSelector\PatientSelector.xaml.cs">
+      <DependentUpon>PatientSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PatientSelector\ViewModel\IPatientDataBaseInteraction.cs" />
+    <Compile Include="PatientSelector\ViewModel\IPatientSelectorViewModel.cs" />
+    <Compile Include="PatientSelector\ViewModel\PatientSelectorViewModel.cs" />
+    <Compile Include="PatientSelector\ViewModel\PatientSelectorViewModelSampleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,8 +85,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PatientSelector\Dialog\AddPatientDialog\AddPatientDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PatientSelector\PatientSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bytePassion.OnkoTePla.Contracts\bytePassion.OnkoTePla.Contracts.csproj">
+      <Project>{85958036-dfef-4c68-abf4-fd241eaab47f}</Project>
+      <Name>bytePassion.OnkoTePla.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bytePassion.OnkoTePla.Utils\bytePassion.OnkoTePla.Utils.csproj">
       <Project>{8242518D-A925-4391-BB9B-99558809ADAF}</Project>
       <Name>bytePassion.OnkoTePla.Utils</Name>

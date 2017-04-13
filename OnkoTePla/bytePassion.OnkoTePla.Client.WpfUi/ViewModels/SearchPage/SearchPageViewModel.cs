@@ -18,8 +18,8 @@ using bytePassion.OnkoTePla.Client.DataAndService.Repositories.ReadModelReposito
 using bytePassion.OnkoTePla.Client.WpfUi.Enums;
 using bytePassion.OnkoTePla.Client.WpfUi.Global;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModelMessages;
-using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.SearchPage.Helper;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Appointments;
 using bytePassion.OnkoTePla.Contracts.Domain;
 using bytePassion.OnkoTePla.Contracts.Domain.Events.Base;

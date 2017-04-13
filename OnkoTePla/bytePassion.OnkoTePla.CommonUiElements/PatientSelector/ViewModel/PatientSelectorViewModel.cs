@@ -10,14 +10,12 @@ using bytePassion.Lib.Communication.State;
 using bytePassion.Lib.FrameworkExtensions;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.Commands.Updater;
-using bytePassion.OnkoTePla.Client.DataAndService.Repositories.PatientRepository;
-using bytePassion.OnkoTePla.Client.WpfUi.DialogServices;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog;
 using bytePassion.OnkoTePla.Contracts.Patients;
 
-
-namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 {
-	internal class PatientSelectorViewModel : ViewModel, 
+	public class PatientSelectorViewModel : Lib.WpfLib.ViewModelBase.ViewModel, 
                                               IPatientSelectorViewModel
     {
 		private class PatientSorter : IComparer<Patient>
@@ -29,7 +27,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 		}
 		
 
-		private readonly IClientPatientRepository patientRepository;
+		private readonly IPatientDataBaseInteraction patientRepository;
 		private readonly ISharedState<Patient> selectedPatientSharedVariable;
 		private readonly Action<string> errorCallback;
 		private bool listIsEmpty;
@@ -40,7 +38,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
 
 	    private readonly ObservableCollection<Patient> observablePatientList;
 
-        public PatientSelectorViewModel(IClientPatientRepository patientRepository, 
+        public PatientSelectorViewModel(IPatientDataBaseInteraction patientRepository, 
 									    ISharedState<Patient> selectedPatientSharedVariable,
 										Action<string> errorCallback)
         {

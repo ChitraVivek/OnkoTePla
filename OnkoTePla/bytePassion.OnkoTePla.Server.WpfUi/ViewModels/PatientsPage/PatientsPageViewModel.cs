@@ -6,11 +6,11 @@ using bytePassion.Lib.FrameworkExtensions;
 using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.ViewModelBase;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Resources.UserNotificationService;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients;
 using bytePassion.OnkoTePla.Server.WpfUi.SampleDataGenerators;
-using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector;
 
 
 namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage

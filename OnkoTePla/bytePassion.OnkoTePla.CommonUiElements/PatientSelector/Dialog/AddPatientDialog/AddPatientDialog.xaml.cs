@@ -1,4 +1,4 @@
-﻿namespace bytePassion.OnkoTePla.Client.WpfUi.Views
+﻿namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog
 {
 	public partial class AddPatientDialog 
 	{

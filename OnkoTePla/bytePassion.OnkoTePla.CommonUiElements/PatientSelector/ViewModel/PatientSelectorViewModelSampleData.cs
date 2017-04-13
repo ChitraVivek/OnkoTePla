@@ -8,9 +8,9 @@ using bytePassion.OnkoTePla.Contracts.Patients;
 
 #pragma warning disable 0067
 
-namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 {
-	internal class PatientSelectorViewModelSampleData : IPatientSelectorViewModel 
+	public class PatientSelectorViewModelSampleData : IPatientSelectorViewModel 
 	{
 		public PatientSelectorViewModelSampleData()
 		{			

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 using bytePassion.Lib.Communication.State;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Resources;
 using bytePassion.OnkoTePla.Server.DataAndService.Backup;
@@ -25,7 +26,6 @@ using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.LicencePage;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.MainWindow;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.OptionsPage;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.OverviewPage;
-using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.TherapyPlaceTypesPage;
 using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.UserPage;
@@ -107,7 +107,7 @@ namespace bytePassion.OnkoTePla.Server.WpfUi
 			// ViewModels
 
 			var selectedPatientVariable = new SharedState<Patient>(null);
-			var patientSelectorViewModel = new PatientSelectorViewModel(patientRepository, selectedPatientVariable);
+			var patientSelectorViewModel = new PatientSelectorViewModel(patientRepository, selectedPatientVariable, null);
 
             var overviewPageViewModel          = new OverviewPageViewModel(connectionService);
             var connectionsPageViewModel       = new ConnectionsPageViewModel(dataCenter, connectionService, selectedPageVariable);

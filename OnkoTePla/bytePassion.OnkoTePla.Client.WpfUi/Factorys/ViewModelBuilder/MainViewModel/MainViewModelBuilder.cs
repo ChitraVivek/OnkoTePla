@@ -32,13 +32,13 @@ using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.MainView;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.MedicalPracticeSelector;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.OptionsPage;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.OverviewPage;
-using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.RoomSelector;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.SearchPage;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.TherapyPlaceRowView;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.TherapyPlaceRowView.Helper;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.TimeGrid;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.UndoRedoView;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Domain;
 using bytePassion.OnkoTePla.Contracts.Patients;
 

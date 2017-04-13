@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.SearchPage.Helper;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 
 
 namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.SearchPage

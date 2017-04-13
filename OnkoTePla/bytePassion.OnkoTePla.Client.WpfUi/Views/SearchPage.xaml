@@ -8,6 +8,8 @@
              xmlns:views="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.Views"
              xmlns:converter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
              xmlns:helper="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.ViewModels.SearchPage.Helper"
+             xmlns:views1="clr-namespace:bytePassion.OnkoTePla.Client.WpfUi.Views;assembly=bytePassion.OnkoTePla.CommonUiElements"
+             xmlns:patientSelector="clr-namespace:bytePassion.OnkoTePla.CommonUiElements.PatientSelector;assembly=bytePassion.OnkoTePla.CommonUiElements"
              d:DesignHeight="600"
              d:DesignWidth="1200"
              mc:Ignorable="d">
@@ -40,7 +42,7 @@
                 Grid.ColumnSpan="3"
                 Background="{StaticResource AccentColorBrush}" />
 
-        <views:PatientSelector Grid.Row="1"
+        <patientSelector:PatientSelector Grid.Row="1"
                                Grid.Column="1"
                                Margin="0,10,0,0"
                                DataContext="{Binding PatientSelectorViewModel}" />

@@ -122,9 +122,6 @@
     <Compile Include="ViewModels\OverviewPage\IOverviewPageViewModel.cs" />
     <Compile Include="ViewModels\OverviewPage\OverviewPageViewModel.cs" />
     <Compile Include="ViewModels\OverviewPage\OverviewPageViewModelSampleData.cs" />
-    <Compile Include="ViewModels\PatientSelector\IPatientSelectorViewModel.cs" />
-    <Compile Include="ViewModels\PatientSelector\PatientSelectorViewModel.cs" />
-    <Compile Include="ViewModels\PatientSelector\PatientSelectorViewModelSampleData.cs" />
     <Compile Include="SampleDataGenerators\AppointmentGenerator.cs" />
     <Compile Include="SampleDataGenerators\PatientNameGenerator.cs" />
     <Compile Include="ViewModels\PatientsPage\IPatientsPageViewModel.cs" />
@@ -164,9 +161,6 @@
     </Compile>
     <Compile Include="Views\OverviewPage.xaml.cs">
       <DependentUpon>OverviewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PatientSelector.xaml.cs">
-      <DependentUpon>PatientSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PatientsPage.xaml.cs">
       <DependentUpon>PatientsPage.xaml</DependentUpon>
@@ -225,10 +219,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PatientSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\PatientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,6 +264,10 @@
     <Folder Include="ViewModels\PatientsPage\Helper\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bytePassion.OnkoTePla.CommonUiElements\bytePassion.OnkoTePla.CommonUiElements.csproj">
+      <Project>{28226AFB-934B-4F76-9E61-A4AAAF00C29A}</Project>
+      <Name>bytePassion.OnkoTePla.CommonUiElements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bytePassion.OnkoTePla.Communication\bytePassion.OnkoTePla.Communication.csproj">
       <Project>{6e3acb7d-b4db-4f87-9e78-e150e94f0897}</Project>
       <Name>bytePassion.OnkoTePla.Communication</Name>

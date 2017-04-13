@@ -7,9 +7,9 @@ using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.Commands;
 using bytePassion.Lib.WpfLib.Commands.Updater;
 
-namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog.ViewModel
 {
-	internal class AddPatientDialogViewModel : ViewModel, IAddPatientDialogViewModel
+	internal class AddPatientDialogViewModel : Lib.WpfLib.ViewModelBase.ViewModel, IAddPatientDialogViewModel
 	{
 		private string name;
 		private string birthday;
@@ -47,7 +47,7 @@ namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
 		private void CloseDialog()
 		{
 			Application.Current.Windows
-							   .OfType<Views.AddPatientDialog>()
+							   .OfType<AddPatientDialog>()
 							   .FirstOrDefault(window => ReferenceEquals(window.DataContext, this))
 							   ?.Close();
 		}

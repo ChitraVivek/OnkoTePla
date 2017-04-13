@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows;
 using bytePassion.Lib.TimeLib;
-using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog;
-using bytePassion.OnkoTePla.Client.WpfUi.Views;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 
-namespace bytePassion.OnkoTePla.Client.WpfUi.DialogServices
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog
 {
 	internal static class AddPatientDialogService
 	{

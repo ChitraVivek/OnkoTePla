@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using bytePassion.Lib.TimeLib;
 using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddAppointmentDialog.Helper;
-using bytePassion.OnkoTePla.Client.WpfUi.ViewModels.PatientSelector;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Config;
 using bytePassion.OnkoTePla.Contracts.Patients;
 

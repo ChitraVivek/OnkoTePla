@@ -7,6 +7,7 @@
              xmlns:views="clr-namespace:bytePassion.OnkoTePla.Server.WpfUi.Views"
              xmlns:libConverter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
              xmlns:converter="clr-namespace:bytePassion.OnkoTePla.Server.WpfUi.Converter"
+             xmlns:patientSelector="clr-namespace:bytePassion.OnkoTePla.CommonUiElements.PatientSelector;assembly=bytePassion.OnkoTePla.CommonUiElements"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="900">
 	
@@ -32,11 +33,11 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 
-		<views:PatientSelector Grid.Row="0"
-							   Grid.Column="0"
-							   Margin="5"
-							   DataContext="{Binding DataContext.PatientSelectorViewModel, 
-													 RelativeSource={RelativeSource AncestorType={x:Type views:PatientsPage}}}"/>
+		<patientSelector:PatientSelector Grid.Row="0"
+							             Grid.Column="0"
+							             Margin="5"
+							             DataContext="{Binding DataContext.PatientSelectorViewModel, 
+													           RelativeSource={RelativeSource AncestorType={x:Type views:PatientsPage}}}"/>
 		<Button Grid.Row="1"
 				Grid.Column="0"
 				Margin="10"

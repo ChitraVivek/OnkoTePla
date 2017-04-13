@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using bytePassion.Lib.WpfLib.ViewModelBase;
-using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 
 namespace bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientsPage
 {

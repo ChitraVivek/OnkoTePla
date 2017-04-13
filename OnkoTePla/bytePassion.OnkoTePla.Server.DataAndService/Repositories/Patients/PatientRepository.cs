@@ -10,11 +10,12 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 {
 	public class PatientRepository : IPatientRepository
 	{
+		public event Action<Patient> NewPatientAvailable;
+		public event Action<Patient> UpdatedPatientAvailable;
+
 		private readonly IPersistenceService<IEnumerable<Patient>> persistenceService;
 		private readonly IConnectionService connectionService;
-
-		public event Action<Patient> PatientAdded;
-		public event Action<Patient> PatientModified;
+		
 
 		private IDictionary<Guid, Patient> patients;
 		
@@ -42,7 +43,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 			var newPatient = new Patient(name, birthday, alive, newPatientId, externalId, false);
 			patients.Add(newPatientId, newPatient);
 
-			PatientAdded?.Invoke(newPatient);
+			NewPatientAvailable?.Invoke(newPatient);
 			connectionService.SendPatientAddedNotification(newPatient);
 		}
 
@@ -52,7 +53,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 			{
 				patients.Add(newPatient.Id, newPatient);
 
-				PatientAdded?.Invoke(newPatient);
+				NewPatientAvailable?.Invoke(newPatient);
 				connectionService.SendPatientAddedNotification(newPatient);
 				return true;
 			}
@@ -72,7 +73,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 
 			patients[patientId] = newPatientData;
 
-			PatientModified?.Invoke(newPatientData);
+			UpdatedPatientAvailable?.Invoke(newPatientData);
 			connectionService.SendPatientUpdatedNotification(newPatientData);
 		}
 
@@ -129,6 +130,16 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 		{
 			patients = persistenceService.Load().ToDictionary(patient => patient.Id, 
 															  patient => patient);
+		}
+		
+		public void RequestAllPatientList(Action<IReadOnlyList<Patient>> patientListAvailableCallback, Action<string> errorCallback)
+		{
+			patientListAvailableCallback?.Invoke(patients.Values.ToList());
+		}
+
+		public void AddPatient(Patient newPatient, Action<string> errorCallback)
+		{
+			AddPatient(newPatient);
 		}
 	}
 }

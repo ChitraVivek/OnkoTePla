@@ -80,7 +80,6 @@
     <Compile Include="Behaviors\PasswordBoxRemovePassordOnDisabledBehavior.cs" />
     <Compile Include="Behaviors\ResetRoomSelectionBehavior.cs" />
     <Compile Include="Computations\ConnectionStatusToBackgroundBrush.cs" />
-    <Compile Include="Converter\BirthdayToStringConverter.cs" />
     <Compile Include="Behaviors\AcceptAppointmentDropBehavior.cs" />
     <Compile Include="Behaviors\AppointmentAdornerPlacementBehavior.cs" />
     <Compile Include="Behaviors\MoveEndTimeBehavior.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Converter\DateToDateTimeConverter.cs" />
     <Compile Include="Computations\PatientToCollapedVisibilityConverter.cs" />
     <Compile Include="Converter\OperatingModeToVisibilityConverter.cs" />
-    <Compile Include="DialogServices\AddPatientDialogService.cs" />
     <Compile Include="Enums\ConnectionStatus.cs" />
     <Compile Include="Enums\MainPage.cs" />
     <Compile Include="Factorys\AppointmentModification\AppointmentModificationsBuilder.cs" />
@@ -138,9 +136,6 @@
     <Compile Include="ViewModels\AddAppointmentDialog\AddAppointmentDialogViewModelSampleData.cs" />
     <Compile Include="ViewModels\AddAppointmentDialog\Helper\AppointmentCreationState.cs" />
     <Compile Include="ViewModels\AddAppointmentDialog\IAddAppointmentDialogViewModel.cs" />
-    <Compile Include="ViewModels\AddPatientDialog\AddPatientDialogViewModel.cs" />
-    <Compile Include="ViewModels\AddPatientDialog\AddPatientDialogViewModelSampleData.cs" />
-    <Compile Include="ViewModels\AddPatientDialog\IAddPatientDialogViewModel.cs" />
     <Compile Include="ViewModels\AppointmentGrid\AppointmentGridViewModelSampleData.cs" />
     <Compile Include="ViewModelMessages\Dispose.cs" />
     <Compile Include="ViewModels\AppointmentGrid\ClosedDayGridViewModel.cs" />
@@ -204,7 +199,6 @@
     <Compile Include="ViewModels\OverviewPage\IOverviewPageViewModel.cs" />
     <Compile Include="ViewModels\OverviewPage\OverviewPageViewModel.cs" />
     <Compile Include="ViewModels\OverviewPage\OverviewPageViewModelSampleData.cs" />
-    <Compile Include="ViewModels\PatientSelector\PatientSelectorViewModelSampleData.cs" />
     <Compile Include="ViewModels\RoomSelector\RoomFilterViewModelSampleData.cs" />
     <Compile Include="ViewModels\SearchPage\ISearchPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPage\SearchPageViewModel.cs" />
@@ -221,13 +215,11 @@
     <Compile Include="ViewModels\AppointmentView\IAppointmentViewModel.cs" />
     <Compile Include="ViewModels\DateSelector\IDateSelectorViewModel.cs" />
     <Compile Include="ViewModels\MedicalPracticeSelector\IMedicalPracticeSelectorViewModel.cs" />
-    <Compile Include="ViewModels\PatientSelector\IPatientSelectorViewModel.cs" />
     <Compile Include="ViewModels\TimeGrid\Helper\TimeSlotLabel.cs" />
     <Compile Include="ViewModels\RoomSelector\IRoomFilterViewModel.cs" />
     <Compile Include="ViewModels\TherapyPlaceRowView\ITherapyPlaceRowViewModel.cs" />
     <Compile Include="ViewModels\RoomSelector\Helper\RoomSelectorData.cs" />
     <Compile Include="ViewModels\MedicalPracticeSelector\MedicalPracticeSelectorViewModel.cs" />
-    <Compile Include="ViewModels\PatientSelector\PatientSelectorViewModel.cs" />
     <Compile Include="ViewModels\TimeGrid\Helper\TimeSlotLine.cs" />
     <Compile Include="ViewModels\RoomSelector\RoomFilterViewModel.cs" />
     <Compile Include="ViewModels\TherapyPlaceRowView\TherapyPlaceRowViewModel.cs" />
@@ -244,9 +236,6 @@
     </Compile>
     <Compile Include="Views\AddAppointmentDialog.xaml.cs">
       <DependentUpon>AddAppointmentDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddPatientDialog.xaml.cs">
-      <DependentUpon>AddPatientDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AppointmentGrid.xaml.cs">
       <DependentUpon>AppointmentGrid.xaml</DependentUpon>
@@ -296,9 +285,6 @@
     <Compile Include="Views\OverviewPage.xaml.cs">
       <DependentUpon>OverviewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PatientSelector.xaml.cs">
-      <DependentUpon>PatientSelector.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PrintAppointmentGrid.xaml.cs">
       <DependentUpon>PrintAppointmentGrid.xaml</DependentUpon>
     </Compile>
@@ -344,10 +330,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddAppointmentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddPatientDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,10 +394,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OverviewPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PatientSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -497,6 +475,10 @@
       <Project>{76aeeb98-2a61-49de-b8d2-a1448b302e8c}</Project>
       <Name>bytePassion.OnkoTePla.Client.DataAndService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\bytePassion.OnkoTePla.CommonUiElements\bytePassion.OnkoTePla.CommonUiElements.csproj">
+      <Project>{28226afb-934b-4f76-9e61-a4aaaf00c29a}</Project>
+      <Name>bytePassion.OnkoTePla.CommonUiElements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bytePassion.OnkoTePla.Contracts\bytePassion.OnkoTePla.Contracts.csproj">
       <Project>{85958036-DFEF-4C68-ABF4-FD241EAAB47F}</Project>
       <Name>bytePassion.OnkoTePla.Contracts</Name>
@@ -506,7 +488,9 @@
       <Name>bytePassion.OnkoTePla.Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DialogServices\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

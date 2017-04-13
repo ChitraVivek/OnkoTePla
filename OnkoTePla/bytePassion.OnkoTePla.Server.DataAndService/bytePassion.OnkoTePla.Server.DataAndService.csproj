@@ -165,6 +165,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bytePassion.OnkoTePla.CommonUiElements\bytePassion.OnkoTePla.CommonUiElements.csproj">
+      <Project>{28226AFB-934B-4F76-9E61-A4AAAF00C29A}</Project>
+      <Name>bytePassion.OnkoTePla.CommonUiElements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bytePassion.OnkoTePla.Communication\bytePassion.OnkoTePla.Communication.csproj">
       <Project>{6e3acb7d-b4db-4f87-9e78-e150e94f0897}</Project>
       <Name>bytePassion.OnkoTePla.Communication</Name>

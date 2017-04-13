@@ -2,8 +2,7 @@
 using bytePassion.Lib.TimeLib;
 using bytePassion.Lib.WpfLib.ConverterBase;
 
-
-namespace bytePassion.OnkoTePla.Client.WpfUi.Converter
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Converter
 {
 	internal class BirthdayToStringConverter : GenericValueConverter<Date, string>
 	{

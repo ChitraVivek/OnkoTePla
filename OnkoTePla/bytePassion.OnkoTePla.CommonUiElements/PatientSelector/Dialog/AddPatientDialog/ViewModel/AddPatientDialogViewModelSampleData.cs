@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 #pragma warning disable 0067
 
-namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog.ViewModel
 {
 	internal class AddPatientDialogViewModelSampleData : IAddPatientDialogViewModel
 	{

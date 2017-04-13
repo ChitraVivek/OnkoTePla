@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using bytePassion.Lib.TimeLib;
-using bytePassion.OnkoTePla.Server.WpfUi.ViewModels.PatientSelector;
+using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 
 #pragma warning disable 0067
 

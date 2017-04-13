@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
+using bytePassion.Lib.WpfLib.ViewModelBase;
 
-namespace bytePassion.OnkoTePla.Client.WpfUi.ViewModels.AddPatientDialog
+namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.Dialog.AddPatientDialog.ViewModel
 {
 	internal interface IAddPatientDialogViewModel : IViewModel
 	{
