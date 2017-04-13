@@ -3,8 +3,9 @@ using System.Linq;
 using System.Windows;
 using bytePassion.OnkoTePla.Client.DataAndService.SessionInfo;
 using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
+using bytePassion.OnkoTePla.Client.Visualization;
 
-namespace bytePassion.OnkoTePla.Client.Visualization
+namespace bytePassion.OnkoTePla.Client.Application
 {
 	internal class FatalErrorHandler
 	{
@@ -54,9 +55,9 @@ namespace bytePassion.OnkoTePla.Client.Visualization
 
 		private static void KillWindow ()
 		{
-			Application.Current.Dispatcher.Invoke(() =>
+			System.Windows.Application.Current.Dispatcher.Invoke(() =>
 			{
-				var windows = Application.Current.Windows
+				var windows = System.Windows.Application.Current.Windows
 											 .OfType<MainWindow>()
 											 .ToList();
 

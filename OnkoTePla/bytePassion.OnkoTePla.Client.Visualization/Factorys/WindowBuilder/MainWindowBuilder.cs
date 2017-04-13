@@ -20,7 +20,7 @@ using bytePassion.OnkoTePla.Client.Visualization.ViewModels.NotificationServiceC
 
 namespace bytePassion.OnkoTePla.Client.Visualization.Factorys.WindowBuilder
 {
-	internal class MainWindowBuilder : IWindowBuilder<MainWindow>
+	public class MainWindowBuilder : IWindowBuilder<MainWindow>
 	{
 		private readonly ILocalSettingsRepository localSettingsRepository;
 		private readonly IClientPatientRepository patientRepository;

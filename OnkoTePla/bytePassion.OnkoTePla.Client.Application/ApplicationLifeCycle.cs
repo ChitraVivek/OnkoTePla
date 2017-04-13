@@ -4,6 +4,7 @@ using bytePassion.Lib.Communication.MessageBus;
 using bytePassion.Lib.Communication.MessageBus.HandlerCollection;
 using bytePassion.Lib.Communication.ViewModel;
 using bytePassion.Lib.Communication.ViewModel.Messages;
+using bytePassion.Lib.Utils;
 using bytePassion.OnkoTePla.Client.DataAndService.Connection;
 using bytePassion.OnkoTePla.Client.DataAndService.Domain.CommandHandler;
 using bytePassion.OnkoTePla.Client.DataAndService.Domain.CommandSrv;
@@ -18,16 +19,17 @@ using bytePassion.OnkoTePla.Client.DataAndService.Repositories.ReadModelReposito
 using bytePassion.OnkoTePla.Client.DataAndService.Repositories.TherapyPlaceTypeRepository;
 using bytePassion.OnkoTePla.Client.DataAndService.SessionInfo;
 using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
+using bytePassion.OnkoTePla.Client.Visualization;
 using bytePassion.OnkoTePla.Client.Visualization.Factorys.WindowBuilder;
 using bytePassion.OnkoTePla.Resources;
 
-namespace bytePassion.OnkoTePla.Client.Visualization
+namespace bytePassion.OnkoTePla.Client.Application
 {
-	public partial class App
+	internal class ApplicationLifeCycle : IApplicationLifeCycle
 	{
-		protected override void OnStartup (StartupEventArgs e)
+		
+		public void BuildAndStart (StartupEventArgs startupEventArgs)
 		{
-			base.OnStartup(e);
 
 			AssureAppDataDirectoriesExist();
 
@@ -37,21 +39,21 @@ namespace bytePassion.OnkoTePla.Client.Visualization
 			////////                                                                             //////////
 			///////////////////////////////////////////////////////////////////////////////////////////////								
 
-			var connectionService = new ConnectionService();			
+			var connectionService = new ConnectionService();
 			var eventBus          = new ClientEventBus(connectionService);
 
 			var commandHandlerCollection = new SingleHandlerCollection<DomainCommand>();
 			var commandMessageBus = new LocalMessageBus<DomainCommand>(commandHandlerCollection);
-			var commandBus = new CommandBus(commandMessageBus);			
+			var commandBus = new CommandBus(commandMessageBus);
 
 			var persistenceService = new LocalSettingsXMLPersistenceService(GlobalConstants.LocalSettingsPersistenceFile);
 			var localSettingsRepository = new LocalSettingsRepository(persistenceService);
 			localSettingsRepository.LoadRepository();
-			
+
 			var clientMedicalPracticeRepository  = new ClientMedicalPracticeRepository(connectionService);
 			var clientPatientRepository          = new ClientPatientRepository(connectionService);
 			var clienttherapyPlaceTypeRepository = new ClientTherapyPlaceTypeRepository(connectionService);
-			var clientLabelRepository			 = new ClientLabelRepository(connectionService);
+			var clientLabelRepository            = new ClientLabelRepository(connectionService);
 			var clientReadmodelRepository        = new ClientReadModelRepository(eventBus, clientPatientRepository, clientMedicalPracticeRepository, clientLabelRepository, connectionService);
 
 
@@ -71,31 +73,31 @@ namespace bytePassion.OnkoTePla.Client.Visualization
 			var  deleteAppointmentCommandHandler = new  DeleteAppointmentCommandHandler(connectionService, session, clientPatientRepository,                                  userActionBuilder, fatalErrorHandler.HandleFatalError);
 			var replaceAppointmentCommandHandler = new ReplaceAppointmentCommandHandler(connectionService, session, clientPatientRepository, clientMedicalPracticeRepository, userActionBuilder, fatalErrorHandler.HandleFatalError);
 
-			commandBus.RegisterCommandHandler(    addAppointmentCommandHandler);
-			commandBus.RegisterCommandHandler( deleteAppointmentCommandHandler);
+			commandBus.RegisterCommandHandler(addAppointmentCommandHandler);
+			commandBus.RegisterCommandHandler(deleteAppointmentCommandHandler);
 			commandBus.RegisterCommandHandler(replaceAppointmentCommandHandler);
 
 
 			// initiate ViewModelCommunication			
 
 			var handlerCollection = new MultiHandlerCollection<ViewModelMessage>();
-            IMessageBus<ViewModelMessage> viewModelMessageBus = new LocalMessageBus<ViewModelMessage>(handlerCollection);
-            IViewModelCollectionList viewModelCollections = new ViewModelCollectionList();
+			IMessageBus<ViewModelMessage> viewModelMessageBus = new LocalMessageBus<ViewModelMessage>(handlerCollection);
+			IViewModelCollectionList viewModelCollections = new ViewModelCollectionList();
 
-            IViewModelCommunication viewModelCommunication = new ViewModelCommunication(viewModelMessageBus,
-                                                                                        viewModelCollections);			
-          
+			IViewModelCommunication viewModelCommunication = new ViewModelCommunication(viewModelMessageBus,
+																						viewModelCollections);
 
-            var mainWindowBuilder = new MainWindowBuilder(localSettingsRepository,
+
+			var mainWindowBuilder = new MainWindowBuilder(localSettingsRepository,
 														  clientPatientRepository,
-														  clientMedicalPracticeRepository,														  
+														  clientMedicalPracticeRepository,
 														  clientReadmodelRepository,
-														  clienttherapyPlaceTypeRepository,	
-														  clientLabelRepository,													  
+														  clienttherapyPlaceTypeRepository,
+														  clientLabelRepository,
 														  commandService,
-                                                          viewModelCommunication,
-														  session,														   														 
-                                                          fatalErrorHandler.HandleFatalError);              
+														  viewModelCommunication,
+														  session,
+														  fatalErrorHandler.HandleFatalError);
 
 			var mainWindow = mainWindowBuilder.BuildWindow();
 
@@ -112,14 +114,20 @@ namespace bytePassion.OnkoTePla.Client.Visualization
 			localSettingsRepository.PersistRepository();
 
 			connectionService.Dispose();
+		
 		}
 
-		private static void AssureAppDataDirectoriesExist()
+		private static void AssureAppDataDirectoriesExist ()
 		{
 			if (!Directory.Exists(GlobalConstants.ClientBasePath))
 			{
-				Directory.CreateDirectory(GlobalConstants.ClientBasePath);				
+				Directory.CreateDirectory(GlobalConstants.ClientBasePath);
 			}
+		}
+
+		public void CleanUp (ExitEventArgs exitEventArgs)
+		{
+			
 		}
 	}
 }
