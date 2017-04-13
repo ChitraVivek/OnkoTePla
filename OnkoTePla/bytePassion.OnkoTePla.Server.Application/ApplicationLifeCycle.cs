@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using bytePassion.Lib.Communication.State;
 using bytePassion.Lib.Utils;
+using bytePassion.OnkoTePla.CommonUiElements.DebugOutput;
+using bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel;
 using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Resources;
@@ -31,6 +34,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.OverviewPage;
 using bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage;
 using bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPage;
 using bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage;
+using bytePassion.OnkoTePla.Utils;
 
 namespace bytePassion.OnkoTePla.Server.Application
 {
@@ -152,6 +156,23 @@ namespace bytePassion.OnkoTePla.Server.Application
 			};
 
 			mainWindow.Show();
+
+#if DEBUG
+
+			var listener = new OnkoTePlaDebugListener();
+
+			Debug.Listeners.Add(listener);
+
+			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);
+
+			var debugWindow = new DebugOutputWindow
+			{
+				Owner = mainWindow,
+				DataContext = debugOutputWindowViewModel
+			};
+
+			debugWindow.Show();
+#endif
 		}
 
 		public void CleanUp(ExitEventArgs exitEventArgs)
