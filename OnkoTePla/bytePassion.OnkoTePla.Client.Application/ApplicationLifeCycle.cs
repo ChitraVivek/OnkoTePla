@@ -19,7 +19,6 @@ using bytePassion.OnkoTePla.Client.DataAndService.Repositories.ReadModelReposito
 using bytePassion.OnkoTePla.Client.DataAndService.Repositories.TherapyPlaceTypeRepository;
 using bytePassion.OnkoTePla.Client.DataAndService.SessionInfo;
 using bytePassion.OnkoTePla.Client.DataAndService.Workflow;
-using bytePassion.OnkoTePla.Client.Visualization;
 using bytePassion.OnkoTePla.Client.Visualization.Factorys.WindowBuilder;
 using bytePassion.OnkoTePla.Resources;
 
@@ -27,19 +26,16 @@ namespace bytePassion.OnkoTePla.Client.Application
 {
 	internal class ApplicationLifeCycle : IApplicationLifeCycle
 	{
+		private ILocalSettingsRepository localSettingsRepository;
+		private IConnectionService connectionService;
 		
 		public void BuildAndStart (StartupEventArgs startupEventArgs)
 		{
 
 			AssureAppDataDirectoriesExist();
 
-			///////////////////////////////////////////////////////////////////////////////////////////////
-			////////                                                                             //////////
-			////////                          Composition Root and Setup                         //////////
-			////////                                                                             //////////
-			///////////////////////////////////////////////////////////////////////////////////////////////								
-
-			var connectionService = new ConnectionService();
+			
+			connectionService = new ConnectionService();
 			var eventBus          = new ClientEventBus(connectionService);
 
 			var commandHandlerCollection = new SingleHandlerCollection<DomainCommand>();
@@ -47,7 +43,8 @@ namespace bytePassion.OnkoTePla.Client.Application
 			var commandBus = new CommandBus(commandMessageBus);
 
 			var persistenceService = new LocalSettingsXMLPersistenceService(GlobalConstants.LocalSettingsPersistenceFile);
-			var localSettingsRepository = new LocalSettingsRepository(persistenceService);
+			
+			localSettingsRepository = new LocalSettingsRepository(persistenceService);
 			localSettingsRepository.LoadRepository();
 
 			var clientMedicalPracticeRepository  = new ClientMedicalPracticeRepository(connectionService);
@@ -101,20 +98,7 @@ namespace bytePassion.OnkoTePla.Client.Application
 
 			var mainWindow = mainWindowBuilder.BuildWindow();
 
-			mainWindow.ShowDialog();
-
-
-
-			///////////////////////////////////////////////////////////////////////////////////////////////
-			////////                                                                             //////////
-			////////             Clean Up and store data after main Window was closed            //////////
-			////////                                                                             //////////
-			///////////////////////////////////////////////////////////////////////////////////////////////
-
-			localSettingsRepository.PersistRepository();
-
-			connectionService.Dispose();
-		
+			mainWindow.Show();
 		}
 
 		private static void AssureAppDataDirectoriesExist ()
@@ -127,7 +111,9 @@ namespace bytePassion.OnkoTePla.Client.Application
 
 		public void CleanUp (ExitEventArgs exitEventArgs)
 		{
-			
+			localSettingsRepository.PersistRepository();
+
+			connectionService.Dispose();
 		}
 	}
 }
