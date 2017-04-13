@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Server.DataAndService.Backup;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.BackupPage
 {
-	internal interface IBackupPageViewModel : IViewModel
+	public interface IBackupPageViewModel : IViewModel
 	{
 		ICommand ImportData               { get; }
 		ICommand ExportData               { get; }

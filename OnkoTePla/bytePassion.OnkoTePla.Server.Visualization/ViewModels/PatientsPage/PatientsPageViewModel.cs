@@ -14,7 +14,7 @@ using bytePassion.OnkoTePla.Server.Visualization.SampleDataGenerators;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage
 {
-	internal class PatientsPageViewModel : ViewModel, IPatientsPageViewModel
+	public class PatientsPageViewModel : ViewModel, IPatientsPageViewModel
 	{
 		private readonly IPatientRepository patientRepository;
 		private readonly ISharedState<Patient> selectedPatientVariable;

@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.Helper
 {
-	internal class ColorDisplayData : INotifyPropertyChanged
+	public class ColorDisplayData : INotifyPropertyChanged
 	{
 		public ColorDisplayData(Color color)
 		{

@@ -5,7 +5,7 @@ using bytePassion.Lib.WpfLib.ViewModelBase;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.LicencePage
 {
-	internal class LicencePageViewModel : ViewModel, 
+	public class LicencePageViewModel : ViewModel, 
                                           ILicencePageViewModel
     {
         protected override void CleanUp() { }

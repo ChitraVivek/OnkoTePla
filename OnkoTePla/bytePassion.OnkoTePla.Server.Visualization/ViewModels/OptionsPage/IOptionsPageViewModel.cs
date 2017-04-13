@@ -2,7 +2,7 @@
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.OptionsPage
 {
-	internal interface IOptionsPageViewModel : IViewModel
+	public interface IOptionsPageViewModel : IViewModel
     {
         
     }

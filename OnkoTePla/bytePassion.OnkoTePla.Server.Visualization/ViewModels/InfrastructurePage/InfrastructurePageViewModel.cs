@@ -24,7 +24,7 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage
 {
-	internal class InfrastructurePageViewModel : ViewModel, 
+	public class InfrastructurePageViewModel : ViewModel, 
                                                  IInfrastructurePageViewModel
     {
 		private readonly IDataCenter dataCenter;

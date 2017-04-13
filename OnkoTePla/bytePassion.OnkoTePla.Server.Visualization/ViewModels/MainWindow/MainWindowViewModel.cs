@@ -23,7 +23,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.MainWindow
 {
-	internal class MainWindowViewModel : ViewModel, IMainWindowViewModel
+	public class MainWindowViewModel : ViewModel, IMainWindowViewModel
     {
 		private readonly ISharedState<MainPage> selectedPageVariable;
 

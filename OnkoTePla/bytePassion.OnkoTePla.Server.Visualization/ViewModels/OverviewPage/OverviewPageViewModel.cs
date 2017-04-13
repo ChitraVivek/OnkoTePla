@@ -7,7 +7,7 @@ using bytePassion.OnkoTePla.Server.DataAndService.Connection;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.OverviewPage
 {
-	internal class OverviewPageViewModel : ViewModel, IOverviewPageViewModel
+	public class OverviewPageViewModel : ViewModel, IOverviewPageViewModel
     {
 		private readonly IConnectionService connectionService;
 

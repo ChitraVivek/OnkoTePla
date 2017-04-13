@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Contracts.Infrastructure;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPage.Helper
 {
-	internal class IconDisplayData : INotifyPropertyChanged
+	public class IconDisplayData : INotifyPropertyChanged
 	{
 		public IconDisplayData(ImageSource iconImage, TherapyPlaceTypeIcon iconType, string iconName)
 		{

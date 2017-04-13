@@ -5,7 +5,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.ConnectionsPage.Help
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.ConnectionsPage
 {
-	internal interface IConnectionsPageViewModel : IViewModel
+	public interface IConnectionsPageViewModel : IViewModel
     {
 		ICommand UpdateAvailableAddresses { get; }
 		

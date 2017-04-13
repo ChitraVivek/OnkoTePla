@@ -15,7 +15,7 @@ using Duration = bytePassion.Lib.TimeLib.Duration;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.SampleDataGenerators
 {
-	internal class AppointmentGenerator
+	public class AppointmentGenerator
 	{
 		private readonly Random rand;
 		

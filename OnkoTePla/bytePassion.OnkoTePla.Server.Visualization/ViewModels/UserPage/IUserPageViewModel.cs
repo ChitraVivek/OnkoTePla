@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage.Helper;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage
 {
-	internal interface IUserPageViewModel : IViewModel
+	public interface IUserPageViewModel : IViewModel
     {
         ICommand AddUser        { get; }
 		ICommand SaveChanges    { get; }

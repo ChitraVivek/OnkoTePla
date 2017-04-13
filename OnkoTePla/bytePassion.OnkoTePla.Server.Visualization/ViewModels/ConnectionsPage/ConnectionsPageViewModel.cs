@@ -18,7 +18,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.ConnectionsPage.Help
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.ConnectionsPage
 {
-	internal class ConnectionsPageViewModel : ViewModel, IConnectionsPageViewModel
+	public class ConnectionsPageViewModel : ViewModel, IConnectionsPageViewModel
 	{
 		private const string NoConnection = "- keine Verbindung momentan -";
 

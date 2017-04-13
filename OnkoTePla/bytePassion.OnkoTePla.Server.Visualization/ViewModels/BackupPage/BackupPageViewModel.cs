@@ -14,7 +14,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.BackupPage
 {
-	internal class BackupPageViewModel : ViewModel, IBackupPageViewModel
+	public class BackupPageViewModel : ViewModel, IBackupPageViewModel
 	{
 		private readonly IBackupService backupService;
 		private readonly IBackupScheduler backupScheduler;

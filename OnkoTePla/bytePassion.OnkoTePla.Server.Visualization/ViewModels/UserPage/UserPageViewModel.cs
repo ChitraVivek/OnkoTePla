@@ -14,7 +14,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage.Helper;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage
 {
-	internal class UserPageViewModel : ViewModel, 
+	public class UserPageViewModel : ViewModel, 
 									   IUserPageViewModel
     {
 	    private readonly IDataCenter dataCenter;

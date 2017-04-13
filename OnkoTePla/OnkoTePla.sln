@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Utils
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Client.Application", "bytePassion.OnkoTePla.Client.Application\bytePassion.OnkoTePla.Client.Application.csproj", "{5B1EE4A2-487A-43DE-8521-A69AD8271F1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bytePassion.OnkoTePla.Server.Application", "bytePassion.OnkoTePla.Server.Application\bytePassion.OnkoTePla.Server.Application.csproj", "{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{5B1EE4A2-487A-43DE-8521-A69AD8271F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B1EE4A2-487A-43DE-8521-A69AD8271F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B1EE4A2-487A-43DE-8521-A69AD8271F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +96,6 @@ Global
 		{28226AFB-934B-4F76-9E61-A4AAAF00C29A} = {714734C2-47E3-4AF9-AD5C-278EEA027C62}
 		{8242518D-A925-4391-BB9B-99558809ADAF} = {714734C2-47E3-4AF9-AD5C-278EEA027C62}
 		{5B1EE4A2-487A-43DE-8521-A69AD8271F1A} = {77988DA6-01CD-4FD8-B32E-FB24C819D131}
+		{FFB5A9C1-E572-49BF-9A0C-C1758C0E8B32} = {C8E2CC59-9C4B-4827-8F34-39D90E57268E}
 	EndGlobalSection
 EndGlobal

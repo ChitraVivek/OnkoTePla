@@ -3,7 +3,7 @@ using bytePassion.Lib.FrameworkExtensions;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.ConnectionsPage.Helper
 {
-	internal class ConnectedClientDisplayData : INotifyPropertyChanged
+	public class ConnectedClientDisplayData : INotifyPropertyChanged
 	{
 		private string logginInUser;
 

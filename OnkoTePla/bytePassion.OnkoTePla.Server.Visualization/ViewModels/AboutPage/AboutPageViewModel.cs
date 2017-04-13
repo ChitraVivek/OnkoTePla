@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Resources;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.AboutPage
 {
-	internal class AboutPageViewModel : ViewModel, IAboutPageViewModel
+	public class AboutPageViewModel : ViewModel, IAboutPageViewModel
     {
 		public AboutPageViewModel()
 		{

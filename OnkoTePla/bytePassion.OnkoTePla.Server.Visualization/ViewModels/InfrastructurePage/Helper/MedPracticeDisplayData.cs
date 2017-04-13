@@ -4,7 +4,7 @@ using bytePassion.Lib.FrameworkExtensions;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.Helper
 {
-	internal class MedPracticeDisplayData : INotifyPropertyChanged
+	public class MedPracticeDisplayData : INotifyPropertyChanged
 	{
 		private string name;
 

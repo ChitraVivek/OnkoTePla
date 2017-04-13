@@ -4,7 +4,7 @@ using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage
 {
-	internal interface IPatientsPageViewModel : IViewModel
+	public interface IPatientsPageViewModel : IViewModel
 	{
 		IPatientSelectorViewModel PatientSelectorViewModel { get; }
 

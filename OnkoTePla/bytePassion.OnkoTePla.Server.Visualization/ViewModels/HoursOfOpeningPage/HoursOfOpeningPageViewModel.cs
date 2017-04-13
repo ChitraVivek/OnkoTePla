@@ -18,7 +18,7 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.HoursOfOpeningPage
 {
-	internal class HoursOfOpeningPageViewModel : ViewModel, 
+	public class HoursOfOpeningPageViewModel : ViewModel, 
 												 IHoursOfOpeningPageViewModel
 	{
 		private readonly IDataCenter dataCenter;

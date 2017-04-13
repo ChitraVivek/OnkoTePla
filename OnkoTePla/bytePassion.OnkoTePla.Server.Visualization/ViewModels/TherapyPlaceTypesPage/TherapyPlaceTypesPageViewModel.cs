@@ -17,7 +17,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPag
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPage
 {
-	internal class TherapyPlaceTypesPageViewModel : ViewModel, ITherapyPlaceTypesPageViewModel
+	public class TherapyPlaceTypesPageViewModel : ViewModel, ITherapyPlaceTypesPageViewModel
 	{
 		private const string BasePath = "pack://application:,,,/bytePassion.OnkoTePla.Resources;component/Icons/TherapyPlaceType/";
 

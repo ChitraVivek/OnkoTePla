@@ -5,7 +5,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.H
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage
 {
-	internal interface IInfrastructurePageViewModel : IViewModel
+	public interface IInfrastructurePageViewModel : IViewModel
     {
 	    ObservableCollection<MedPracticeDisplayData>  MedicalPractices { get; }
 		ObservableCollection<RoomDisplayData>         Rooms            { get; } 

@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPag
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPage
 {
-	internal interface ITherapyPlaceTypesPageViewModel : IViewModel
+	public interface ITherapyPlaceTypesPageViewModel : IViewModel
 	{
 		ICommand AddTherapyPlaceType { get; }
 		ICommand SaveChanges         { get; }

@@ -2,7 +2,7 @@
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.LicencePage
 {
-	internal interface ILicencePageViewModel : IViewModel
+	public interface ILicencePageViewModel : IViewModel
     {
         
     }

@@ -6,7 +6,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.H
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.LabelPage
 {
-	internal interface ILabelPageViewModel : IViewModel
+	public interface ILabelPageViewModel : IViewModel
 	{
 		ICommand AddLabel       { get; }
 		ICommand SaveChanges    { get; }

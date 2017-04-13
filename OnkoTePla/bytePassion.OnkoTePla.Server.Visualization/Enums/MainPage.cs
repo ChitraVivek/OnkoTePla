@@ -1,6 +1,6 @@
 ﻿namespace bytePassion.OnkoTePla.Server.Visualization.Enums
 {
-	internal enum MainPage
+	public enum MainPage
     {
         Overview,
         Connections,

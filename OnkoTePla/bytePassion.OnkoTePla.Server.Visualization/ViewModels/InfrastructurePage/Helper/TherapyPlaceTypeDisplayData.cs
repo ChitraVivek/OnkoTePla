@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.Helper
 {
-	internal class TherapyPlaceTypeDisplayData : INotifyPropertyChanged
+	public class TherapyPlaceTypeDisplayData : INotifyPropertyChanged
 	{
 		public TherapyPlaceTypeDisplayData(string name, ImageSource icon, Guid id)
 		{

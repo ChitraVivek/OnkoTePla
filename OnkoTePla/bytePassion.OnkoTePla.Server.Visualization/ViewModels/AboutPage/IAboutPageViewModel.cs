@@ -2,7 +2,7 @@
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.AboutPage
 {
-	internal interface IAboutPageViewModel : IViewModel
+	public interface IAboutPageViewModel : IViewModel
     {
        string VersionNumber { get; } 
     }

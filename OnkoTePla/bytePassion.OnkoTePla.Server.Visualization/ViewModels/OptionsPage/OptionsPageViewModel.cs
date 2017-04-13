@@ -5,7 +5,7 @@ using bytePassion.Lib.WpfLib.ViewModelBase;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.OptionsPage
 {
-	internal class OptionsPageViewModel : ViewModel, 
+	public class OptionsPageViewModel : ViewModel, 
                                           IOptionsPageViewModel
     {
         protected override void CleanUp() { }

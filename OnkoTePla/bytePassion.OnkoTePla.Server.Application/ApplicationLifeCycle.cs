@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using System.Windows;
 using bytePassion.Lib.Communication.State;
+using bytePassion.Lib.Utils;
 using bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel;
 using bytePassion.OnkoTePla.Contracts.Patients;
 using bytePassion.OnkoTePla.Resources;
 using bytePassion.OnkoTePla.Server.DataAndService.Backup;
+using bytePassion.OnkoTePla.Server.DataAndService.Connection;
 using bytePassion.OnkoTePla.Server.DataAndService.Data;
 using bytePassion.OnkoTePla.Server.DataAndService.Factorys;
 using bytePassion.OnkoTePla.Server.DataAndService.Repositories.Config;
@@ -30,14 +32,20 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage;
 using bytePassion.OnkoTePla.Server.Visualization.ViewModels.TherapyPlaceTypesPage;
 using bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage;
 
-namespace bytePassion.OnkoTePla.Server.Visualization
+namespace bytePassion.OnkoTePla.Server.Application
 {
-	public partial class App
-    {		
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
+	internal class ApplicationLifeCycle : IApplicationLifeCycle
+	{
+		private IBackupScheduler backupScheduler;
+		private ILocalSettingsRepository localSettingsRepository;
+		private IPatientRepository patientRepository;
+		private IConfigurationRepository configRepository;
+		private IEventStore eventStore;
+		private IConnectionServiceBuilder connectionServiceBuilder;
+		private IConnectionService connectionService;
 
+		public void BuildAndStart(StartupEventArgs startupEventArgs)
+		{
 			AssureAppDataDirectoriesExist();
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,27 +58,29 @@ namespace bytePassion.OnkoTePla.Server.Visualization
 
 			// ConnectionService
 
-			var connectionServiceBuilder = new ConnectionServiceBuilder(dataCenterContainer);
-			var connectionService = connectionServiceBuilder.Build();
+			connectionServiceBuilder = new ConnectionServiceBuilder(dataCenterContainer);			
+			connectionService = connectionServiceBuilder.Build();
 
 			// Patient-Repository
 
 			var patientPersistenceService = new XmlPatientDataStore(GlobalConstants.PatientPersistenceFile);
-			var patientRepository = new PatientRepository(patientPersistenceService, connectionService);
+			
+			patientRepository = new PatientRepository(patientPersistenceService, connectionService);
 			patientRepository.LoadRepository();
 
 
 			// Config-Repository
 
-			var configPersistenceService = new XmlConfigurationDataStore(GlobalConstants.ConfigPersistenceFile);
-			var configRepository = new ConfigurationRepository(configPersistenceService);
+			var configPersistenceService = new XmlConfigurationDataStore(GlobalConstants.ConfigPersistenceFile);			
+			configRepository = new ConfigurationRepository(configPersistenceService);
 			configRepository.LoadRepository();
 
-			
+
 			// LocalSettings-Repository
 
 			var settingsPersistenceService = new LocalSettingsXmlPersistenceService(GlobalConstants.LocalServerSettingsPersistanceFile);
-			var localSettingsRepository = new LocalSettingsRepository(settingsPersistenceService);
+			
+			localSettingsRepository = new LocalSettingsRepository(settingsPersistenceService);
 			localSettingsRepository.LoadRepository();
 
 			// Event-Store
@@ -80,17 +90,19 @@ namespace bytePassion.OnkoTePla.Server.Visualization
 			var metaDataPersistenceService = new XmlPracticeMetaDataPersistanceService(GlobalConstants.MetaDataPersistanceFile);
 			var metaDataService = new StreamMetaDataService(metaDataPersistenceService);
 
-			var eventStore = new EventStore(streamPersistenceService, metaDataService, connectionService);
+			
+			eventStore = new EventStore(streamPersistenceService, metaDataService, connectionService);
 			eventStore.LoadRepository();
 
 			// DataAndService
 
-			var dataCenter = new DataCenter(configRepository, patientRepository, eventStore);			
-	        dataCenterContainer.DataCenter = dataCenter;
+			var dataCenter = new DataCenter(configRepository, patientRepository, eventStore);
+			dataCenterContainer.DataCenter = dataCenter;
 
-	        var backUpService = new BackupService(patientRepository, configRepository, eventStore, connectionService);
-	        var backupScheduler = new BackupScheduler(backUpService);
-	        backupScheduler.Start(localSettingsRepository);
+			var backUpService = new BackupService(patientRepository, configRepository, eventStore, connectionService);
+			
+			backupScheduler = new BackupScheduler(backUpService);
+			backupScheduler.Start(localSettingsRepository);
 
 			// ViewModel-Variables
 
@@ -108,56 +120,53 @@ namespace bytePassion.OnkoTePla.Server.Visualization
 			var selectedPatientVariable = new SharedState<Patient>(null);
 			var patientSelectorViewModel = new PatientSelectorViewModel(patientRepository, selectedPatientVariable, null);
 
-            var overviewPageViewModel          = new OverviewPageViewModel(connectionService);
-            var connectionsPageViewModel       = new ConnectionsPageViewModel(dataCenter, connectionService, selectedPageVariable);
-            var userPageViewModel              = new UserPageViewModel(dataCenter, selectedPageVariable);
-            var licencePageViewModel           = new LicencePageViewModel();
-            var infrastructurePageViewModel    = new InfrastructurePageViewModel(dataCenter, selectedPageVariable, appointmentGenerator);
+			var overviewPageViewModel          = new OverviewPageViewModel(connectionService);
+			var connectionsPageViewModel       = new ConnectionsPageViewModel(dataCenter, connectionService, selectedPageVariable);
+			var userPageViewModel              = new UserPageViewModel(dataCenter, selectedPageVariable);
+			var licencePageViewModel           = new LicencePageViewModel();
+			var infrastructurePageViewModel    = new InfrastructurePageViewModel(dataCenter, selectedPageVariable, appointmentGenerator);
 			var hoursOfOpeningPageViewModel    = new HoursOfOpeningPageViewModel(dataCenter, selectedPageVariable);
 			var therapyPlaceTypesPageViewModel = new TherapyPlaceTypesPageViewModel(dataCenter, selectedPageVariable, connectionService);
-			var labelPageViewModel			   = new LabelPageViewModel(dataCenter, selectedPageVariable, connectionService);
+			var labelPageViewModel             = new LabelPageViewModel(dataCenter, selectedPageVariable, connectionService);
 			var patientsPageViewModel          = new PatientsPageViewModel(patientSelectorViewModel, patientRepository, selectedPatientVariable, patientNameGenerator);
-			var backupPageViewModel			   = new BackupPageViewModel(backUpService, backupScheduler, localSettingsRepository);
+			var backupPageViewModel            = new BackupPageViewModel(backUpService, backupScheduler, localSettingsRepository);
 			var optionsPageViewModel           = new OptionsPageViewModel();
-            var aboutPageViewModel             = new AboutPageViewModel(); 
-	        
-	        var mainWindowViewModel = new MainWindowViewModel(overviewPageViewModel,
-                                                              connectionsPageViewModel,
-                                                              userPageViewModel,
-                                                              licencePageViewModel,
-                                                              infrastructurePageViewModel, 
-															  hoursOfOpeningPageViewModel,  
-															  therapyPlaceTypesPageViewModel,  
+			var aboutPageViewModel             = new AboutPageViewModel();
+
+			var mainWindowViewModel = new MainWindowViewModel(overviewPageViewModel,
+															  connectionsPageViewModel,
+															  userPageViewModel,
+															  licencePageViewModel,
+															  infrastructurePageViewModel,
+															  hoursOfOpeningPageViewModel,
+															  therapyPlaceTypesPageViewModel,
 															  labelPageViewModel,
 															  patientsPageViewModel,
-															  backupPageViewModel,                                                         
-                                                              optionsPageViewModel,
-                                                              aboutPageViewModel,
+															  backupPageViewModel,
+															  optionsPageViewModel,
+															  aboutPageViewModel,
 															  selectedPageVariable);
-            var mainWindow = new MainWindow
-                             {
-                                 DataContext = mainWindowViewModel
-                             };
+			var mainWindow = new Visualization.MainWindow
+			{
+				DataContext = mainWindowViewModel
+			};
 
-            mainWindow.ShowDialog();
+			mainWindow.Show();
+		}
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ////////                                                                             //////////
-            ////////             Clean Up and store data after main Window was closed            //////////
-            ////////                                                                             //////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            
+		public void CleanUp(ExitEventArgs exitEventArgs)
+		{
 			backupScheduler.Stop();
 
 			configRepository.PersistRepository();
 			patientRepository.PersistRepository();
-			eventStore.PersistRepository();			
+			eventStore.PersistRepository();
 			localSettingsRepository.PersistRepository();
 
 			connectionServiceBuilder.DisposeConnectionService(connectionService);
-        }
+		}
 
-		private void AssureAppDataDirectoriesExist()
+		private void AssureAppDataDirectoriesExist ()
 		{
 			if (!Directory.Exists(GlobalConstants.ServerBasePath))
 			{
@@ -166,5 +175,5 @@ namespace bytePassion.OnkoTePla.Server.Visualization
 				Directory.CreateDirectory(GlobalConstants.EventHistoryBasePath);
 			}
 		}
-    }
+	}
 }

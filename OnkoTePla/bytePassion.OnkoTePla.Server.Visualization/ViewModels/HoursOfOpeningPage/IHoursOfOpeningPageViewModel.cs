@@ -5,7 +5,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.H
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.HoursOfOpeningPage
 {
-	internal interface IHoursOfOpeningPageViewModel : IViewModel
+	public interface IHoursOfOpeningPageViewModel : IViewModel
 	{		
 		ICommand ConfirmChanges { get; }
 		ICommand RejectChanges  { get; }

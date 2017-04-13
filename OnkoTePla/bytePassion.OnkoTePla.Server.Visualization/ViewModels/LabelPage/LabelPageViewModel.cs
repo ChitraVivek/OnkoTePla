@@ -17,7 +17,7 @@ using bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.H
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.LabelPage
 {
-	internal class LabelPageViewModel : ViewModel, ILabelPageViewModel
+	public class LabelPageViewModel : ViewModel, ILabelPageViewModel
 	{
 		private readonly IDataCenter dataCenter;
 		private readonly ISharedStateReadOnly<MainPage> selectedPageVariable;

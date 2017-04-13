@@ -5,7 +5,7 @@ using bytePassion.Lib.FrameworkExtensions;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.InfrastructurePage.Helper
 {
-	internal class RoomDisplayData : INotifyPropertyChanged
+	public class RoomDisplayData : INotifyPropertyChanged
 	{
 		private Color displayedColor;
 		private string name;

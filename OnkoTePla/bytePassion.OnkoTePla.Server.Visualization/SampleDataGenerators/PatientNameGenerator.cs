@@ -5,7 +5,7 @@ using bytePassion.OnkoTePla.Contracts.Patients;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.SampleDataGenerators
 {
-	internal class PatientNameGenerator
+	public class PatientNameGenerator
 	{
 		private readonly Random rand;
 

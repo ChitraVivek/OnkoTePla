@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.UserPage.Helper
 {
-	internal class MedPracticeListItemData : INotifyPropertyChanged
+	public class MedPracticeListItemData : INotifyPropertyChanged
 	{
 		public MedPracticeListItemData(bool isSelected, string name, Guid id)
 		{
