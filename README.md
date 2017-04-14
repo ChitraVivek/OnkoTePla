@@ -21,8 +21,8 @@ If you want to contribute, contact a developer via E-Mail or Gitter-Chat
 
 Latest Release ChangeLog Entry:
 
-[December 23th, 2016]  
- - Client  (1.0 Beta)
+[December 23th, 2016]   
+ - Client  (1.0 Alpha)
     - Initial Release
- - Server (1.0 Beta) 
+ - Server (1.0 Alpha) 
     - Initial Release

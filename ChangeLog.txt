@@ -5,10 +5,10 @@
 ################################################################################ 
 
 
-OnkoTePla (c: 1.0 Beta/s: 1.0 Beta)
+OnkoTePla (c: 1.0 Alpha/s: 1.0 Alpha)
 [December 23th, 2016] 
 --------------------------------------------------------------------------------
-- Client  (1.0 Beta)
+- Client  (1.0 Alpha)
     - Initial Release
-- Server (1.0 Beta) 
+- Server (1.0 Alpha) 
     - Initial Release
