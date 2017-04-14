@@ -36,9 +36,18 @@ namespace bytePassion.OnkoTePla.Client.Application
 		public void BuildAndStart (StartupEventArgs startupEventArgs)
 		{
 
+			
+#if DEBUG
+
+			var listener = new OnkoTePlaDebugListener();
+
+			Debug.Listeners.Add(listener);
+
+			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);
+#endif
+
 			AssureAppDataDirectoriesExist();
 
-			
 			connectionService = new ConnectionService();
 			var eventBus          = new ClientEventBus(connectionService);
 
@@ -105,13 +114,6 @@ namespace bytePassion.OnkoTePla.Client.Application
 			mainWindow.Show();
 
 #if DEBUG
-
-			var listener = new OnkoTePlaDebugListener();
-
-			Debug.Listeners.Add(listener);
-
-			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);
-
 			var debugWindow = new DebugOutputWindow
 			{
 				Owner = mainWindow,
@@ -120,6 +122,7 @@ namespace bytePassion.OnkoTePla.Client.Application
 
 			debugWindow.Show();
 #endif
+
 		}
 
 		private static void AssureAppDataDirectoriesExist ()

@@ -50,13 +50,16 @@ namespace bytePassion.OnkoTePla.Server.Application
 
 		public void BuildAndStart(StartupEventArgs startupEventArgs)
 		{
-			AssureAppDataDirectoriesExist();
 
-			///////////////////////////////////////////////////////////////////////////////////////////////////
-			////////                                                                                 //////////
-			////////                            Composition Root and Setup                           //////////
-			////////                                                                                 //////////
-			///////////////////////////////////////////////////////////////////////////////////////////////////
+#if DEBUG
+			var listener = new OnkoTePlaDebugListener();
+
+			Debug.Listeners.Add(listener);
+
+			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);			
+#endif
+
+			AssureAppDataDirectoriesExist();
 
 			var dataCenterContainer = new DataCenterContainer();
 
@@ -158,13 +161,6 @@ namespace bytePassion.OnkoTePla.Server.Application
 			mainWindow.Show();
 
 #if DEBUG
-
-			var listener = new OnkoTePlaDebugListener();
-
-			Debug.Listeners.Add(listener);
-
-			var debugOutputWindowViewModel = new DebugOutputWindowViewModel(listener);
-
 			var debugWindow = new DebugOutputWindow
 			{
 				Owner = mainWindow,
