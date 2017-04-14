@@ -137,7 +137,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
             get { return showDeceasedPatients; }
             set
             {
-                PropertyChanged.ChangeAndNotify(this, ref showDeceasedPatients, value);
+                PropertyChanged.ChangeAndNotify(this, ref showDeceasedPatients, value);				
 				UpdateForNewInput();
 			}
         }
