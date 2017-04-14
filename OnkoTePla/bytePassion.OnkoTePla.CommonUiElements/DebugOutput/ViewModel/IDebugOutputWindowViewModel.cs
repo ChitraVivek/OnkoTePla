@@ -6,8 +6,9 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 {
 	public interface IDebugOutputWindowViewModel : IViewModel
 	{
-		ICommand DumpOutput { get; }
+		ICommand DumpOutput  { get; }
 		ICommand ClearFilter { get; }
+		ICommand ClearOutput { get; }
 
 		bool AlwaysOnTop { get; set; }
 		bool ScrollDown { get; set; }

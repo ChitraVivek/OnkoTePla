@@ -28,7 +28,7 @@ namespace bytePassion.OnkoTePla.Communication.SendReceive
 			{
 				sendSuccessful = socket.TrySend(ref outMsg, TimeSpan.FromMilliseconds(timeoutMilliSeconds), false);
 
-				Debug.WriteLine(encodedMessage);
+				Debug.WriteLine("[T >>>] " + encodedMessage);
 			}
 			catch (Exception)
 			{
@@ -53,15 +53,13 @@ namespace bytePassion.OnkoTePla.Communication.SendReceive
 				return null;
 			}
 			
-			
-
 			var str = inMsg.Size > 0
 				? Encoding.GetString(inMsg.Data, 0, inMsg.Size)
 				: string.Empty;
 
 			inMsg.Close();
 
-			Debug.WriteLine(str);
+			Debug.WriteLine("[R <<<] " + str);
 
 			return NetworkMessageCoding.Decode(str);				
 		}

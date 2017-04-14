@@ -13,6 +13,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 		{
 			AlwaysOnTop = true;
 			ScrollDown = false;
+			Filter = "blubb";
 
 			var testOutput = new CollectionViewSource
 			{
@@ -30,10 +31,12 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 
 		public ICommand DumpOutput  => null;
 		public ICommand ClearFilter => null;
+		public ICommand ClearOutput => null;
 
 		public bool AlwaysOnTop { get; set; }
-		public bool ScrollDown { get; set; }
-		public string Filter { get; set; }
+		public bool ScrollDown  { get; set; }
+		public string Filter    { get; set; }
+
 		public ICollectionView Output { get; }
 
 		public void Dispose () { }
