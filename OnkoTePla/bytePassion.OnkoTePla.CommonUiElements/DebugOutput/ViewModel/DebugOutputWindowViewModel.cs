@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using bytePassion.OnkoTePla.Utils;
@@ -41,14 +42,22 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 
 		private void OnNewDebugMessage(string s)
 		{
-			debugMessages.Add(s);
+			if (!string.IsNullOrWhiteSpace(s))
+			{
+				Application.Current.Dispatcher.Invoke(() =>
+				{
+					debugMessages.Add(s);
+				});
+			}					
 		}
 
 		public ICommand DumpOutput { get; }
 		public ICommand ClearFilter { get; }
+
 		public bool AlwaysOnTop { get; set; }
 		public bool ScrollDown { get; set; }
 		public string Filter { get; set; }
+
 		public ICollectionView Output { get; }
 
 		protected override void CleanUp()

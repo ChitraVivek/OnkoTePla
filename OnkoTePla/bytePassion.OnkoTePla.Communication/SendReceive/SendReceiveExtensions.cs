@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 using bytePassion.OnkoTePla.Communication.NetworkMessages;
 using bytePassion.OnkoTePla.Resources;
@@ -26,6 +27,8 @@ namespace bytePassion.OnkoTePla.Communication.SendReceive
 			try
 			{
 				sendSuccessful = socket.TrySend(ref outMsg, TimeSpan.FromMilliseconds(timeoutMilliSeconds), false);
+
+				Debug.WriteLine(encodedMessage);
 			}
 			catch (Exception)
 			{
@@ -50,11 +53,15 @@ namespace bytePassion.OnkoTePla.Communication.SendReceive
 				return null;
 			}
 			
+			
+
 			var str = inMsg.Size > 0
 				? Encoding.GetString(inMsg.Data, 0, inMsg.Size)
 				: string.Empty;
 
 			inMsg.Close();
+
+			Debug.WriteLine(str);
 
 			return NetworkMessageCoding.Decode(str);				
 		}
