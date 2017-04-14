@@ -59,7 +59,8 @@ namespace bytePassion.OnkoTePla.Communication.SendReceive
 
 			inMsg.Close();
 
-			Debug.WriteLine("[R <<<] " + str);
+			if (!string.IsNullOrWhiteSpace(str))
+				Debug.WriteLine("[R <<<] " + str);
 
 			return NetworkMessageCoding.Decode(str);				
 		}
