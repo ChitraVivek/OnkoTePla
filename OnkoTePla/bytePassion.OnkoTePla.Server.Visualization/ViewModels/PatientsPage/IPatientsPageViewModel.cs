@@ -18,7 +18,7 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage
 		string PatientName       { get; set; }
 		string PatientBirthday   { get; set; }
 		string PatientInternalId { get; }
-		string PatientExternalId { get; }	
+		string PatientExternalId { get; set; }	
 		bool   IsPatientHidden   { get; set; }	
 	}
 }

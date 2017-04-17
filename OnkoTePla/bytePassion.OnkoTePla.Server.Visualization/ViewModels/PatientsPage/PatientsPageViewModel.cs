@@ -76,6 +76,7 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage
 
 			patientRepository.UpdatePatient(selectedPatientVariable.Value.Id,
 											PatientName,
+											PatientExternalId,
 											Date.Parse(PatientBirthday),
 											IsPatientAlive,
 											IsPatientHidden);
@@ -150,7 +151,7 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.PatientsPage
 		public string PatientExternalId
 		{
 			get { return patientExternalId; }
-			private set { PropertyChanged.ChangeAndNotify(this, ref patientExternalId, value); }
+			set { PropertyChanged.ChangeAndNotify(this, ref patientExternalId, value); }
 		}
 
 		public bool IsPatientHidden

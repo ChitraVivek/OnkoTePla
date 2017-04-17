@@ -110,14 +110,14 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 															  patient.IsHidden));
 		}
 		
-		public void UpdatePatient(Guid patientId, string newName, Date newBirthday, bool newLivingStatus, bool newIsHiddenStatus)
+		public void UpdatePatient(Guid patientId, string newName, string newExternalId, Date newBirthday, bool newLivingStatus, bool newIsHiddenStatus)
 		{
 			ModifyPatientAndRaiseEvent(patientId,
 									   patient => new Patient(newName,
 															  newBirthday,
 															  newLivingStatus,
 															  patient.Id,
-															  patient.ExternalId,
+															  newExternalId,
 															  newIsHiddenStatus));
 		}
 

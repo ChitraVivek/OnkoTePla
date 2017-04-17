@@ -18,7 +18,7 @@ namespace bytePassion.OnkoTePla.Server.DataAndService.Repositories.Patients
 		void SetNewName (Guid patientId, string newName);
 		void SetNewBirthday (Guid patientId, Date newBirthday);
 		void SetLivingStatus (Guid patientId, bool newLivingStatus);
-		void UpdatePatient(Guid patientId, string newName, Date newBirthDay, bool newLivingStatus, bool newIsHiddenStatus);
+		void UpdatePatient(Guid patientId, string newName, string newExternalId, Date newBirthDay, bool newLivingStatus, bool newIsHiddenStatus);
 	}
 	
 }

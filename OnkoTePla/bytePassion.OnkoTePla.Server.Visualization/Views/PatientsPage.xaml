@@ -190,12 +190,14 @@
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
-			<TextBlock Grid.Row="3"
+			<TextBox Grid.Row="3"
 					   Grid.Column="1"
-					   HorizontalAlignment="Left"
+					   HorizontalAlignment="Stretch"
 					   VerticalAlignment="Center"
 					   Margin="5"
-					   Text="{Binding PatientExternalId}"
+					   Text="{Binding PatientExternalId, 
+									  Mode=TwoWay, 
+									  UpdateSourceTrigger=PropertyChanged}"
 					   FontSize="15"
 					   FontFamily="{StaticResource StandardFontFamily}"/>
 
