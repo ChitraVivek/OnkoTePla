@@ -4,13 +4,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appointmentView="clr-namespace:bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView"
-             d:DesignHeight="42"
+             xmlns:converter="clr-namespace:bytePassion.Lib.WpfLib.Converter;assembly=bytePassion.Lib"
+             d:DesignHeight="142"
              d:DesignWidth="300"
-             mc:Ignorable="d">
+			 mc:Ignorable="d">
 
     <d:DesignData.DataContext>
         <appointmentView:AppointmentViewModelSampleData />
     </d:DesignData.DataContext>
+	
+	<UserControl.Resources>
+		<converter:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter"/>
+	</UserControl.Resources>
 
     <Border Background="White"
             BorderBrush="DarkGray"
@@ -25,9 +30,26 @@
                        TextWrapping="Wrap" 
 				       HorizontalAlignment="Left"
 				       VerticalAlignment="Center"/>
-			
+
+			<DockPanel Margin="10,5">
+
+				<Rectangle DockPanel.Dock="Left"
+						   Width="20"
+						   Fill="{Binding LabelColor, Converter={StaticResource ColorToSolidColorBrushConverter}}"></Rectangle>
+				
+				<TextBlock DockPanel.Dock="Left"
+						   FontFamily="Segoe UI Semibold"						   
+				           Margin="10,0,0,0"
+                           Foreground="#404148"
+                           Text="{Binding LabelName}"
+                           TextWrapping="Wrap" 				           
+				           VerticalAlignment="Center"/>
+
+			</DockPanel>
+
+
 			<TextBlock FontFamily="Segoe UI Semibold"
-				       Margin="10,5"
+				       Margin="10,0,10,5"
                        Foreground="#404148"
                        Text="{Binding Description}"
                        TextWrapping="Wrap" 

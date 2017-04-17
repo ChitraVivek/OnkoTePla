@@ -42,6 +42,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 		private AppointmentModifications currentAppointmentModifications;
         private string description;
 		private Color labelColor;
+		private string labelName;
 
 		public AppointmentViewModel(Appointment appointment,
 									ICommandService commandService,
@@ -152,6 +153,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 			EndTime = appointment.EndTime;
             Description = appointment.Description;
 			LabelColor = appointment.Label.Color;
+			LabelName = appointment.Label.Name;
 
 			ShowDisabledOverlay = false;
 			
@@ -186,6 +188,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 				case nameof(AppointmentModifications.Label):
 				{
 					LabelColor = appointmentModifications.Label.Color;
+					LabelName = appointmentModifications.Label.Name;
 					break;
 				}
 			}
@@ -249,14 +252,20 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 			private set { PropertyChanged.ChangeAndNotify(this, ref labelColor, value); }
 		}
 
+		public string LabelName
+		{
+			get { return labelName; }
+			private set { PropertyChanged.ChangeAndNotify(this, ref labelName, value); }
+		}
+
 
 		public string PatientDisplayName => $"{appointment.Patient.Name} (*{appointment.Patient.Birthday.Year})";
         public string TimeSpan           => $"{appointment.StartTime.ToString().Substring(0, 5)} - {appointment.EndTime.ToString().Substring(0, 5)}";
 		public string AppointmentDate    => appointment.Day.ToString();
 		
-		public string Room               => appointment.TherapyPlace.Name;
+		public string Room               => appointment.TherapyPlace.Name;		
 
-        public string Description
+		public string Description
         {
             get { return description; }
             set
@@ -300,6 +309,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 			EndTime     = appointment.EndTime;
 			Description = appointment.Description;
 			LabelColor  = appointment.Label.Color;
+			LabelName   = appointment.Label.Name;
 
 			if (initialLocalisation != currentLocation)			
 				SetNewLocation(initialLocalisation, false);

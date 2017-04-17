@@ -36,6 +36,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 		string AppointmentDate    { get; }		//	Information for
 		string Description        { get; }		//  the Tool-Tip
 		string Room               { get; }		//
+		string LabelName          { get; }		//
 
 		AppointmentModifications CurrentAppointmentModifications { get; }
 		AdornerControl AdornerControl { get; }

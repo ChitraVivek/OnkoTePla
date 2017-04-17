@@ -31,6 +31,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 			EndTime = endTime;
 
 			LabelColor = Colors.SteelBlue;
+			LabelName = "testLabel";
 
 			OperatingMode = OperatingMode.Edit;
 			ShowDisabledOverlay = false;
@@ -53,6 +54,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 		public string AppointmentDate    { get; }
 		public string Description        { get; }
 		public string Room               { get; }
+		public string LabelName          { get; }
 
 		public AppointmentModifications CurrentAppointmentModifications { get; } = null;
 		public AdornerControl AdornerControl { get; } = null;
