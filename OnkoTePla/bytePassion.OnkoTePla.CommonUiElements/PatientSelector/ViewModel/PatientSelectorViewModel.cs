@@ -109,7 +109,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 			    if (!patient.IsHidden)
 			    {
 					observablePatientList.Add(patient);
-					observablePatientList.Sort(new PatientSorter());
+					//observablePatientList.Sort(new PatientSorter()); TODO deadlock
 				}
 				
 				UpdateForNewInput();
