@@ -37,7 +37,6 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Repositories.TherapyPlaceT
 		{
 			if (cachedTherapyPlaceTypes == null)
 			{
-
 				connectionService.RequestTherapyPlaceTypeList(
 					therapyPlaceTypeList =>
 					{
@@ -48,14 +47,14 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Repositories.TherapyPlaceT
 								cachedTherapyPlaceTypes.Add(therapyPlaceType.Id, therapyPlaceType);
 						}
 
-						therapyPlacetypesAvailableCallback(GetTherapyPlaceType(id, errorCallback));
+						therapyPlacetypesAvailableCallback?.Invoke(GetTherapyPlaceType(id, errorCallback));
 					},
 					errorCallback
-					);
+				);
 			}
 			else
 			{
-				therapyPlacetypesAvailableCallback(GetTherapyPlaceType(id, errorCallback));
+				therapyPlacetypesAvailableCallback?.Invoke(GetTherapyPlaceType(id, errorCallback));
 			}
 		}
 
