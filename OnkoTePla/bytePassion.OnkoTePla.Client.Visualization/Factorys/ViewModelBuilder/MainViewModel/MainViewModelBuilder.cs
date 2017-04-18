@@ -92,17 +92,10 @@ namespace bytePassion.OnkoTePla.Client.Visualization.Factorys.ViewModelBuilder.M
             // Register Global ViewModelVariables
 
 	        var firstDispayedDate = TimeTools.Today();	// TODO find last open
-
-	        var lastUsedMedicalPracticeId = localSettingsRepository.LastUsedMedicalPracticeId;
-
-	        if (lastUsedMedicalPracticeId == Guid.Empty)
-	        {
-		        lastUsedMedicalPracticeId = session.LoggedInUser.ListOfAccessablePractices.First();
-	        }
-	       			    
+			
                 gridSizeVariable                  = new SharedState<Size>(initialSize ?? new Size(new Width(400), new Height(400)));
             var selectedDateVariable              = new SharedState<Date>(firstDispayedDate);    
-            var selectedMedicalPracticeIdVariable = new SharedState<Guid>(lastUsedMedicalPracticeId);
+            var selectedMedicalPracticeIdVariable = new SharedState<Guid>(Guid.Empty);
             var roomFilterVariable                = new SharedState<Guid?>();
             var appointmentModificationsVariable  = new SharedState<AppointmentModifications>();
 
@@ -196,7 +189,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.Factorys.ViewModelBuilder.M
 																						medicalPracticeRepository,
 																						localSettingsRepository,
                                                                                         selectedMedicalPracticeIdVariable,
-                                                                                        appointmentModificationsVariable, 
+                                                                                        appointmentModificationsVariable, 																						
 																						errorCallback);
 			
             var roomSelectorViewModel = new RoomFilterViewModel(medicalPracticeRepository,

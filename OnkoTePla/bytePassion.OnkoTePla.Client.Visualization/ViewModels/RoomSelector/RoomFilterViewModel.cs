@@ -91,6 +91,9 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.RoomSelector
 
 		private void SetRoomData (Date date, Guid medicalPracticeId)
 		{
+			if (medicalPracticeId == Guid.Empty)
+				return;
+
 			medicalPracticeRepository.RequestMedicalPractice(
 				medicalPractice =>
 				{

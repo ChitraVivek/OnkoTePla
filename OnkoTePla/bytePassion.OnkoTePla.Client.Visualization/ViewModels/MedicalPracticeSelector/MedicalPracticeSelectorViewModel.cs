@@ -41,6 +41,10 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.MedicalPracticeS
 											   .Select(practiceId => new MedicalPracticeDisplayData(practiceId, practiceId.ToString()))
 											   .ToObservableCollection();
 
+
+			var selectedMedPrac = AvailableMedicalPractices.FirstOrDefault(practice => practice.MedicalPracticeId == localSettingsRepository.LastUsedMedicalPracticeId);
+			SelectedMedicalPractice = selectedMedPrac ?? AvailableMedicalPractices.First();
+
 			foreach (var medicalPracticeDisplayData in AvailableMedicalPractices)
 			{
 				medicalPracticeRepository.RequestMedicalPractice(
@@ -52,9 +56,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.MedicalPracticeS
 					errorCallback						
 				);
 			}
-
-			SelectedMedicalPractice = AvailableMedicalPractices.First(practice => practice.MedicalPracticeId == selectedMedicalPracticeIdVariable.Value);						
-
+			
 			PracticeIsSelectable = true;
 		}
 
