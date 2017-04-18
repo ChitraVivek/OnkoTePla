@@ -26,17 +26,17 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 		{
 			this.listener = listener;
 
+			Filter = "";
+
 			listener.OnNewDebugMessage += OnNewDebugMessage;
-
-			debugMessages = new ObservableCollection<string>();
-
+			debugMessages = listener.GetInitialList().ToObservableCollection();
+			
 			dmSource = new CollectionViewSource
 			{
 				Source = debugMessages
 			};
 			Output = dmSource.View;
-			dmSource.Filter += OnFilter;
-			Filter = "";
+			dmSource.Filter += OnFilter;			
 
 			ClearFilter = new Command(DoClearFilter);
 			DumpOutput  = new Command(DoDumpOutput);
@@ -139,7 +139,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.DebugOutput.ViewModel
 			set
 			{
 				PropertyChanged.ChangeAndNotify(this, ref filter, value);
-				dmSource.View.Refresh();
+				dmSource?.View.Refresh();
 			}
 		}
 
