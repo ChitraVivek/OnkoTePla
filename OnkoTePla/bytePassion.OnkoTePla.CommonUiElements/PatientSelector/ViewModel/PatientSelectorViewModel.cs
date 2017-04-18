@@ -127,7 +127,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 			Application.Current.Dispatcher.Invoke(() =>
 			{				
 				observablePatientList.Add(patient);
-				observablePatientList.Sort(new PatientSorter());
+				//observablePatientList.Sort(new PatientSorter());
 				UpdateForNewInput();
 			});
 		}
