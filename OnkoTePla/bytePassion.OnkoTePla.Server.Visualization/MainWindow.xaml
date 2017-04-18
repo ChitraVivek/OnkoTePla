@@ -10,13 +10,13 @@
                       xmlns:computations="clr-namespace:bytePassion.OnkoTePla.Server.Visualization.Computations"
                       xmlns:enum="clr-namespace:bytePassion.OnkoTePla.Server.Visualization.Enums"
                       xmlns:views="clr-namespace:bytePassion.OnkoTePla.Server.Visualization.Views"
-                      Title="MainWindow"
+                      Title="{Binding Title}"
                       Width="1300"
                       Height="900"
 					  MinWidth="900"
 					  MinHeight="700"
                       WindowStartupLocation="CenterScreen"
-					  Closing="MainWindow_OnClosing"
+					  Closing="MainWindow_OnClosing"					  
                       mc:Ignorable="d">
 
     <d:DesignData.DataContext>

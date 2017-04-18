@@ -24,6 +24,8 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.MainWindow
 		bool CheckWindowClosing { get; }
 		ICommand CloseWindow { get; }
 
+		string Title { get; }
+
 		IOverviewPageViewModel          OverviewPageViewModel          { get; }
         IConnectionsPageViewModel       ConnectionsPageViewModel       { get; }
         IUserPageViewModel              UserPageViewModel              { get; }

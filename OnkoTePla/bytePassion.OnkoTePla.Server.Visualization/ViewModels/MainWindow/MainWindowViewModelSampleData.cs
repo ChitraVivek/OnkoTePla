@@ -37,15 +37,19 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.MainWindow
 			PatientsPageViewModel		   = new PatientsPageViewModelSampleData();
 			BackupPageViewModel			   = new BackupPageViewModelSampleData();
 			LabelPageViewModel			   = new LabelPageViewModelSampleData();
-		}
+
+	        Title = "OnkoTePla Server";
+        }
 
         public ICommand SwitchToPage => null;
         public MainPage SelectedPage { get; }
 
 		public bool CheckWindowClosing { get; }
 		public ICommand CloseWindow => null;
-		
-		public IOverviewPageViewModel          OverviewPageViewModel          { get; }
+
+	    public string Title { get; }
+
+	    public IOverviewPageViewModel          OverviewPageViewModel          { get; }
         public IConnectionsPageViewModel       ConnectionsPageViewModel       { get; }
         public IUserPageViewModel              UserPageViewModel              { get; }
         public ILicencePageViewModel           LicencePageViewModel           { get; }

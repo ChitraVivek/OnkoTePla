@@ -64,7 +64,13 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.MainWindow
 			CloseWindow = new Command(DoCloseApplication);
 
 			CheckWindowClosing = true;
-        }
+
+#if DEBUG
+	        Title = ">>> DEBUG <<<       OnkoTePla - Server       >>> Debug <<<";
+#else
+			Title = "OnkoTePla - Server";
+#endif
+		}
 
 		private void OnSelectedPageVariableChanged(MainPage newPage)
 		{
@@ -111,9 +117,10 @@ namespace bytePassion.OnkoTePla.Server.Visualization.ViewModels.MainWindow
 
 		public bool CheckWindowClosing { get; private set; }
 		public ICommand CloseWindow { get; }
-	
+	    public string Title { get; }
 
-		public IOverviewPageViewModel          OverviewPageViewModel          { get; }
+
+	    public IOverviewPageViewModel          OverviewPageViewModel          { get; }
         public IConnectionsPageViewModel       ConnectionsPageViewModel       { get; }
         public IUserPageViewModel              UserPageViewModel              { get; }
         public ILicencePageViewModel           LicencePageViewModel           { get; }
