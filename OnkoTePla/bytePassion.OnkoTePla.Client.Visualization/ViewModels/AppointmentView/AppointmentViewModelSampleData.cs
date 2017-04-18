@@ -26,6 +26,7 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 			AppointmentDate = "2.November 2015";
 			Description = "test";
 			Room = "A12";
+			ToolTipNameWithBirthday = "Jerry Black (2.4.16)";
 
 			BeginTime = beginTime;
 			EndTime = endTime;
@@ -49,12 +50,13 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 
 		public Color LabelColor { get; }
 
-		public string PatientDisplayName { get; }
-		public string TimeSpan           { get; }
-		public string AppointmentDate    { get; }
-		public string Description        { get; }
-		public string Room               { get; }
-		public string LabelName          { get; }
+		public string PatientDisplayName      { get; }
+		public string TimeSpan                { get; }
+		public string AppointmentDate         { get; }
+		public string Description             { get; }
+		public string Room                    { get; }
+		public string LabelName               { get; }
+		public string ToolTipNameWithBirthday { get; }
 
 		public AppointmentModifications CurrentAppointmentModifications { get; } = null;
 		public AdornerControl AdornerControl { get; } = null;

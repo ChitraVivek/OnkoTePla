@@ -26,7 +26,7 @@
 			<TextBlock FontFamily="Segoe UI Semibold"
 				       Margin="10,5,10,0"
                        Foreground="#404148"
-                       Text="{Binding PatientDisplayName}"
+                       Text="{Binding ToolTipNameWithBirthday}"
                        TextWrapping="Wrap" 
 				       HorizontalAlignment="Left"
 				       VerticalAlignment="Center"/>

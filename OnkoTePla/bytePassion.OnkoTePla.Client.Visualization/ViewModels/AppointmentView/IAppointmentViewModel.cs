@@ -30,13 +30,14 @@ namespace bytePassion.OnkoTePla.Client.Visualization.ViewModels.AppointmentView
 	
 		Color LabelColor { get; }
 
-		string PatientDisplayName { get; }
-
-		string TimeSpan           { get; }		//
-		string AppointmentDate    { get; }		//	Information for
-		string Description        { get; }		//  the Tool-Tip
-		string Room               { get; }		//
-		string LabelName          { get; }		//
+		string PatientDisplayName      { get; }
+								       
+		string TimeSpan                { get; }		//
+		string AppointmentDate         { get; }		//	Information for
+		string Description             { get; }		//  the Tool-Tip
+		string Room                    { get; }		//
+		string LabelName               { get; }		//
+		string ToolTipNameWithBirthday { get; }
 
 		AppointmentModifications CurrentAppointmentModifications { get; }
 		AdornerControl AdornerControl { get; }
