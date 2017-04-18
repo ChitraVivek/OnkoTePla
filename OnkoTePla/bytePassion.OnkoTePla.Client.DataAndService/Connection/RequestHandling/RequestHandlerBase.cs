@@ -31,7 +31,11 @@ namespace bytePassion.OnkoTePla.Client.DataAndService.Connection.RequestHandling
 				return;
 			}
 
+#if DEBUG
+			var response = socket.ReceiveNetworkMsg(TimeSpan.FromSeconds(50));
+#else
 			var response = socket.ReceiveNetworkMsg(TimeSpan.FromSeconds(5));
+#endif
 
 			if (response == null)
 			{
