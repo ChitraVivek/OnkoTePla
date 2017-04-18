@@ -207,7 +207,7 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
             if (string.IsNullOrWhiteSpace(filter))
                 return true;
 
-            if (p.Name.ToLower().Contains(filter.ToLower()))
+            if (p.Name.ToLower().Contains(filter.ToLower()) || p.ExternalId.ToLower().Contains(filter.ToLower()))
             {
 				return true;
 			}
