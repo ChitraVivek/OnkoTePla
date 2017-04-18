@@ -118,6 +118,7 @@
                     VerticalAlignment="Center"
                     FontSize="20"
                     Foreground="#FFD8D8D8"
+					IsHitTestVisible="False"
                     Text="{Binding Title}" />
 
         <views:ConnectionStatusView Grid.Column="4"
