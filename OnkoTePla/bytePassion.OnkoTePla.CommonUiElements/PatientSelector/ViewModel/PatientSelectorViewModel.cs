@@ -50,7 +50,8 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 
 	        Patients = new CollectionViewSource
 	        {
-		        Source = observablePatientList
+		        Source = observablePatientList, SortDescriptions = { new SortDescription("Name", ListSortDirection.Ascending)}
+               
 			};
 	        Patients.Filter += Filter;			
 			SearchFilter = "";						
@@ -109,7 +110,6 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 			    if (!patient.IsHidden)
 			    {
 					observablePatientList.Add(patient);
-					//observablePatientList.Sort(new PatientSorter()); TODO deadlock
 				}
 				
 				UpdateForNewInput();
@@ -127,7 +127,6 @@ namespace bytePassion.OnkoTePla.CommonUiElements.PatientSelector.ViewModel
 			Application.Current.Dispatcher.Invoke(() =>
 			{				
 				observablePatientList.Add(patient);
-				//observablePatientList.Sort(new PatientSorter());
 				UpdateForNewInput();
 			});
 		}

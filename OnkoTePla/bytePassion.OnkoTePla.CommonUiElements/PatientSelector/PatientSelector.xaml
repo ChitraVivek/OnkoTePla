@@ -88,6 +88,8 @@
         <ListBox Grid.Row="3"
                  HorizontalContentAlignment="Stretch"
                  Foreground="#444444"
+                 VirtualizingStackPanel.IsVirtualizing="True"
+                 VirtualizingStackPanel.VirtualizationMode="Recycling"
                  IsSynchronizedWithCurrentItem="False"
                  ItemContainerStyle="{StaticResource ListBoxItem}"
                  ItemTemplate="{StaticResource ListItemTemplate}"

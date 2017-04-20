@@ -86,7 +86,8 @@
 		<ScrollViewer Grid.Row="1"
 					  HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto">
-			<ItemsControl Margin="5,2,0,0" ItemsSource="{Binding Output}">
+            <ItemsControl Margin="5,2,0,0" ItemsSource="{Binding Output}" VirtualizingStackPanel.IsVirtualizing="True"
+                          VirtualizingStackPanel.VirtualizationMode="Recycling">
 
 				<ItemsControl.ItemTemplate>
 					<DataTemplate DataType="system:String">
